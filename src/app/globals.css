@@ -19,31 +19,87 @@
   }
 } */
 
+html {
+  font-size: 20px;
+  line-height: 1.8;
+  @apply bg-base-100;
+}
+
 body {
+  --dot-bg: white;
+  --dot-color: #eaeef9;
+  --dot-size: 2px;
+  --dot-space: 38px;
+
   font-family: var(--font-nunito);
   font-size: 20px;
   line-height: 1.8;
+
+  /* https://codepen.io/edmundojr/pen/xOYJGw */
+  background: linear-gradient(
+        90deg,
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    linear-gradient(
+        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+        transparent 1%
+      )
+      center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
+    background-attachment: fixed;
 }
 
 h1 {
   font-family: var(--font-nunito);
   font-weight: 800;
-  @apply text-primary-content leading-normal lg:leading-normal text-5xl lg:text-7xl;
+  @apply text-primary-content text-3xl lg:text-5xl;
 }
 
 h2 {
   font-weight: 900;
-  @apply text-secondary text-4xl my-2 leading-normal;
+  @apply text-secondary text-xl lg:text-2xl my-2;
 }
 
 h3 {
   font-weight: 700;
-  @apply text-base-content text-2xl my-2 leading-normal;
+  @apply text-base-content text-base lg:text-lg my-2;
+}
+
+h4 {
+  font-weight: 700;
+  @apply text-base-content text-lg my-2;
 }
 
 hr {
   border: 0;
   border-top: 6px solid;
   width: 40px;
-  @apply border-secondary my-7;
+  @apply border-secondary my-6;
+}
+
+.slanted {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw))
+}
+
+p {
+  @apply text-base-content text-base my-4;
+}
+
+ul {
+  @apply list-[square] list-inside marker:text-accent;
+}
+
+ul li {
+  @apply text-base-content text-base my-1;
+}
+
+.btn {
+  font-weight: 800;
+  @apply text-sm;
+  height: 2.6rem;
+  min-height: 2.6rem;
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
 }

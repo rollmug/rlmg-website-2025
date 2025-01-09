@@ -14,6 +14,18 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontSize: {
+        xs: ['0.7rem', '1.4rem'], // 14px
+        sm: ['0.8rem', '1.4rem'], // 16px for buttons
+        base: ['1rem', '1.8rem'], // 20px for body text
+        lg: ['1.2rem', '1.8rem'], // 24px for h3
+        xl: ['1.7rem', '2.0rem'], // 34px
+        "2xl": ['1.8rem', '2.0rem'], // 36px
+        "2xl": ['2.0rem', '2.2rem'], // 40px
+        "3xl": ['3.0rem', '3.6rem'], // 60px
+        "4xl": ['3.4rem', '2.6rem'], // 68px
+        "5xl": ['4.5rem', '6.25rem'], // 90px
+      },
     },
   },
   daisyui: {
@@ -31,6 +43,8 @@ export default {
           "neutral-content": "#ffffff", // text on dark bg
           accent: "#FFD95C", // for links on dark background, and for play btn color
           warning: "#FFD95C",
+
+          "--rounded-btn": "4px",
         }
       }
     ]
@@ -38,5 +52,10 @@ export default {
   plugins: [
     require('@tailwindcss/typography'),
     require('daisyui'),
+    function ({ addBase }) {
+      addBase({
+        'html': { fontSize: "20px" },
+      })
+    }
   ],
 };
