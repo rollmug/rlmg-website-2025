@@ -19,9 +19,10 @@
   }
 } */
 
-html {
-  font-size: 20px;
+html, body {
+  font-size: 18px;
   line-height: 1.8;
+  font-family: var(--font-nunito);
   @apply bg-base-100;
 }
 
@@ -30,10 +31,6 @@ body {
   --dot-color: #eaeef9;
   --dot-size: 2px;
   --dot-space: 38px;
-
-  font-family: var(--font-nunito);
-  font-size: 20px;
-  line-height: 1.8;
 
   /* https://codepen.io/edmundojr/pen/xOYJGw */
   background: linear-gradient(

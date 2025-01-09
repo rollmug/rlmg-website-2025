@@ -54,7 +54,7 @@ export default {
     require('daisyui'),
     function ({ addBase }) {
       addBase({
-        'html': { fontSize: "20px" },
+        'html': { fontSize: "18px" },
       })
     }
   ],
