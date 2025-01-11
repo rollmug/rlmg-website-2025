@@ -100,3 +100,13 @@ ul li {
   padding-left: 1.3rem;
   padding-right: 1.3rem;
 }
+
+.btn.btn-filter {
+  @apply bg-neutral text-primary-content border-2 border-primary;
+  height: 2.2rem;
+  min-height: 2.2rem;
+}
+
+.btn.btn-filter.active {
+  @apply bg-primary;
+}
