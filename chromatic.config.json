@@ -1,5 +1,7 @@
 {
-  "onlyChanged": true,
-  "projectId": "Project:67828ae7686383b100d9b616",
-  "zip": true
+  "$schema": "https://www.chromatic.com/config-file.schema.json",
+  "onlyChanged": false,
+  "autoAcceptChanges": "main",
+  "exitOnceUploaded": true,
+  "projectId": "Project:67828ae7686383b100d9b616"
 }
