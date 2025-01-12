@@ -31,11 +31,11 @@ export const Navigation = {
         orgName: 'RLMG',
         fixed: true,
         listItems: [
-            { text: 'About Us', url: { pathname: '/', query: { path: '/story/ui-elements-navbar--navigation' } } },
-            { text: 'Our Work', url: { pathname: '/', query: { path: '/story/ui-elements-navbar--navigation' } } },
-            { text: 'Our Team', url: { pathname: '/', query: { path: '/story/ui-elements-navbar--navigation' } } },
-            { text: 'Careers', url: { pathname: '/', query: { path: '/story/ui-elements-navbar--navigation' } } },
-            { text: 'Contact Us', url: { pathname: '/', query: { path: '/story/ui-elements-navbar--navigation' } } },
+            { text: 'About Us', url: { pathname: './', query: { path: '/story/ui-elements-navbar--navigation' } } },
+            { text: 'Our Work', url: { pathname: './', query: { path: '/story/ui-elements-navbar--navigation' } } },
+            { text: 'Our Team', url: { pathname: './', query: { path: '/story/ui-elements-navbar--navigation' } } },
+            { text: 'Careers', url: { pathname: './', query: { path: '/story/ui-elements-navbar--navigation' } } },
+            { text: 'Contact Us', url: { pathname: './', query: { path: '/story/ui-elements-navbar--navigation' } } },
         ],
     }
 };
