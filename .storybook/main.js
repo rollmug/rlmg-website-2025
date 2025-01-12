@@ -14,7 +14,7 @@ const config = {
   addons: [
     "@storybook/addon-onboarding",
     "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
+    //"@chromatic-com/storybook",
     "@storybook/addon-interactions",
     'storybook-addon-paddings',
     {
