@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import PropTypes from 'prop-types';
@@ -11,21 +11,18 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
      * fallback text (no logo) from short name in cms
      * links list with urls
      * { pathname: '/', query: { path: '/story/ui-elements-navbar--navigation' }
-     * 
-     * TO DO:
-     * 
-     * rethink how to toggle the dropdown menu with animation
-     * and style the links to the right perhaps?
      */
 
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
+    // max-w-screen-lg w-full mx-auto
+
     return (
         <>
             <header className={`${fixed ? 'fixed' : 'absolute'} top-0 left-0 bg-white shadow-md flex w-screen z-[1]`}>
-                <nav className="navbar max-w-screen-lg w-full mx-auto justify-between min-h-14 lg:min-h-16 py-0 lg:py-3">
+                <nav className="navbar section-padded justify-between min-h-14 lg:min-h-16 py-0 lg:py-3">
                     <div className="flex-1">
-                        <Link href="/" className="btn btn-link text-xl py-[6px] lg:py-0">
+                        <Link href="/" className="btn btn-link text-xl !px-0 py-[6px] lg:py-0 text-left">
                             <Logo img={img} orgName={orgName} />
                         </Link>
                     </div>
@@ -34,7 +31,7 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
                     </div>
                     <div className="flex-none">
                         <div className="dropdown static lg:hidden">
-                            <div tabIndex={0} role="button" className="btn btn-ghost text-center lg:hidden" onClick={() => setMobileNavOpen((pv) => !pv)}>
+                            <div tabIndex={0} role="button" className="!px-0 btn btn-ghost text-center lg:hidden" onClick={() => setMobileNavOpen((pv) => !pv)}>
                                 <MenuIcon open={mobileNavOpen} />
                             </div>
                             <MobileLinks listItems={listItems} open={mobileNavOpen} />
@@ -59,9 +56,9 @@ const Logo = ({ img, orgName }) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ ease: "easeIn", duration: 1 }}
-                    className="inline-flex max-h-full w-20"
+                    className="inline-flex max-h-full w-20 h-full items-start"
                 >
-                    <Image src={img} alt="RLMG Logo" width={0} height={0} className="_max-h-full object-contain _w-auto" />
+                    <Image src={img} alt="RLMG Logo" width={0} height={0} className="object-contain max-h-full -translate-x-2 lg:translate-x-0" />
                 </motion.div>
             ) : <span className="text-lg">{orgName}</span>
             }

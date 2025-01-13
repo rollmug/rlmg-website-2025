@@ -1,8 +1,9 @@
 'use client';
 import { Navbar } from "@/components/ui/Navbar";
-import Image from "next/image";
+import { Banner } from "@/components/ui/Banner";
 
 import RLMG from '../stories/assets/rlmg-logo.png';
+import testImg from '../stories/assets/test-bg-image.jpg'
 
 export default function Home() {
   return (
@@ -16,14 +17,9 @@ export default function Home() {
       ]} fixed />
 
       <main className="py-14 lg:py-20">
-        <div className="relative pt-6 pb-24 lg:pb-48 bg-neutral slanted">
-          <div className="max-w-2xl mx-auto p-6 lg:p-10">
-            <h1 className="">
-              Typography is Everything
-            </h1>
-          </div>
-        </div>
-        <section className="p-6 pt-2 lg:p-10 lg:pt-2 max-w-2xl mx-auto ">
+        <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything"  />
+
+        <section className="section-padded py-8 lg:py-2">
           <h2>Who We Are</h2>
           <h3>We Create Text. At Different Sizes.</h3>
           <hr />

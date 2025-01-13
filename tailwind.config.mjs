@@ -20,12 +20,13 @@ export default {
         sm: ['0.8rem', '1.4rem'], // 16px for buttons
         base: ['1rem', '1.8rem'], // 20px for body text
         lg: ['1.2rem', '1.8rem'], // 24px for h3
+        lgr: ['1.4rem', '1.8rem'], // 30px for h3
         xl: ['1.7rem', '2.0rem'], // 34px
-        "2xl": ['1.8rem', '2.0rem'], // 36px
-        "2xl": ['2.0rem', '2.2rem'], // 40px
-        "3xl": ['3.0rem', '3.6rem'], // 60px
-        "4xl": ['3.4rem', '2.6rem'], // 68px
-        "5xl": ['4.5rem', '6.25rem'], // 90px
+        "2xl": ['2.0rem', '2.5rem'], // 40px
+        "2.5xl": ['2.5rem', '3.25rem'], // 40px
+        "3xl": ['3.0rem', '3.5rem'], // 60px
+        "4xl": ['3.4rem', '3.75rem'], // 68px
+        "5xl": ['4.5rem', '5.25rem'], // 90px
       },
     },
   },
