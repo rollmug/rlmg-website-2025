@@ -16,7 +16,8 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
         case 'top':
             videoClass = 'place-top';
             justifyContent = 'justify-start pt-[15%] sm:pt-[12%] md:pt-[10%] lg:pt-[7%] xl:pt-[5%]';
-            bannerGradient = 'bg-gradient-to-b h-2/3 lg:h-2/3 w-full top-0';
+            // bannerGradient = 'bg-gradient-to-b h-2/3 lg:h-2/3 w-full top-0';
+            bannerGradient = 'bg-gradient-to-br h-full lg:h-full w-full top-0';
             break;
         case 'center':
             videoClass = 'place-center';
