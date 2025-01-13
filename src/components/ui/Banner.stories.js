@@ -1,7 +1,7 @@
 import { Banner } from "./Banner";
 
 import testImg from '../../stories/assets/test-bg-image.jpg';
-const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
+const videoLoop = 'https://rlmg-website-2025.vercel.app/videos/WebLoop_opt_241218_1280-optimized.mp44';
 
 export default {
     title: 'UI Elements/Banner',
