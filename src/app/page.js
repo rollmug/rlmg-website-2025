@@ -4,6 +4,7 @@ import { Banner } from "@/components/ui/Banner";
 
 import RLMG from '../stories/assets/rlmg-logo.png';
 import testImg from '../stories/assets/test-bg-image.jpg'
+const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 
 export default function Home() {
   return (
@@ -17,7 +18,7 @@ export default function Home() {
       ]} fixed />
 
       <main className="py-14 lg:py-20">
-        <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything"  />
+        <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything" bannerVideo={videoLoop}  />
 
         <section className="section-padded py-8 lg:py-2">
           <h2>Who We Are</h2>

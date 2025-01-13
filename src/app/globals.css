@@ -19,7 +19,8 @@
   }
 } */
 
-html, body {
+html,
+body {
   font-size: 18px;
   line-height: 1.8;
   font-family: var(--font-nunito);
@@ -33,19 +34,13 @@ body {
   --dot-space: 38px;
 
   /* https://codepen.io/edmundojr/pen/xOYJGw */
-  background: linear-gradient(
-        90deg,
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
-    linear-gradient(
-        var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
-        transparent 1%
-      )
-      center / var(--dot-space) var(--dot-space),
+  background: linear-gradient(90deg,
+      var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+      transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)),
+      transparent 1%) center / var(--dot-space) var(--dot-space),
     var(--dot-color);
-    background-attachment: fixed;
+  background-attachment: fixed;
 }
 
 h1 {
@@ -86,7 +81,7 @@ hr {
 }
 
 .slanted {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw))
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
 }
 
 p {
@@ -120,7 +115,8 @@ ul li {
   @apply bg-primary;
 }
 
-ul.menu li, ul.menu li a {
+ul.menu li,
+ul.menu li a {
   text-align: inherit;
   font-size: inherit;
 }
@@ -131,4 +127,21 @@ ul.menu li, ul.menu li a {
 
 .menu-mobile.menu-lg {
   font-size: 1.075rem;
+}
+
+.next-video-bg-video {
+  --media-object-fit: cover;
+  @apply w-full h-full object-cover object-center;
+}
+
+.bg-video-banner .next-video-bg-video {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
+}
+
+/* .next-video-bg.place-top .next-video-bg-text {
+  @apply justify-start pt-[15%] sm:pt-[12%] md:pt-[10%] lg:pt-[7%] xl:pt-[5%];
+} */
+
+.next-video-bg-text {
+  @apply !hidden  !p-0 border border-primary w-full !h-full !min-h-full;
 }

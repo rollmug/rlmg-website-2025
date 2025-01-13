@@ -1,6 +1,7 @@
 import { Banner } from "./Banner";
 
-import testImg from '../../stories/assets/test-bg-image.jpg'
+import testImg from '../../stories/assets/test-bg-image.jpg';
+const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 
 export default {
     title: 'UI Elements/Banner',
@@ -40,6 +41,18 @@ export const BannerImage = {
         bannerSubheader: 'Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.',
         bannerCallToActionLink: './',
         bannerCallToActionText: 'Learn More',
-        bannerImage: testImg
+        bannerImage: testImg,
+    }
+};
+
+export const BannerVideo = {
+    args: {
+        bannerTextPlacement: 'top',
+        bannerHeader: 'Banner Header',
+        bannerSubheader: 'Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.',
+        bannerCallToActionLink: './',
+        bannerCallToActionText: 'Learn More',
+        bannerImage: testImg,
+        bannerVideo: videoLoop
     }
 };

@@ -2,57 +2,91 @@ import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import PropTypes from 'prop-types';
-import Link from 'next/link';
+//import Video from 'next-video';
+import BackgroundPlayer from 'next-video/background-player';
 import { Button } from "./Button";
 
-export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage }) => {
+// WebLoop-1280-optimized.mp4
+// const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 
-    let justifyContent, bannerGradient;
+export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerVideo }) => {
+
+    let justifyContent, bannerGradient, videoClass;
     switch (bannerTextPlacement) {
         case 'top':
+            videoClass = 'place-top';
             justifyContent = 'justify-start pt-[15%] sm:pt-[12%] md:pt-[10%] lg:pt-[7%] xl:pt-[5%]';
             bannerGradient = 'bg-gradient-to-b h-2/3 lg:h-2/3 w-full top-0';
             break;
         case 'center':
+            videoClass = 'place-center';
             justifyContent = 'justify-center';
             bannerGradient = 'bg-gradient-to-r h-full w-2/3 lg:w-2/3 left-0';
             break;
         case 'bottom':
+            videoClass = 'place-bottom';
             justifyContent = 'justify-end pt-[10%]';
             bannerGradient = 'bg-gradient-to-t h-2/3 lg:h-2/3 w-full bottom-0';
             break
         default:
+            videoClass = 'place-top';
             justifyContent = 'justify-start pt-[15%] sm:pt-[12%] md:pt-[10%] lg:pt-[7%] xl:pt-[5%]';
             bannerGradient = 'bg-gradient-to-b h-2/3 lg:h-2/3 w-full top-0';
     }
 
     const classNames = [
-        `${bannerImage ? 'min-h-[calc(70vh)]' : 'min-h-[calc(50vh)]'}  pb-14 sm:pb-24`, // mobile portrait
+        `${(bannerImage || bannerVideo) ? 'min-h-[calc(70vh)]' : 'min-h-[calc(50vh)]'}  pb-14 sm:pb-24`, // mobile portrait
         'landscape:min-h-[calc(80vh)] landscape:pb-20', // mobile landscape
         'landscape:lg:pb-32', // tablet landscape
         'landscape:xl:pb-36',
     ];
 
     const className = classNames.join(' ');
+    const imgClasses = 'object-cover object-left lg:object-center transition-all ease-in-out duration-1000 opacity-0';
+
+    if (bannerImage && bannerVideo) {
+        return (
+            <>
+                <div className={`relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className}`}>
+                    <div className="absolute inset-0 z-0 slanted">
+                        <Image src={bannerImage} fill alt="" className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
+                        <AnimatePresence>
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 slanted">
+                                <BackgroundPlayer src={bannerVideo} className={`bg-video-banner !hidden md:!grid`} />
+                            </motion.div>
+                        </AnimatePresence>
+                        {(bannerHeader || bannerSubheader) && (
+                            <div className={`${bannerGradient} from-black to-transparent absolute opacity-50`}></div>
+                        )}
+                    </div>
+
+                    <div className="section-padded z-[2]">
+                        {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
+                        {bannerSubheader && <p className="text-white leading-normal lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">{bannerSubheader}</p>}
+                        {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
+                    </div>
+                </div>
+            </>
+        );
+    }
 
     return (
         <>
-            <div className={`relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className} `}>
-                {bannerImage && (
+            <div className={`relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className}`}>
+                {(bannerImage && !bannerVideo) && (
                     <div className="absolute inset-0 z-0">
-                        <Image src={bannerImage} layout="fill" objectFit="cover" alt="" className={`object-left lg:object-center`} />
+                        <Image src={bannerImage} fill alt="" className={`${imgClasses}`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         {(bannerHeader || bannerSubheader) && (
                             <div className={`${bannerGradient} from-black to-transparent absolute opacity-50`}></div>
                         )}
                     </div>
                 )}
-                <div className="section-padded z-[1]">
+
+                <div className="section-padded z-[2]">
                     {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
                     {bannerSubheader && <p className="text-white leading-normal lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">{bannerSubheader}</p>}
                     {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
                 </div>
-
-
             </div>
 
         </>
