@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import PropTypes from 'prop-types';
 import Link from 'next/link';
+import { Logo } from "./Logo";
 
 export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
 
@@ -14,8 +14,6 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
      */
 
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
-
-    // max-w-screen-lg w-full mx-auto
 
     return (
         <>
@@ -47,24 +45,24 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
     );
 };
 
-const Logo = ({ img, orgName }) => {
-    return (
-        <AnimatePresence>
-            {img ? (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ ease: "easeIn", duration: 1 }}
-                    className="inline-flex max-h-full w-20 h-full items-start"
-                >
-                    <Image src={img} alt="RLMG Logo" width={0} height={0} className="object-contain max-h-full -translate-x-2 lg:translate-x-0" />
-                </motion.div>
-            ) : <span className="text-lg">{orgName}</span>
-            }
-        </AnimatePresence>
-    )
-}
+// const Logo = ({ img, orgName }) => {
+//     return (
+//         <AnimatePresence>
+//             {img ? (
+//                 <motion.div
+//                     initial={{ opacity: 0 }}
+//                     animate={{ opacity: 1 }}
+//                     exit={{ opacity: 0 }}
+//                     transition={{ ease: "easeIn", duration: 1 }}
+//                     className="inline-flex max-h-full w-20 h-full items-start"
+//                 >
+//                     <Image src={img} alt="RLMG Logo" width={0} height={0} className="object-contain max-h-full -translate-x-2 lg:translate-x-0" />
+//                 </motion.div>
+//             ) : <span className="text-lg">{orgName}</span>
+//             }
+//         </AnimatePresence>
+//     )
+// }
 
 const MenuIcon = ({ open }) => {
 

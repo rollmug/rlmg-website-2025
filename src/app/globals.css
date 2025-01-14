@@ -84,8 +84,20 @@ hr {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
 }
 
+.slanted-reverse {
+  clip-path: polygon(0 8vw, 100% 0, 100% 100%, 0 100%);
+}
+
+.slanted-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8vw), 0 100%);
+}
+
 p {
   @apply text-base-content text-base my-4;
+}
+
+p.font-bold b, p.font-bold strong {
+  font-weight: 900;
 }
 
 ul {

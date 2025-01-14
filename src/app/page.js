@@ -6,6 +6,7 @@ import RLMG from '../stories/assets/rlmg-logo.png';
 import testImg from '../stories/assets/test-bg-image.jpg'
 import { FeaturedImage } from "@/components/ui/FeaturedImage";
 import { TextWithImage } from "@/components/content-blocks/TextWithImage";
+import { TextOnlyHero } from "@/components/content-blocks/TextOnlyHero";
 const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 const featureImg = '/storybook-imgs/Biomuseo_Panorama_2_2014.jpg';
 const testImg3 = '/storybook-imgs/Our-Approach.jpg';
@@ -47,9 +48,15 @@ export default function Home() {
           imagePlacement="left"
           className={`my-2 lg:mb-8 lg:mt-12`}
         />
+
+        <TextOnlyHero
+          headerText="Pizza on Wednesdays"
+          mainText="We are always looking for talented individuals to join our team. If you are passionate about creating meaningful experiences, <strong>we would love to hear from you.</strong>"
+          buttonText="View Toppings"
+          buttonURL="/careers"
+          className="mt-8 lg:mt-16 border border-transparent"
+        />
       </main>
-
-
     </div>
   );
 }
