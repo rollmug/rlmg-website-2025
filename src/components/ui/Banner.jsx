@@ -61,11 +61,7 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
                         )}
                     </div>
 
-                    <div className="section-padded z-[2]">
-                        {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
-                        {bannerSubheader && <p className="text-white leading-normal lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">{bannerSubheader}</p>}
-                        {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
-                    </div>
+                    <OverlayText bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} />
                 </div>
             </>
         );
@@ -83,16 +79,20 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
                     </div>
                 )}
 
-                <div className="section-padded z-[2]">
-                    {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
-                    {bannerSubheader && <p className="text-white leading-normal lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">{bannerSubheader}</p>}
-                    {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
-                </div>
+                <OverlayText bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} />
             </div>
 
         </>
     );
 }
+
+const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText }) => (
+    <div className="section-padded z-[2]">
+        {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
+        {bannerSubheader && <p className="text-white leading-normal lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">{bannerSubheader}</p>}
+        {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
+    </div>
+);
 
 Banner.propTypes = {
     bannerTextPlacement: PropTypes.oneOf(['top', 'center', 'bottom']),

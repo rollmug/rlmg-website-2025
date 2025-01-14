@@ -3,6 +3,7 @@ import { Paragraph } from "./Paragraph";
 export default {
     title: 'Typography/Paragraph',
     component: Paragraph,
+    tags: ['!autodocs'],
     parameters: {
         layout: 'centered',
         paddings: {
