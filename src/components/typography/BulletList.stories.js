@@ -6,14 +6,16 @@ export default {
     tags: ['!autodocs'],
     args: {
         listItems: [
-            'Strategy & Concept',
-            'Design Development & Prototyping',
-            'Interactive Media',
-            'Film & Linear Media',
-            'Immersive Environments',
-            'Project Management',
+            { text: 'Strategy & Concept' },
+            { text: 'Design Development & Prototyping' },
+            { text: 'Interactive Media' },
+            { text: 'Film & Linear Media' },
+            { text: 'Immersive Environments' },
+            { text: 'Project Management' },
         ],
-        title: 'Our Capabilities'
+        title: 'Our Capabilities',
+        textSize: 'normal',
+        spacing: 'normal',
     },
     parameters: {
         layout: 'centered',
@@ -31,4 +33,31 @@ export default {
     },
 }
 
-export const Normal = (args) => <BulletList {...args} />;
+export const Bullets = {
+    args: {
+        bullets: true,
+    }
+}
+
+export const Plain = {
+    args: {
+        bullets: false,
+    }
+}
+
+export const WithLinks = {
+    args: {
+        bullets: false,
+        title: null,
+        spacing: 'loose',
+        textSize: 'small',
+        listItems: [
+            { text: 'Home', url: '/' },
+            { text: 'About Us', url: '/' },
+            { text: 'Our Work', url: '/' },
+            { text: 'Our Team', url: '/' },
+            { text: 'Careers', url: '/' },
+            { text: 'Contact Us', url: '/' },
+        ],
+    }
+}

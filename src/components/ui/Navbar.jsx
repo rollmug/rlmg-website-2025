@@ -45,25 +45,6 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
     );
 };
 
-// const Logo = ({ img, orgName }) => {
-//     return (
-//         <AnimatePresence>
-//             {img ? (
-//                 <motion.div
-//                     initial={{ opacity: 0 }}
-//                     animate={{ opacity: 1 }}
-//                     exit={{ opacity: 0 }}
-//                     transition={{ ease: "easeIn", duration: 1 }}
-//                     className="inline-flex max-h-full w-20 h-full items-start"
-//                 >
-//                     <Image src={img} alt="RLMG Logo" width={0} height={0} className="object-contain max-h-full -translate-x-2 lg:translate-x-0" />
-//                 </motion.div>
-//             ) : <span className="text-lg">{orgName}</span>
-//             }
-//         </AnimatePresence>
-//     )
-// }
-
 const MenuIcon = ({ open }) => {
 
     if (open) {

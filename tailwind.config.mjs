@@ -18,6 +18,7 @@ export default {
       fontSize: {
         xs: ['0.7rem', '1.4rem'], // 14px
         sm: ['0.8rem', '1.4rem'], // 16px for buttons
+        "sm2": ['0.9rem', '1.5rem'], // 16px for buttons
         base: ['1rem', '1.8rem'], // 20px for body text
         lg: ['1.2rem', '1.8rem'], // 24px for h3
         lgr: ['1.4rem', '1.8rem'], // 30px for h3
