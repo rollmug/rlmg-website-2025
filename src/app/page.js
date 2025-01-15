@@ -59,7 +59,7 @@ export default function Home() {
         { text: "Contact", url: "/" },
       ]} fixed />
 
-      <main className="py-14 lg:py-20">
+      <main className="py-[3.5rem] lg:py-[4.9rem]">
         <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything" bannerVideo={videoLoop} />
 
         <TextWithImage
