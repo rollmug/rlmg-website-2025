@@ -36,7 +36,7 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, class
                                         ) : 'Image goes here'}
 
                                     </div>
-                                    <h3 className="my-0 ">{post.postTitle}</h3>
+                                    <Link href={post.urlSlug}><h3 className="my-0 ">{post.postTitle}</h3></Link>
                                     <p className="my-0 text-sm lg:text-base">{post.postTeaser}</p>
                                 </div>
                             ))}

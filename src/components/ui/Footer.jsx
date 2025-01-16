@@ -31,7 +31,7 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
 
                     {/* column three */}
                     <div className="flex flex-col justify-between gap-6 lg:gap-10 flex-1 lg:order-3 xl:px-6">
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-4 overflow-hidden">
                             <h3 className="my-0">Subscribe to Our Newsletter</h3>
                             
                             <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
