@@ -8,6 +8,7 @@ import { Footer } from "@/components/ui/Footer";
 import { TextWithImage } from "@/components/content-blocks/TextWithImage";
 import { TextOnlyHero } from "@/components/content-blocks/TextOnlyHero";
 import { ContentSection } from "@/components/layout/ContentSection";
+import { FeaturedPosts } from "@/components/content-blocks/FeaturedPosts";
 const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 const featureImg = '/storybook-imgs/Biomuseo_Panorama_2_2014.jpg';
 const testImg3 = '/storybook-imgs/Our-Approach.jpg';
@@ -79,7 +80,37 @@ export default function Home() {
           />
         </ContentSection>
 
-        <ContentSection standout={true}>
+        <FeaturedPosts
+          buttonText="See All Projects"
+          linkToPage="/"
+          standout
+          posts={[
+            {
+              bannerImage: '/storybook-imgs/Featured-1.jpg',
+              postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
+              postTitle: 'Post Title',
+              urlSlug: {
+                pathname: './',
+                query: {
+                  path: '/story/content-blocks-featured-posts--with-background'
+                }
+              }
+            },
+            {
+              bannerImage: '/storybook-imgs/Featured-2.jpg',
+              postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
+              postTitle: 'Post Title',
+              urlSlug: {
+                pathname: './',
+                query: {
+                  path: '/story/content-blocks-featured-posts--with-background'
+                }
+              }
+            }
+          ]}
+        />
+
+        <ContentSection>
           <TextWithImage
             header="Our Approach"
             subheader="Measure Once. Cut Twice."

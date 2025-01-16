@@ -21,14 +21,14 @@ export default {
             {
                 postTitle: 'Post Title',
                 postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
-                urlSlug: '/',
-                bannerImage: '',
+                urlSlug: { pathname: './', query: { path: '/story/content-blocks-featured-posts--with-background' } },
+                bannerImage: 'https://rlmg-website-2025.vercel.app/storybook-imgs/Featured-1.jpg',
             },
             {
                 postTitle: 'Post Title',
                 postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
-                urlSlug: '/',
-                bannerImage: '',
+                urlSlug: { pathname: './', query: { path: '/story/content-blocks-featured-posts--with-background' } },
+                bannerImage: 'https://rlmg-website-2025.vercel.app/storybook-imgs/Featured-2.jpg',
             },
         ],
     },
