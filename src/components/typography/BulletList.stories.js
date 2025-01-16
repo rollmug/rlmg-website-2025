@@ -15,6 +15,7 @@ export default {
         ],
         title: 'Our Capabilities',
         textSize: 'normal',
+        columns: 1,
         spacing: 'normal',
     },
     parameters: {
@@ -59,5 +60,71 @@ export const WithLinks = {
             { text: 'Careers', url: '/' },
             { text: 'Contact Us', url: '/' },
         ],
+    }
+}
+
+export const IntoColumns = {
+    args: {
+        bullets: false,
+        title: null,
+        spacing: 'loose',
+        textSize: 'small',
+        listItems: [
+            { text: 'Home', url: '/' },
+            { text: 'About Us', url: '/' },
+            { text: 'Our Work', url: '/' },
+            { text: 'Our Team', url: '/' },
+            { text: 'Careers', url: '/' },
+            { text: 'Contact Us', url: '/' },
+            { text: 'Blog', url: '/' },
+        ],
+        columns: 2,
+    }
+}
+
+export const LongListColumns = {
+    parameters: {
+        layout: 'fullscreen',
+    },
+    args: {
+        bullets: false,
+        title: null,
+        spacing: 'loose',
+        textSize: 'small',
+        listItems: [
+            { text: 'Home', url: '/' },
+            { text: 'About Us', url: '/' },
+            { text: 'Our Work', url: '/' },
+            { text: 'Our Team', url: '/' },
+            { text: 'Careers', url: '/' },
+            { text: 'Contact Us', url: '/' },
+            { text: 'Blog', url: '/' },
+            { text: 'Press', url: '/' },
+            { text: 'Privacy Policy', url: '/' },
+            { text: 'Terms of Use', url: '/' },
+            { text: 'Accessibility', url: '/' },
+            { text: 'Sitemap', url: '/' },
+        ],
+        columns: 3,
+    }
+}
+
+export const ColumnsOnMobile = {
+    args: {
+        bullets: false,
+        title: null,
+        spacing: 'loose',
+        textSize: 'small',
+        listItems: [
+            { text: 'Home', url: '/' },
+            { text: 'About Us', url: '/' },
+            { text: 'Our Work', url: '/' },
+            { text: 'Our Team', url: '/' },
+            { text: 'Careers', url: '/' },
+            { text: 'Contact Us', url: '/' },
+            { text: 'Blog', url: '/' },
+        ],
+        columns: 2,
+        columnsOnMobile: true,
     }
 }

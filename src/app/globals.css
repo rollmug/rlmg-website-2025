@@ -157,3 +157,11 @@ ul.menu li a {
 .next-video-bg-text {
   @apply !hidden  !p-0 border border-primary w-full !h-full !min-h-full;
 }
+
+input[type=email]:focus {
+  @apply border-0 outline-none outline-0;
+}
+
+input[type=email]::placeholder {
+  @apply text-base-content;
+}

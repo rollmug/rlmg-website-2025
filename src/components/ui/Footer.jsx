@@ -4,35 +4,52 @@ import { Logo } from "./Logo";
 import { SocialMediaIcons } from "./SocialMediaIcons";
 import { BulletList } from "../typography/BulletList";
 
+import { HiArrowLongRight } from "react-icons/hi2";
+
 export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
     return (
         <footer className={`py-4 ${className}`}>
             <section className="section-padded">
-                <div className="flex w-full flex-col lg:flex-row items-stretch lg:justify-between lg:items-start gap-4 lg:gap-10">
+                <div className="flex w-full flex-col lg:flex-row items-stretch lg:justify-between gap-4 lg:gap-10">
+
+                    {/* colum one */}
                     <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 xl:gap-12 flex-1">
                         <div className="pl-2 lg:pl-0">
                             <Logo img={logoImg} orgName={orgName} />
                         </div>
                         <div className="flex flex-col gap-1">
                             <h3 className="my-0 font-extrabold text-xl lg:text-2xl text-primary">{email}</h3>
-                            <p className="my-0 text-sm lg:text-sm2">{address}</p>
+                            <p className="my-0 text-sm lg:text-sm2 xl:text-nowrap">{address}</p>
                             <SocialMediaIcons links={socialLinks} className="my-2" size="medium" />
                         </div>
                     </div>
-                    {/* border border-warning flex flex-row justify-start items-start shrink grow flex-wrap */}
-                    {/* basis-1/2 */}
-                    {/* https://css-tricks.com/understanding-flex-grow-flex-shrink-and-flex-basis/ */}
-                    <div className="flex flex-col gap-4 flex-0 pb-4 lg:pb-0 lg:px-8 xl:px-10">
-                        <BulletList bullets={false} textSize="small" spacing="looser" listItems={listItems} className={``} />
+
+                    {/* column two */}
+                    <div className="flex-0 pb-4 lg:pb-0 lg:px-8 xl:px-10 order-3 lg:order-2">
+                        <BulletList bullets={false} textSize="small" spacing="looser" listItems={listItems} className={``} columns={2} columnsOnMobile={true} />
                     </div>
-                    <div className="flex flex-col gap-6 lg:gap-10 flex-1">
+
+                    {/* column three */}
+                    <div className="flex flex-col justify-between gap-6 lg:gap-10 flex-1 lg:order-3 xl:px-6">
                         <div className="flex flex-col gap-4">
                             <h3 className="my-0">Subscribe to Our Newsletter</h3>
-                            <p className="my-0">Enter Email*</p>
+                            
+                            <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
+                                <div className="flex-1">
+                                    <input type="email" placeholder="Enter Email*" className="input input-sm input-ghost p-1 pl-0 h-auto w-full max-w-full " />
+                                </div>
+                                <button className="btn btn-ghost text-right !px-1">
+                                    <HiArrowLongRight className="text-primary w-6 h-6" />
+                                </button>
+                            </div>
                         </div>
-                        <div className="lg:self-end">
-                            <p className="text-xs">&copy; 2025 {orgName}</p>
+                        <div className="lg:self-end hidden lg:block">
+                            <p className="text-xs my-0">&copy; 2025 {orgName}</p>
                         </div>
+                    </div>
+
+                    <div className="order-4 block mt-6 lg:hidden">
+                        <p className="text-xs my-0">&copy; 2025 {orgName}</p>
                     </div>
                 </div>
             </section>

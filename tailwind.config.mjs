@@ -41,6 +41,7 @@ export default {
           secondary: "#019FF9", //blue - for headers
           "base-100": "#ffffff", // main background
           "base-200": "#F3F4F7", // slightly darker background on some content blocks
+          "base-300": "#C6C8C8", // darker background
           "base-content": "#2A303E", // main text color
           neutral: "#2A303E", // for dark bg on quote blocks and other content blocks
           "neutral-content": "#ffffff", // text on dark bg

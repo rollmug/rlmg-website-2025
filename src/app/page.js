@@ -23,6 +23,7 @@ const footerArgs = {
     { text: 'Our Team', url: '/' },
     { text: 'Careers', url: '/' },
     { text: 'Contact Us', url: '/' },
+    { text: "Blog", url: "/" },
   ],
   socialLinks: [
     {

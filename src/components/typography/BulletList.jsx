@@ -2,57 +2,116 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import Link from "next/link";
 
-export const BulletList = ({ title, listItems, bullets = true, textSize = 'normal', spacing = 'normal', className }) => {
-    let textClass, spacingClass;
-    switch (textSize) {
-        case 'small':
-            textClass = 'text-sm';
-            break;
-        case 'normal':
-            textClass = 'text-base';
-            break;
-        case 'large':
-            textClass = 'text-lg';
-            break;
-        default:
-            textClass = 'text-base';
+export const BulletList = ({ title, listItems, bullets = true, textSize = 'normal', spacing = 'normal', columns = 1, columnsOnMobile = false, className }) => {
+    const textClass = getTextClass(textSize);
+    const spacingClass = getSpacingClass(spacing);
+    let gridClass = '';
+
+    if (columns > 1) {
+        const itemsPerColumn = Math.ceil(listItems.length / columns);
+        const columnItems = listItems.reduce((result, item, index) => {
+            const columnIndex = Math.floor(index / itemsPerColumn);
+            if (!result[columnIndex]) {
+                result[columnIndex] = [];
+            }
+            result[columnIndex].push(item);
+            return result;
+        }, []);
+
+        if(columnsOnMobile) {
+            // this swaps the columns, and displays them on mobile but as long list on desktop
+            switch (columns) {
+                case 2: gridClass = 'grid-cols-2'; break;
+                case 3: gridClass = 'grid-cols-3'; break;
+                case 4: gridClass = 'grid-cols-4'; break;
+            }
+            return (
+                <>
+                    {title && <h4>{title}</h4>}
+                    <div className={`grid gap-4 max-w-screen-lg mx-auto ${gridClass} lg:grid-cols-1`}>
+                        {columnItems.map((column, index) => (
+                            <List key={index} listItems={column} bullets={bullets} className={className} spacingClass={spacingClass} textClass={textClass} />
+                        ))}
+                    </div>
+                </>
+            );
+        } else {
+            switch (columns) {
+                case 2: gridClass = 'lg:grid-cols-2'; break;
+                case 3: gridClass = 'sm:grid-cols-2 lg:grid-cols-3'; break;
+                case 4: gridClass = 'md:grid-cols-3 lg:grid-cols-4'; break;
+            }
+            return (
+                <>
+                    {title && <h4>{title}</h4>}
+                    <div className={`grid grid-cols-1 gap-4 max-w-screen-lg mx-auto ${gridClass}`}>
+                        {columnItems.map((column, index) => (
+                            <List key={index} listItems={column} bullets={bullets} className={className} spacingClass={spacingClass} textClass={textClass} />
+                        ))}
+                    </div>
+                </>
+            );
+        }
     }
 
-    switch (spacing) {
-        case 'tight':
-            spacingClass = 'space-y-1';
-            break;
-        case 'normal':
-            spacingClass = 'space-y-2';
-            break;
-        case 'loose':
-            spacingClass = 'space-y-3';
-            break;
-        case 'looser':
-            spacingClass = 'space-y-4';
-            break;
-        default:
-            spacingClass = 'space-y-1';
-    }
-
+    // normal list
     return (
         <>
             {title && <h4>{title}</h4>}
-            <ul className={`${bullets ? 'list-inside' : 'list-none'} ${className} ${spacingClass}`}>
-                {listItems.map((item, index) => (
-                    <li key={index} className={`${textClass}`}>
-                        {item.url ? <>
-                            <Link href={item.url}>{item.text}</Link>
-                        </> :
-                            item.text
-                        }
-                    </li>
-                ))}
-            </ul>
+            <List listItems={listItems} bullets={bullets} className={className} spacingClass={spacingClass} textClass={textClass} />
         </>
-
     );
 };
+
+const List = ({ listItems, bullets, className, spacingClass, textClass }) => {
+    return (
+        <ul className={`${bullets ? 'list-inside' : 'list-none'} ${className} ${spacingClass}`}>
+            {listItems.map((item, index) => (
+                <ListItem key={index} text={item.text} url={item.url} textClass={textClass} />
+            ))}
+        </ul>
+    );
+}
+
+const ListItem = ({ text, url, textClass }) => {
+    return (
+        <li className={`${textClass}`}>
+            {url ? (
+                <Link href={url}>{text}</Link>
+            ) : (
+                text
+            )}
+        </li>
+    );
+}
+
+const getTextClass = (textSize) => {
+    switch (textSize) {
+        case 'small':
+            return 'text-sm';
+        case 'normal':
+            return 'text-base';
+        case 'large':
+            return 'text-lg';
+        default:
+            return 'text-base';
+    }
+};
+
+const getSpacingClass = (spacing) => {
+    switch (spacing) {
+        case 'tight':
+            return 'space-y-1';
+        case 'normal':
+            return 'space-y-2';
+        case 'loose':
+            return 'space-y-3';
+        case 'looser':
+            return 'space-y-4';
+        default:
+            return 'space-y-2';
+    }
+}
 
 BulletList.propTypes = {
     title: PropTypes.string,
@@ -63,6 +122,8 @@ BulletList.propTypes = {
     bullets: PropTypes.bool,
     textSize: PropTypes.oneOf(['small', 'normal', 'large']),
     spacing: PropTypes.oneOf(['tight', 'normal', 'loose', 'looser']),
+    columns: PropTypes.number,
+    columnsOnMobile: PropTypes.bool,
     className: PropTypes.string,
 }
 
@@ -78,5 +139,7 @@ BulletList.defaultProps = {
     ],
     bullets: true,
     textSize: 'normal',
+    columns: 1,
+    columnsOnMobile: false,
     spacing: 'normal',
 }
