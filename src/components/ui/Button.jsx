@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Button = ({ label, type= 'button', active = false, children, ...props }) => {
+export const Button = ({ label, type= 'button', active = false }) => {
 
     if(type === 'filter') {
         return (
