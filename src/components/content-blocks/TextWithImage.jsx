@@ -7,9 +7,9 @@ export const TextWithImage = ({ header, subheader, text, image, width, alt, clas
         <section className={`section-padded ${className}`}>
             <div className={`flex justify-evenly items-center gap-1 lg:gap-10 ${imagePlacement === 'left' ? 'flex-col-reverse lg:flex-row-reverse' : 'flex-col lg:flex-row'}`}>
                 <div className={`w-full lg:w-1/2`}>
-                    <div className="flex flex-col justify-center items-start">
-                        <h2>{header}</h2>
-                        <h3>{subheader}</h3>
+                    <div className="flex flex-col justify-center items-start gap-2">
+                        <h2 className="my-0">{header}</h2>
+                        <h3 className="my-0">{subheader}</h3>
                         <hr />
                         <p>{text}</p>
                     </div>

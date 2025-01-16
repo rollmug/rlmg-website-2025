@@ -65,7 +65,7 @@ export const BulletList = ({ title, listItems, bullets = true, textSize = 'norma
 
 const List = ({ listItems, bullets, className, spacingClass, textClass }) => {
     return (
-        <ul className={`${bullets ? 'list-inside' : 'list-none'} ${className} ${spacingClass}`}>
+        <ul className={`${bullets ? 'list-outside' : 'list-none !ml-0'} ${className} ${spacingClass}`}>
             {listItems.map((item, index) => (
                 <ListItem key={index} text={item.text} url={item.url} textClass={textClass} />
             ))}

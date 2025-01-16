@@ -9,9 +9,27 @@ import { TextWithImage } from "@/components/content-blocks/TextWithImage";
 import { TextOnlyHero } from "@/components/content-blocks/TextOnlyHero";
 import { ContentSection } from "@/components/layout/ContentSection";
 import { FeaturedPosts } from "@/components/content-blocks/FeaturedPosts";
+import { BannerImageColumnText } from "@/components/content-blocks/BannerImageColumnText";
 const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 const featureImg = '/storybook-imgs/Biomuseo_Panorama_2_2014.jpg';
 const testImg3 = '/storybook-imgs/Our-Approach.jpg';
+
+const bannerArgs = {
+  image: '/storybook-imgs/Hero_Image.jpg',
+  headerText: 'Header Text',
+  subheaderText: 'Subheader Text',
+  buttonText: 'Learn About Our Process',
+  buttonURL: '/',
+  textBlocks: [
+    { content: '<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus.</p>' },
+    {
+      content: '<ul><li>Item 1 is longer</li><li>Item 2</li><li>Item 3</li></ul>'
+    },
+    {
+      content: '<ul><li>Item 1 is longer too</li><li>Item 2</li><li>Item 3</li></ul>'
+    },
+  ]
+}
 
 const footerArgs = {
   logoImg: RLMG,
@@ -110,7 +128,7 @@ export default function Home() {
           ]}
         />
 
-        <ContentSection>
+        {/* <ContentSection>
           <TextWithImage
             header="Our Approach"
             subheader="Measure Once. Cut Twice."
@@ -121,7 +139,9 @@ export default function Home() {
             imagePlacement="left"
             className={`my-2 lg:mb-8 lg:mt-12`}
           />
-        </ContentSection>
+        </ContentSection> */}
+
+        <BannerImageColumnText {...bannerArgs} />
 
         <TextOnlyHero
           headerText="Pizza on Wednesdays"
