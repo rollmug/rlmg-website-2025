@@ -18,7 +18,7 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                             <Logo img={logoImg} orgName={orgName} />
                         </div>
                         <div className="flex flex-col gap-1">
-                            <h3 className="my-0 font-extrabold text-xl lg:text-2xl text-primary">{email}</h3>
+                            <h3 className="my-0 font-extrabold text-lgr md:text-xl lg:text-2xl text-primary">{email}</h3>
                             <p className="my-0 text-sm lg:text-sm2 xl:text-nowrap">{address}</p>
                             <SocialMediaIcons links={socialLinks} className="my-2" size="medium" />
                         </div>

@@ -1,10 +1,9 @@
 'use client';
-import { Navbar } from "@/components/ui/Navbar";
+import { PageLayout } from "@/components/layout/PageLayout";
 import { Banner } from "@/components/ui/Banner";
 
 import RLMG from '../stories/assets/rlmg-logo.png';
 import testImg from '../stories/assets/test-bg-image.jpg'
-import { Footer } from "@/components/ui/Footer";
 import { TextWithImage } from "@/components/content-blocks/TextWithImage";
 import { TextOnlyHero } from "@/components/content-blocks/TextOnlyHero";
 import { ContentSection } from "@/components/layout/ContentSection";
@@ -14,22 +13,13 @@ const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 const featureImg = '/storybook-imgs/Biomuseo_Panorama_2_2014.jpg';
 const testImg3 = '/storybook-imgs/Our-Approach.jpg';
 
-const bannerArgs = {
-  image: '/storybook-imgs/Hero_Image.jpg',
-  headerText: 'Header Text',
-  subheaderText: 'Subheader Text',
-  buttonText: 'Learn About Our Process',
-  buttonURL: '/',
-  textBlocks: [
-    { content: '<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus.</p>' },
-    {
-      content: '<ul><li>Item 1 is longer</li><li>Item 2</li><li>Item 3</li></ul>'
-    },
-    {
-      content: '<ul><li>Item 1 is longer too</li><li>Item 2</li><li>Item 3</li></ul>'
-    },
-  ]
-}
+const navItems=[
+  { text: "About Us", url: "/" },
+  { text: "Our Work", url: "/" },
+  { text: "Our Team", url: "/" },
+  { text: "Careers", url: "/" },
+  { text: "Contact", url: "/" },
+];
 
 const footerArgs = {
   logoImg: RLMG,
@@ -69,66 +59,80 @@ const footerArgs = {
   ],
 }
 
+const pageLayoutParams = {
+  orgName: 'RLMG',
+  logoImg: RLMG,
+  navItems: navItems,
+  footerArgs: footerArgs
+};
+
+const bannerArgs = {
+  image: '/storybook-imgs/Hero_Image.jpg',
+  headerText: 'Header Text',
+  subheaderText: 'Subheader Text',
+  buttonText: 'Learn About Our Process',
+  buttonURL: '/',
+  textBlocks: [
+    { content: '<p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus.</p>' },
+    {
+      content: '<ul><li>Item 1 is longer</li><li>Item 2</li><li>Item 3</li></ul>'
+    },
+    {
+      content: '<ul><li>Item 1 is longer too</li><li>Item 2</li><li>Item 3</li></ul>'
+    },
+  ]
+}
+
 export default function Home() {
   return (
-    <div className="">
-      <Navbar img={RLMG} orgName="RLMG" listItems={[
-        { text: "About Us", url: "/" },
-        { text: "Our Work", url: "/" },
-        { text: "Our Team", url: "/" },
-        { text: "Careers", url: "/" },
-        { text: "Contact", url: "/" },
-      ]} fixed />
-
-      <main className="py-[3.5rem] lg:py-[4.9rem]">
-        <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything" bannerVideo={videoLoop} />
-
-        <ContentSection>
-          <TextWithImage
-            header="Who We Are"
-            subheader="We Create Text. At Different Sizes."
-            text="We bring to life innovative and imaginative experiences that stir emotions. Shift perceptions.
+    <PageLayout {...pageLayoutParams}>
+      <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything" bannerVideo={videoLoop} />
+      <ContentSection>
+        <TextWithImage
+          header="Who We Are"
+          subheader="We Create Text. At Different Sizes."
+          text="We bring to life innovative and imaginative experiences that stir emotions. Shift perceptions.
                   Provoke joy, wonder, debate. We open doors and cast light on who we are as humans, where we’ve been, where we’re going.
                   We bring people together and explore what connects us. We create meaningful moments, and we do it with a sense of purpose every step of the way."
-            image={featureImg}
-            width={600}
-            alt="Test image"
-            imagePlacement="right"
-            className={`my-2 mt-6 lg:my-8`}
-          />
-        </ContentSection>
+          image={featureImg}
+          width={600}
+          alt="Test image"
+          imagePlacement="right"
+          className={`my-2 mt-6 lg:my-8`}
+        />
+      </ContentSection>
 
-        <FeaturedPosts
-          buttonText="See All Projects"
-          linkToPage="/"
-          standout
-          posts={[
-            {
-              bannerImage: '/storybook-imgs/Featured-1.jpg',
-              postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
-              postTitle: 'Post Title',
-              urlSlug: {
-                pathname: './',
-                query: {
-                  path: '/story/content-blocks-featured-posts--with-background'
-                }
-              }
-            },
-            {
-              bannerImage: '/storybook-imgs/Featured-2.jpg',
-              postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
-              postTitle: 'Post Title',
-              urlSlug: {
-                pathname: './',
-                query: {
-                  path: '/story/content-blocks-featured-posts--with-background'
-                }
+      <FeaturedPosts
+        buttonText="See All Projects"
+        linkToPage="/"
+        standout
+        posts={[
+          {
+            bannerImage: '/storybook-imgs/Featured-1.jpg',
+            postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
+            postTitle: 'Post Title',
+            urlSlug: {
+              pathname: './',
+              query: {
+                path: '/story/content-blocks-featured-posts--with-background'
               }
             }
-          ]}
-        />
+          },
+          {
+            bannerImage: '/storybook-imgs/Featured-2.jpg',
+            postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
+            postTitle: 'Post Title',
+            urlSlug: {
+              pathname: './',
+              query: {
+                path: '/story/content-blocks-featured-posts--with-background'
+              }
+            }
+          }
+        ]}
+      />
 
-        {/* <ContentSection>
+      <ContentSection>
           <TextWithImage
             header="Our Approach"
             subheader="Measure Once. Cut Twice."
@@ -139,20 +143,18 @@ export default function Home() {
             imagePlacement="left"
             className={`my-2 lg:mb-8 lg:mt-12`}
           />
-        </ContentSection> */}
+        </ContentSection>
 
-        <BannerImageColumnText {...bannerArgs} />
+      <BannerImageColumnText {...bannerArgs} />
 
-        <TextOnlyHero
-          headerText="Pizza on Wednesdays"
-          mainText="We are always looking for talented individuals to join our team. If you are passionate about creating meaningful experiences, <strong>we would love to hear from you.</strong>"
-          buttonText="View Toppings"
-          buttonURL="/careers"
-          className=""
-        />
+      <TextOnlyHero
+        headerText="Pizza on Wednesdays"
+        mainText="We are always looking for talented individuals to join our team. If you are passionate about creating meaningful experiences, <strong>we would love to hear from you.</strong>"
+        buttonText="View Toppings"
+        buttonURL="/careers"
+        className=""
+      />
 
-        <Footer {...footerArgs} className={`mt-6`} />
-      </main>
-    </div>
+    </PageLayout>
   );
 }
