@@ -6,12 +6,12 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import DOMPurify from "isomorphic-dompurify";
 
-export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, image, buttonText, buttonURL, standout = false, className }) => {
-    const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
-    const variants = {
-        hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
-        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1 },
-    };
+export const ResponsiveColumns = ({ headerText, subheaderText, textBlocks, buttonText, buttonURL, standout = false, className }) => {
+    // const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
+    // const variants = {
+    //     hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
+    //     visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1 },
+    // };
 
     let gridClass;
     if (textBlocks && textBlocks.length >= 1) {
@@ -27,17 +27,8 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
             <ContentSection standout={standout}>
                 <section className={`section-padded full-mobile ${className}`}>
                     <div className="flex flex-col justify-start gap-2">
-                        <div className={`aspect-video bg-base-200 flex justify-center items-center mb-4 lg:mb-8 w-full max-w-full overflow-hidden`}>
-                            {image ? (
-                                <AnimatePresence>
-                                    <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full max-w-full">
-                                        <Image src={image} fill alt="" className={`object-cover`} />
-                                    </motion.div>
-                                </AnimatePresence>
-                            ) : 'Image goes here'}
-                        </div>
 
-                        <div className="section-padded-mobile-only flex flex-col justify-start gap-2 lg:gap-2">
+                        <div className="section-padded-mobile-only flex flex-col justify-start gap-1 lg:gap-2">
                             {headerText && (<h2 className="my-0">{headerText}</h2>)}
                             {subheaderText && (<h3 className="my-0">{subheaderText}</h3>)}
                             {(headerText || subheaderText) && <div className="mb-2 lg:mb-1">
@@ -48,7 +39,7 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                                     {textBlocks.map((block, index) => {
                                         const cleanText = DOMPurify.sanitize(block.content);
                                         return (
-                                            <div key={index} className="max-w-[50ch] basis-full lg:basis-auto" dangerouslySetInnerHTML={{ __html: cleanText }} />
+                                            <div key={index} className={`max-w-prose ${index > 0 ? 'lg:w-1/3' : ''} basis-full lg:basis-auto`} dangerouslySetInnerHTML={{ __html: cleanText }} />
                                         )
                                     })}
                                 </div>
@@ -59,23 +50,21 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                                 </div>
                             )}
                         </div>
-
                     </div>
                 </section>
             </ContentSection>
         </>
     );
-}
+};
 
-BannerImageColumnText.propTypes = {
+ResponsiveColumns.propTypes = {
     headerText: PropTypes.string,
     subheaderText: PropTypes.string,
     textBlocks: PropTypes.arrayOf(PropTypes.shape({
-        content: PropTypes.node.isRequired,
+        content: PropTypes.string,
     })),
-    image: PropTypes.string,
     buttonText: PropTypes.string,
     buttonURL: PropTypes.string,
     standout: PropTypes.bool,
     className: PropTypes.string,
-}
+};

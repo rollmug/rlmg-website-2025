@@ -8,7 +8,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 
 export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
     return (
-        <footer className={`py-4 ${className}`}>
+        <footer className={`mt-6 py-4 ${className}`}>
             <section className="section-padded">
                 <div className="flex w-full flex-col lg:flex-row items-stretch lg:justify-between gap-4 lg:gap-10">
 

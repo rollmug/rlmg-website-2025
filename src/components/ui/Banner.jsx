@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 //import Video from 'next-video';
 import BackgroundPlayer from 'next-video/background-player';
 import { Button } from "./Button";
+import DOMPurify from "isomorphic-dompurify";
 
 // WebLoop-1280-optimized.mp4
 // const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
@@ -43,12 +44,12 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
     ];
 
     const className = classNames.join(' ');
-    const imgClasses = 'object-cover object-left lg:object-center transition-all ease-in-out duration-1000 opacity-0';
+    const imgClasses = 'object-cover object-center lg:object-center transition-all ease-in-out duration-1000 opacity-0';
 
     if (bannerImage && bannerVideo) {
         return (
             <>
-                <div className={`relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className}`}>
+                <div className={`banner-block relative bg-neutral slanted w-full flex flex-col ${justifyContent} ${className}`}>
                     <div className="absolute inset-0 z-0 slanted">
                         <Image src={bannerImage} fill alt="" className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         <AnimatePresence>
@@ -57,11 +58,11 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
                             </motion.div>
                         </AnimatePresence>
                         {(bannerHeader || bannerSubheader) && (
-                            <div className={`${bannerGradient} from-black to-transparent absolute opacity-50`}></div>
+                            <div className={`${bannerGradient} from-black to-transparent absolute opacity-70`}></div>
                         )}
                     </div>
 
-                    <OverlayText bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} />
+                    <OverlayText bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} bannerTextPlacement={bannerTextPlacement} />
                 </div>
             </>
         );
@@ -69,30 +70,37 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
 
     return (
         <>
-            <div className={`relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className}`}>
+            <div className={`banner-block relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className}`}>
                 {(bannerImage && !bannerVideo) && (
                     <div className="absolute inset-0 z-0">
                         <Image src={bannerImage} fill alt="" className={`${imgClasses}`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         {(bannerHeader || bannerSubheader) && (
-                            <div className={`${bannerGradient} from-black to-transparent absolute opacity-50`}></div>
+                            <div className={`${bannerGradient} from-black to-transparent absolute opacity-70`}></div>
                         )}
                     </div>
                 )}
 
-                <OverlayText bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} />
+                <OverlayText bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} bannerTextPlacement={bannerTextPlacement} />
             </div>
 
         </>
     );
 }
 
-const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText }) => (
-    <div className="section-padded z-[2]">
+const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerTextPlacement }) => {
+    let cleanSubheader;
+    if (bannerSubheader) {
+        cleanSubheader = DOMPurify.sanitize(bannerSubheader);
+    }
+
+    // dangerouslySetInnerHTML={{ __html: cleanSubheader }}
+
+    return (<div className={`section-padded z-[2] ${bannerTextPlacement === 'bottom' ? 'lg:mb-4 xl:mb-6' : ''}`}>
         {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
-        {bannerSubheader && <p className="text-white leading-normal lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">{bannerSubheader}</p>}
+        {bannerSubheader && <p className="text-white leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
         {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
-    </div>
-);
+    </div>)
+};
 
 Banner.propTypes = {
     bannerTextPlacement: PropTypes.oneOf(['top', 'center', 'bottom']),

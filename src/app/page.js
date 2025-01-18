@@ -6,19 +6,18 @@ import RLMG from '../stories/assets/rlmg-logo.png';
 import testImg from '../stories/assets/test-bg-image.jpg'
 import { TextWithImage } from "@/components/content-blocks/TextWithImage";
 import { TextOnlyHero } from "@/components/content-blocks/TextOnlyHero";
-import { ContentSection } from "@/components/layout/ContentSection";
 import { FeaturedPosts } from "@/components/content-blocks/FeaturedPosts";
 import { BannerImageColumnText } from "@/components/content-blocks/BannerImageColumnText";
 const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 const featureImg = '/storybook-imgs/Biomuseo_Panorama_2_2014.jpg';
 const testImg3 = '/storybook-imgs/Our-Approach.jpg';
 
-const navItems=[
-  { text: "About Us", url: "/" },
-  { text: "Our Work", url: "/" },
-  { text: "Our Team", url: "/" },
-  { text: "Careers", url: "/" },
-  { text: "Contact", url: "/" },
+const navItems = [
+  { text: "About Us", url: "/demo/about" },
+  { text: "Our Work", url: "/demo/work" },
+  { text: "Our Team", url: "/demo/team" },
+  { text: "Careers", url: "/demo/careers" },
+  { text: "Contact", url: "/demo/contact" },
 ];
 
 const footerArgs = {
@@ -87,22 +86,22 @@ export default function Home() {
   return (
     <PageLayout {...pageLayoutParams}>
       <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything" bannerVideo={videoLoop} />
-      <ContentSection>
-        <TextWithImage
-          header="Who We Are"
-          subheader="We Create Text. At Different Sizes."
-          text="We bring to life innovative and imaginative experiences that stir emotions. Shift perceptions.
+
+      <TextWithImage
+        header="Who We Are"
+        subheader="We Create Text. At Different Sizes."
+        text="We bring to life innovative and imaginative experiences that stir emotions. Shift perceptions.
                   Provoke joy, wonder, debate. We open doors and cast light on who we are as humans, where we’ve been, where we’re going.
                   We bring people together and explore what connects us. We create meaningful moments, and we do it with a sense of purpose every step of the way."
-          image={featureImg}
-          width={600}
-          alt="Test image"
-          imagePlacement="right"
-          className={`my-2 mt-6 lg:my-8`}
-        />
-      </ContentSection>
+        image={featureImg}
+        width={600}
+        alt="Test image"
+        imagePlacement="right"
+        className={`my-2 mt-6 lg:my-8`}
+      />
 
       <FeaturedPosts
+        headerText="Featured Projects"
         buttonText="See All Projects"
         linkToPage="/"
         standout
@@ -132,18 +131,16 @@ export default function Home() {
         ]}
       />
 
-      <ContentSection>
-          <TextWithImage
-            header="Our Approach"
-            subheader="Measure Once. Cut Twice."
-            text="We are led by the principles of design-thinking. It informs every facet of our approach, from UX to graphic design to storytelling and technology. In support of that guiding principle is good old-fashioned teamwork, internally across our disciplines and with clients and partners. We listen carefully, we respect diverse perspectives, and, above all, we have fun."
-            image={testImg3}
-            width={600}
-            alt="Test image"
-            imagePlacement="left"
-            className={`my-2 lg:mb-8 lg:mt-12`}
-          />
-        </ContentSection>
+      {/* <TextWithImage
+        header="Our Approach"
+        subheader="Measure Once. Cut Twice."
+        text="We are led by the principles of design-thinking. It informs every facet of our approach, from UX to graphic design to storytelling and technology. In support of that guiding principle is good old-fashioned teamwork, internally across our disciplines and with clients and partners. We listen carefully, we respect diverse perspectives, and, above all, we have fun."
+        image={testImg3}
+        width={600}
+        alt="Test image"
+        imagePlacement="left"
+        className={`my-2 lg:mb-8 lg:mt-12`}
+      /> */}
 
       <BannerImageColumnText {...bannerArgs} />
 
@@ -151,7 +148,7 @@ export default function Home() {
         headerText="Pizza on Wednesdays"
         mainText="We are always looking for talented individuals to join our team. If you are passionate about creating meaningful experiences, <strong>we would love to hear from you.</strong>"
         buttonText="View Toppings"
-        buttonURL="/careers"
+        buttonURL="/"
         className=""
       />
 

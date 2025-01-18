@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 export const PageLayout = ({ children, orgName, logoImg, navItems, footerArgs, className }) => {
     return (
-        <main className={`page w-full h-screen mx-auto pb-4 ${className} flex flex-col items-stretch justify-between`}>
+        <main className={`page w-full min-h-screen mx-auto pb-4 lg:pb-10 ${className} flex flex-col items-stretch justify-between`}>
             <Navbar img={logoImg} orgName={orgName} listItems={navItems} fixed />
-            <content className="page-content pt-[3.5rem] lg:pt-[4.9rem] grow">
+            <section className="page-content pt-[3.5rem] lg:pt-[4.9rem] grow">
                 {children}
-            </content>
+            </section>
             <Footer {...footerArgs} />
         </main>
     );

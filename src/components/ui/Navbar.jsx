@@ -89,7 +89,7 @@ const MobileLinks = ({ listItems, open }) => {
                     }}
                     className=""
                 >
-                    <ul tabIndex={0} className="left-0 mt-0 w-full absolute menu menu-mobile menu-lg bg-base-100 z-[1 p-0 shadow-md [&_li>*]:rounded-none items-stretch text-center">
+                    <ul tabIndex={0} className="left-0 mt-0 !mx-0 w-full absolute menu menu-mobile menu-lg bg-base-100 z-[1 p-0 shadow-md [&_li>*]:rounded-none items-stretch text-center">
                         <Links listItems={listItems} />
                     </ul>
                 </motion.div>

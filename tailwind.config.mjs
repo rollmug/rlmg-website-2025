@@ -47,6 +47,7 @@ export default {
           "neutral-content": "#ffffff", // text on dark bg
           accent: "#FFD95C", // for links on dark background, and for play btn color
           warning: "#FFD95C",
+          info: "#015A8D",
 
           "--rounded-btn": "4px",
         }

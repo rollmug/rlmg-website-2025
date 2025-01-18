@@ -116,12 +116,16 @@ ul li {
   @apply text-base-content text-base my-0;
 }
 
-.column-text p {
+.column-text p, .column-text h2, .column-text h3, .column-text h4 {
   @apply mt-0;
 }
 
 .column-text ul li {
   @apply leading-normal mb-2;
+}
+
+.equal-colum-text p {
+  @apply text-sm2 my-3 leading-normal;
 }
 
 .btn {
@@ -162,6 +166,14 @@ ul.menu li a {
   @apply w-full h-full object-cover object-center;
 }
 
+.banner-block + .content-section {
+  @apply mt-12 md:mt-8 lg:mt-4;
+}
+
+.content-section + .content-section {
+  @apply my-8 md:my-12 lg:my-16;
+}
+
 .bg-video-banner .next-video-bg-video {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
 }
@@ -180,4 +192,24 @@ input[type=email]:focus {
 
 input[type=email]::placeholder {
   @apply text-base-content;
+}
+
+.quote-container.light {
+  @apply bg-base-200 text-base-content;
+}
+
+.quote-container.dark {
+  @apply bg-info text-primary-content;
+}
+
+.quote-container.dark .quote-text {
+  @apply text-primary-content;
+}
+
+.quote-container.dark .quote-author {
+  @apply text-accent;
+}
+
+.quote-container.dark .quote-source, .quote-container.dark .quote-source-divider {
+  @apply text-primary-content;
 }

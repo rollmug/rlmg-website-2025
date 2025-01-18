@@ -11,7 +11,7 @@ export default {
                 { name: 'Medium', value: '32px' },
                 { name: 'Large', value: '64px' },
             ],
-            default: 'Large',
+            default: 'Small',
         },
     },
     globals: {
