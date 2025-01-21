@@ -129,7 +129,7 @@ const ContentBlock = ({ block }) => {
                 return { content: text };
             });
 
-            return <ResponsiveColumns
+            return <BannerImageColumnText
                 headerText={item.headerText}
                 subheaderText={item.subheaderText}
                 textBlocks={textBlocks}
