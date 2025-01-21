@@ -198,7 +198,9 @@ const ContentBlock = ({ block }) => {
                 const img = image.directus_files_id;
                 return {
                     src: formatImageURL(img),
-                    alt: ''
+                    alt: '',
+                    width: img.width,
+                    height: img.height
                 };
             });
             return <ColumnImages

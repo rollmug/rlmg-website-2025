@@ -27,15 +27,16 @@ export const ColumnImages = ({ headerText, columnImages, columnSize, className }
                         {columnImages && columnImages.length > 0 && (
                             <div className={`grid ${gridClass} self-stretch lg:self-center justify-start items-center lg:justify-items-center gap-8 md:gap-10 lg:gap-12 xl:gap-16`}>
                                 {columnImages.map((image, index) => {
-                                    const delay = index * .2; 
+                                    const delay = index * .2;
                                     return (
                                         <AnimatePresence key={index}>
                                             <motion.div
                                                 initial={{ scale: .5, opacity: 0 }}
                                                 whileInView={{ scale: 1, opacity: 1 }}
                                                 transition={{ ease: "easeIn", duration: .5, delay: delay }}
-                                                className="">
-                                                <Image src={image.src} alt={image.alt} width={450} height={0} className="w-auto max-w-full h-auto max-h-40" />
+                                                className="lg:justify-self-stretch flex lg:justify-center items-center">
+                                                <Image src={image.src} alt={image.alt} width={image.width} height={image.height} className="max-w-full" />
+                                                {/* w-full _max-w-max _h-auto max-h-max */}
                                             </motion.div>
                                         </AnimatePresence>
                                     )
