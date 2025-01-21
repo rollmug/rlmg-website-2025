@@ -108,6 +108,10 @@ p.font-bold b, p.font-bold strong, .font-extrabold {
   font-weight: 900;
 }
 
+div.apply-neutral p {
+  @apply text-neutral-content;
+}
+
 ul {
   @apply list-[square] list-outside marker:text-accent ml-4;
 }

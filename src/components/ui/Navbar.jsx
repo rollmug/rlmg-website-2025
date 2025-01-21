@@ -74,6 +74,7 @@ const MenuIcon = ({ open }) => {
 }
 
 const MobileLinks = ({ listItems, open }) => {
+    // if(!listItems || !listItems?.length) return null;
     return (
         <AnimatePresence mode="popLayout">
             {open && (
@@ -99,6 +100,7 @@ const MobileLinks = ({ listItems, open }) => {
 }
 
 const Links = ({ listItems, className }) => {
+    listItems = listItems && listItems.length > 0 ? listItems : [ { url: '/', text: 'Home'} ]; // fallback to home
     return (
         <>
             {listItems.map((item, index) => (

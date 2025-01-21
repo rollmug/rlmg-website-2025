@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from "react";
 import { ContentSection } from "../layout/ContentSection";
 import DOMPurify from "isomorphic-dompurify";
@@ -6,12 +7,14 @@ import Link from "next/link";
 
 export const ColumnText = ({ headerText, columnSize, columnText, standout = false, className }) => {
     let gridClass;
+    columnSize = Number(columnSize) || 1;
     if (columnText && columnText.length >= 1) {
         switch (columnSize) {
             case 1: gridClass = 'grid-cols-1'; break;
             case 2: gridClass = 'lg:grid-cols-2'; break;
             case 3: gridClass = 'grid-cols-1 md:grid-cols-3'; break;
             case 4: gridClass = 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'; break;
+            default: gridClass = 'grid-cols-1';
         }
     }
 

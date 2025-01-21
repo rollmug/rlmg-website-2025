@@ -7,8 +7,8 @@ export const BulletList = ({ title, listItems, bullets = true, textSize = 'norma
     const spacingClass = getSpacingClass(spacing);
     let gridClass = '';
 
-    if (columns > 1) {
-        const itemsPerColumn = Math.ceil(listItems.length / columns);
+    if (listItems && columns > 1) {
+        const itemsPerColumn = listItems ? Math.ceil(listItems.length / columns) : 0;
         const columnItems = listItems.reduce((result, item, index) => {
             const columnIndex = Math.floor(index / itemsPerColumn);
             if (!result[columnIndex]) {
@@ -64,6 +64,7 @@ export const BulletList = ({ title, listItems, bullets = true, textSize = 'norma
 };
 
 const List = ({ listItems, bullets, className, spacingClass, textClass }) => {
+    if (!listItems) return null;
     return (
         <ul className={`${bullets ? 'list-outside' : 'list-none !ml-0'} ${className} ${spacingClass}`}>
             {listItems.map((item, index) => (

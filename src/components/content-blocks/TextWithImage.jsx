@@ -13,7 +13,7 @@ export const TextWithImage = ({ header, subheader, text, image, width, alt, clas
                             <h2 className="my-0">{header}</h2>
                             <h3 className="my-0">{subheader}</h3>
                             <hr />
-                            <p>{text}</p>
+                            <div dangerouslySetInnerHTML={{ __html: text }} />
                         </div>
                     </div>
                     <div className={`w-full lg:w-1/2 px-3 py-8 lg:px-4 lg:py-4 flex items-center ${imagePlacement === 'left' ? 'justify-center' : 'justify-center'}`}>

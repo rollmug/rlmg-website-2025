@@ -45,7 +45,7 @@ export const BannerImage = {
     }
 };
 
-export const BannerVideo = {
+export const bannerBGVideo = {
     args: {
         bannerTextPlacement: 'top',
         bannerHeader: 'Banner Header',
@@ -53,6 +53,6 @@ export const BannerVideo = {
         bannerCallToActionLink: './',
         bannerCallToActionText: 'Learn More',
         bannerImage: testImg,
-        bannerVideo: videoLoop
+        bannerBGVideo: videoLoop
     }
 };

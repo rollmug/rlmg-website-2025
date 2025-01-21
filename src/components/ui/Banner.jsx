@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
@@ -10,7 +12,7 @@ import DOMPurify from "isomorphic-dompurify";
 // WebLoop-1280-optimized.mp4
 // const videoLoop = '/videos/WebLoop_opt_241218_1280-optimized.mp4';
 
-export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerVideo }) => {
+export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerBGVideo }) => {
 
     let justifyContent, bannerGradient, videoClass;
     switch (bannerTextPlacement) {
@@ -37,7 +39,7 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
     }
 
     const classNames = [
-        `${(bannerImage || bannerVideo) ? 'min-h-[calc(70vh)]' : 'min-h-[calc(50vh)]'}  pb-14 sm:pb-24`, // mobile portrait
+        `${(bannerImage || bannerBGVideo) ? 'min-h-[calc(70vh)]' : 'min-h-[calc(50vh)]'}  pb-14 sm:pb-24`, // mobile portrait
         'landscape:min-h-[calc(80vh)] landscape:pb-20', // mobile landscape
         'landscape:lg:pb-32', // tablet landscape
         'landscape:xl:pb-36',
@@ -46,7 +48,7 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
     const className = classNames.join(' ');
     const imgClasses = 'object-cover object-center lg:object-center transition-all ease-in-out duration-1000 opacity-0';
 
-    if (bannerImage && bannerVideo) {
+    if (bannerImage && bannerBGVideo) {
         return (
             <>
                 <div className={`banner-block relative bg-neutral slanted w-full flex flex-col ${justifyContent} ${className}`}>
@@ -54,7 +56,7 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
                         <Image src={bannerImage} fill alt="" className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         <AnimatePresence>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 slanted">
-                                <BackgroundPlayer src={bannerVideo} className={`bg-video-banner !hidden md:!grid`} />
+                                <BackgroundPlayer src={bannerBGVideo} className={`bg-video-banner !hidden md:!grid`} />
                             </motion.div>
                         </AnimatePresence>
                         {(bannerHeader || bannerSubheader) && (
@@ -71,7 +73,7 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
     return (
         <>
             <div className={`banner-block relative bg-neutral slanted w-full flex flex-col  ${justifyContent} ${className}`}>
-                {(bannerImage && !bannerVideo) && (
+                {(bannerImage && !bannerBGVideo) && (
                     <div className="absolute inset-0 z-0">
                         <Image src={bannerImage} fill alt="" className={`${imgClasses}`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         {(bannerHeader || bannerSubheader) && (

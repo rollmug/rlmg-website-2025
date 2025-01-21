@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import PropTypes from 'prop-types';
 import { Button } from "../ui/Button";
@@ -19,7 +21,11 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, class
                     <div className="flex flex-row flex-wrap justify-start gap-0">
                         <h2 className="my-0 lg:w-1/2 order-1 text-lgr md:text-xl lg:text-2xl">{headerText ? headerText : 'Featured Posts'}</h2>
                         <div className={`order-3 lg:order-2 lg:w-1/2 text-right`}>
-                            {(buttonText && linkToPage) && <Button label={buttonText} url={linkToPage} className={``} />}
+                            {(buttonText && linkToPage) &&
+                                <Link href={linkToPage}>
+                                    <Button label={buttonText} className={``} />
+                                </Link>
+                            }
                         </div>
                         <div className="my-5 lg:my-8 order-2 lg:order-3 basis-full grid lg:grid-cols-2 grid-flow-row auto-rows-max gap-6">
                             {posts.map((post, index) => (
@@ -28,7 +34,7 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, class
                                         {post.bannerImage ? (
                                             <AnimatePresence>
                                                 <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
-                                                    <Link href={post.urlSlug}>
+                                                    <Link href={post.urlSlug} className="absolute inset-0">
                                                         <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
                                                     </Link>
                                                 </motion.div>
