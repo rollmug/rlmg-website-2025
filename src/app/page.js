@@ -24,7 +24,7 @@ export default async function Home() {
             // handle it a little more gracefully
             const args = {
                 pageLayoutParams: data.layoutParams,
-                headerText: "404 Error",
+                headerText: "404: Page Not Found",
                 mainText: `<p>Welcome to area code 404. This is no man’s land.</p><p>Let’s get you back to civilization: use the navigation at the top of the page, or click the button below to go home.</p>`,
                 buttonText: "Home",
                 buttonURL: "/"

@@ -19,7 +19,7 @@ export default {
 
 export const Error404 = {
     args: {
-        headerText: "404 Error",
+        headerText: "404: Page Not Found",
         mainText: "<p>Welcome to area code 404. This is no man’s land.</p><p>Let’s get you back to civilization: use the navigation at the top of the page, or click the button below.</p>",
         buttonText: "Go back",
         buttonURL: "/",

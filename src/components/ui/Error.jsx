@@ -4,7 +4,7 @@ import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 
 export const Error = ({ headerText, mainText, buttonText, buttonURL, className }) => {
-    headerText = headerText || '404 Error';
+    headerText = headerText || '404: Page Not Found';
     mainText = mainText || 'An unexpected error has occurred.';
     buttonText = buttonText || null;
     buttonURL = buttonURL || null;
