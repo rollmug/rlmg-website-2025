@@ -1,11 +1,13 @@
 'use client';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ContentSection } from "../layout/ContentSection";
+import { AnimatePresence, motion } from "framer-motion";
 import DOMPurify from "isomorphic-dompurify";
 import PropTypes from 'prop-types';
 import Link from "next/link";
 
 export const ColumnText = ({ headerText, columnSize, columnText, standout = false, className }) => {
+    const { width } = useWindowSize();
     let gridClass;
     columnSize = Number(columnSize) || 1;
     if (columnText && columnText.length >= 1) {
@@ -17,6 +19,14 @@ export const ColumnText = ({ headerText, columnSize, columnText, standout = fals
             default: gridClass = 'grid-cols-1';
         }
     }
+
+    const transitionShow = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
+    const transitionHide = { duration: .1, ease: [.25, .1, .25, 1], delay: 0 };
+
+    const variants = {
+        hidden: { filter: "blur(0)", clipPath: 'inset(0px 100% 0px 0px)', opacity: 0, transition: transitionHide },
+        visible: { filter: "blur(0)", clipPath: 'inset(0px 0% 0px 0px)', opacity: 1, transition: transitionShow },
+    };
 
     const [showMore, setShowMore] = useState(false);
 
@@ -38,7 +48,9 @@ export const ColumnText = ({ headerText, columnSize, columnText, standout = fals
                                     {columnText.map((block, index) => {
                                         const cleanText = DOMPurify.sanitize(block.content);
                                         return (
-                                            <div key={index} className={`${index > 0 ? `${showMore ? 'block' : 'hidden'} md:block` : ''}`} dangerouslySetInnerHTML={{ __html: cleanText }} />
+                                            <motion.div key={index} variants={variants} initial="hidden" whileInView="visible">
+                                                <div className={`${index > 0 ? `${showMore ? 'block' : 'hidden'} md:block` : ''}`} dangerouslySetInnerHTML={{ __html: cleanText }} />
+                                            </motion.div>
                                         )
                                     })}
                                 </div>
@@ -58,3 +70,26 @@ ColumnText.propTypes = {
     columnText: PropTypes.array,
     className: PropTypes.string,
 }
+
+export const useWindowSize = () => {
+    const [windowSize, setWindowSize] = useState({
+        width: undefined,
+        height: undefined,
+    });
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        }
+
+        window.addEventListener("resize", handleResize);
+
+        handleResize();
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return windowSize;
+};

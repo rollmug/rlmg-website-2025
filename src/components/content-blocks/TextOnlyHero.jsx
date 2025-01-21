@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { Button } from "../ui/Button";
-// import DOMPurify from 'dompurify';
 import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 
