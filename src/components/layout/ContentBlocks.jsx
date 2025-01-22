@@ -8,15 +8,19 @@ import { FeaturedPosts } from "../content-blocks/FeaturedPosts";
 import { BannerImageColumnText } from "../content-blocks/BannerImageColumnText";
 import { TextOnlyHero } from "../content-blocks/TextOnlyHero";
 import { ResponsiveColumns } from "../content-blocks/ResponsiveColumns";
-import { marked } from "marked";
-import { stripHtml } from "string-strip-html";
-import smartquotes from "smartquotes";
 import { Quote } from "../content-blocks/Quote";
 import { ColumnText } from "../content-blocks/ColumnText";
 import { ColumnImages } from "../content-blocks/ColumnImages";
 import Image from "next/image";
 
-export const ContentBlocks = ({ data }) => {
+import { getBlogPostsByBlog } from "@/lib/blogData";
+
+import { marked } from "marked";
+import { stripHtml } from "string-strip-html";
+import smartquotes from "smartquotes";
+import { BlogMainPage } from "./Blog";
+
+export const ContentBlocks = async ({ data }) => {
     const blocks = data.contentBlocks;
     const pageData = data.pageData;
 
@@ -54,19 +58,35 @@ export const ContentBlocks = ({ data }) => {
         );
 
     } else if (pageData.pageType === 'blog') {
-        // blog
+        const blogData = pageData.connectedBlog;
+        const posts = await getBlogPostsByBlog(blogData.id);
+
+        const blogButtons = blogData.blogCategories.map((category) => {
+            return {
+                categoryName: category.blogCategories_id.categoryName,
+                buttonShortName: category.blogCategories_id.buttonShortName,
+                slug: category.blogCategories_id.slug
+            };
+        });
+
         return (
             <>
-                <ContentSection>
-                    <section className={`section-padded mt-8`}>
-                        <h2>Coming Soon</h2>
-                        <Image src='/top-men.jpg' alt="top men" width={600} height={400} className="w-full max-w-3xl my-10 _mx-auto" />
-                    </section>
-                </ContentSection>
+                <Banner
+                    bannerTextPlacement={`center`}
+                    bannerHeader={blogData.blogName}
+                    bannerSubheader={blogData.blogDescription}
+                    blogButtons={blogButtons}
+                    isBlog={true}
+                />
+                
+                <BlogMainPage blogData={blogData} posts={posts} />
+
+                {
+                    blocks.map((block, index) => <ContentBlock key={index} block={block} />)
+                }
             </>
         );
     } else {
-        // 404
         notFound();
     }
 };
@@ -78,7 +98,7 @@ const ContentBlock = ({ block }) => {
 
     let text, posts, textBlocks, mainText, images;
 
-    console.log('item:', item);
+    // console.log('item:', item);
 
     switch (collection) {
         case 'block_textWithImage':

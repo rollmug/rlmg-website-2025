@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Button = ({ label, type= 'button', active = false }) => {
+export const Button = ({ label, type = 'button', shortLabel, active = false }) => {
 
-    if(type === 'filter') {
+    if (type === 'filter') {
         return (
             <>
-                <button className={`btn btn-primary btn-filter ${active ? 'active' : ''}`}>{label}</button>
+                <button className={`btn btn-primary btn-filter ${active ? 'active' : ''}`}>
+                    <span className={`${shortLabel ? 'hidden md:inline' : 'inline'}`}>{label}</span>
+                    {shortLabel && <span className="inline md:hidden">{shortLabel}</span>}
+                </button>
             </>
         );
     }

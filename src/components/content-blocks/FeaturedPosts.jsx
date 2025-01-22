@@ -8,7 +8,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
-export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, className, standout = false }) => {
+export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, className, standout = false, disableAnimations = false }) => {
     const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     const variants = {
         hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
@@ -31,15 +31,26 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, class
                             {posts.map((post, index) => (
                                 <div key={index} className="flex flex-col lg:gap-2">
                                     <div className={`aspect-video flex justify-center items-center mb-2 lg:mb-4 w-full max-w-full`}>
-                                        {post.bannerImage ? (
-                                            <AnimatePresence>
-                                                <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
-                                                    <Link href={post.urlSlug} className="absolute inset-0">
-                                                        <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
-                                                    </Link>
-                                                </motion.div>
-                                            </AnimatePresence>
-                                        ) : 'Image goes here'}
+
+                                        {disableAnimations && post.bannerImage ? (
+                                            <div className="relative w-full h-full">
+                                                <Link href={post.urlSlug} className="absolute inset-0">
+                                                    <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                                                </Link>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                {post.bannerImage && (
+                                                    <AnimatePresence>
+                                                        <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
+                                                            <Link href={post.urlSlug} className="absolute inset-0">
+                                                                <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                                                            </Link>
+                                                        </motion.div>
+                                                    </AnimatePresence>
+                                                )}
+                                            </>
+                                        )}
 
                                     </div>
                                     <Link href={post.urlSlug}><h3 className="my-0 ">{post.postTitle}</h3></Link>

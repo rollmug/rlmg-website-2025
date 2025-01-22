@@ -142,9 +142,7 @@ ul li {
 }
 
 .btn.btn-filter {
-  @apply bg-neutral text-primary-content border-2 border-primary;
-  height: 2.2rem;
-  min-height: 2.2rem;
+  @apply bg-neutral text-primary-content btn-xs md:btn-sm lg:btn-md border-[1px] md:border-2 border-primary  text-xs md:text-sm font-normal md:font-bold h-6 md:h-9 min-h-6 md:min-h-9;
 }
 
 .btn.btn-filter.active {

@@ -18,7 +18,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
     const data = await formatPageData();
-    console.log('data:', data);
+    // console.log('data:', data);
     if(data.error) {
         if(data.code === '404' && data.layoutParams) {
             // handle it a little more gracefully

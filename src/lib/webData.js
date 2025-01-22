@@ -233,6 +233,7 @@ const pageSlugsQuery = gql`query Pages {
 
 const pageByIdQuery = gql`query Pages_by_id($pagesByIdId: ID!) {
   pages_by_id(id: $pagesByIdId) {
+    id
     metaData {
       id
       metaDescription
@@ -264,6 +265,24 @@ const pageByIdQuery = gql`query Pages_by_id($pagesByIdId: ID!) {
         filename_download
     }
     bannerTextPlacement
+    connectedBlog {
+      id
+      categoryLabel
+      blogName
+      blogDescription
+      namePlural
+      nameSingular
+      urlSlug
+      blogCategories {
+        blogCategories_id {
+          id
+          categoryName
+          buttonShortName
+          description
+          slug
+        }
+      }
+    }
   }
 }`;
 
@@ -511,7 +530,7 @@ export const formatNavigation = (navData) => {
   return navData.map((navItem) => {
     return {
       text: navItem.pages_id.metaData.navigationTitle,
-      url: navItem.pages_id.urlSlug,
+      url: '/' + navItem.pages_id.urlSlug,
     }
   });
 };

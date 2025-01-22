@@ -4,6 +4,8 @@ import { formatPageData } from "@/lib/webData";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { ContentBlocks } from "@/components/layout/ContentBlocks";
 
+import { BlogFilterProvider } from "../blogFilterContext";
+
 export async function generateMetadata({ params }) {
     let data;
     const page = (await params).page
@@ -19,7 +21,7 @@ export async function generateMetadata({ params }) {
 export default async function Page({ params }) {
     const page = (await params).page
     const data = await formatPageData(page);
-    console.log('data:', data);
+    // console.log('data:', data);
 
     if (data.error) {
         notFound();
@@ -27,13 +29,15 @@ export default async function Page({ params }) {
 
     const enabled = data.pageData.enabled;
 
-    if(!enabled) {
+    if (!enabled) {
         notFound();
     }
 
     return (
         <PageLayout {...data.layoutParams}>
-            <ContentBlocks data={data} />
+            <BlogFilterProvider>
+                <ContentBlocks data={data} />
+            </BlogFilterProvider>
         </PageLayout>
     )
 }
