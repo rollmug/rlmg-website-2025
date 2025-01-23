@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import PropTypes from 'prop-types';
@@ -120,7 +120,7 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
         return (
             <div className={`section-padded z-[2] ${bannerTextPlacement === 'bottom' ? 'lg:mb-4 xl:mb-6' : ''}`}>
                 {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
-                {bannerSubheader && <p className="text-white leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
+                {bannerSubheader && <p className="text-base-100 leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
                 <BlogButtons blogButtons={blogButtons} categoryLabel={categoryLabel} />
             </div>
         );
@@ -128,7 +128,7 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
 
     return (<div className={`section-padded z-[2] ${bannerTextPlacement === 'bottom' ? 'lg:mb-4 xl:mb-6' : ''}`}>
         {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
-        {bannerSubheader && <p className="text-white leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
+        {bannerSubheader && <p className="text-base-100 leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
         {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
     </div>)
 };

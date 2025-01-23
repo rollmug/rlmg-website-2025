@@ -33,9 +33,9 @@ const preview = {
     },
     options: {
       storySort: {
-        //method: 'alphabetical',
-        includeNames: true,
-        order: ['Introduction', 'Components', 'Pages'],
+        method: 'alphabetical',
+        //includeNames: true,
+        order: ['Introduction', 'Typography', 'UI Elements', 'Content Blocks', 'Layout', 'Pages', 'Templates', 'Utilities'],
       },
     },
     nextjs: {

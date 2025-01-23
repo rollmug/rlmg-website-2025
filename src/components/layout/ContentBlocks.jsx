@@ -19,6 +19,8 @@ import { marked } from "marked";
 import { stripHtml } from "string-strip-html";
 import smartquotes from "smartquotes";
 import { BlogMainPage } from "./Blog";
+import { BlogPostBanner } from "../ui/BlogBanner";
+import { RichText } from "../content-blocks/RichText";
 
 export const ContentBlocks = async ({ data }) => {
     const blocks = data.contentBlocks;
@@ -78,8 +80,18 @@ export const ContentBlocks = async ({ data }) => {
                     blogButtons={blogButtons}
                     isBlog={true}
                 />
-                
+
                 <BlogMainPage blogData={blogData} posts={posts} />
+
+                {
+                    blocks.map((block, index) => <ContentBlock key={index} block={block} />)
+                }
+            </>
+        );
+    } else if (pageData.pageType === 'blogPost') {
+        return (
+            <>
+                <BlogPostBanner postData={pageData} />
 
                 {
                     blocks.map((block, index) => <ContentBlock key={index} block={block} />)
@@ -101,20 +113,31 @@ const ContentBlock = ({ block }) => {
     // console.log('item:', item);
 
     switch (collection) {
+        case 'block_textOnly':
+            const blockData = parseRichTextData(item);
+
+            // const js = JSON.stringify(blockData, null, 2);
+            return (
+                <RichText content={blockData} />
+            );
+
+            break;
         case 'block_textWithImage':
             text = smartquotes(stripHtml(marked.parse(item.content), {
                 ignoreTags: ['p', 'i', 'em', 'b', 'strong', 'ul', 'li']
             }).result);
 
             return <TextWithImage
-                header={item.headerText}
+                header={item.headerText
+                }
                 subheader={item.subheaderText}
                 text={text}
                 image={item.image.id ? formatImageURL(item.image) : null}
                 width={600}
                 alt="Test image"
                 imagePlacement={item.alignment === 'image_right' ? 'right' : 'left'}
-                className={`my-2 mt-6 lg:my-8`}
+                className={`my-2 mt-6 lg:my-8`
+                }
             />;
             break;
 
@@ -246,3 +269,44 @@ const ContentBlock = ({ block }) => {
             );
     }
 };
+
+const parseRichTextData = (data) => {
+    const blocks = data.text.blocks;
+    const text = blocks.map((block) => {
+        return {
+            id: block.id,
+            type: block.type,
+            data: block.data
+        };
+    });
+
+    return text;
+};
+
+const sampleData = {
+    "item": {
+        "__typename": "block_textOnly",
+        "id": "bf48f0d2-2000-4aa4-9185-66e8974e839e",
+        "text": {
+            "time": 1737656152540,
+            "blocks": [
+                {
+                    "id": "cujRuVKryY",
+                    "data": {
+                        "text": "Carnegie",
+                        "level": 2
+                    },
+                    "type": "header"
+                },
+                {
+                    "id": "EkS0xF2mO-",
+                    "data": {
+                        "text": "Carnegie Science Center’s 7500 sf permanent gallery, Mars: The Next Giant Leap, sends visitors on a 300-million-mile journey to discover how space exploration and the latest thinking about how to sustain life on another planet can improve our lives on Earth today. Seven highly-integrated and interactive media experiences reveal the visions, challenges, and solutions of a Martian society, highlighting what it takes to create an equitable future no matter what planet we live on."
+                    },
+                    "type": "paragraph"
+                }
+            ],
+            "version": "2.29.1"
+        }
+    }
+}

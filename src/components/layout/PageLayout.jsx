@@ -4,10 +4,10 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Footer } from "@/components/ui/Footer";
 import PropTypes from 'prop-types';
 
-export const PageLayout = ({ children, orgName, logoImg, navItems, footerArgs, className }) => {
+export const PageLayout = ({ children, orgName, logoImg, navItems, footerArgs, className, activePage }) => {
     return (
         <main className={`page w-full min-h-screen mx-auto pb-4 lg:pb-10 ${className} flex flex-col items-stretch justify-between`}>
-            <Navbar img={logoImg} orgName={orgName} listItems={navItems} fixed />
+            <Navbar img={logoImg} orgName={orgName} listItems={navItems} activePage={activePage} fixed />
             <section className="page-content pt-[3.5rem] lg:pt-[4.9rem] grow">
                 {children}
             </section>

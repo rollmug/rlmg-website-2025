@@ -5,7 +5,7 @@ import RLMG from '../../stories/assets/rlmg-logo.png';
 export default {
     title: 'UI Elements/Footer',
     component: Footer,
-    //tags: ['!autodocs'],
+    tags: ['!autodocs'],
     parameters: {
         layout: 'fullscreen',
         paddings: {

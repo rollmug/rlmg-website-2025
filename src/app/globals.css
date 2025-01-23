@@ -92,6 +92,10 @@ hr {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
 }
 
+.slanted-less {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));
+}
+
 .slanted-reverse {
   clip-path: polygon(0 8vw, 100% 0, 100% 100%, 0 100%);
 }
@@ -147,6 +151,10 @@ ul li {
 
 .btn.btn-filter.active {
   @apply bg-primary;
+}
+
+.navbar .menu li.active {
+  @apply border-b-2 border-primary;
 }
 
 ul.menu li,

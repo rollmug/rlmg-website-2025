@@ -1,16 +1,16 @@
 import React from "react";
 import { notFound } from 'next/navigation';
-import { formatPageData } from "@/lib/webData";
+// import { formatPageData } from "@/lib/webData";
+import { getBlogPostByID, getPostBySlug, formatBlogPostData } from "@/lib/blogData";
 import { PageLayout } from "@/components/layout/PageLayout";
 import { ContentBlocks } from "@/components/layout/ContentBlocks";
 
-import { BlogFilterProvider } from "../blogFilterContext";
-
 export async function generateMetadata({ params }) {
     let data;
-    const page = (await params).page
+    // const page = (await params).page;
+    const post = (await params).post;
     try {
-        data = await formatPageData(page);
+        data = await formatBlogPostData(post);
     } catch (error) {
         console.error('Error fetching page data:', error);
         data = { metaData: {} }; // Fallback data
@@ -18,26 +18,27 @@ export async function generateMetadata({ params }) {
     return data.metaData;
 }
 
-export default async function Page({ params }) {
-    const page = (await params).page
-    const data = await formatPageData(page);
-    console.log('pageData:', data);
+export default async function BlogPost({ params }) {
+    const page = (await params).page;
+    const post = (await params).post;
+    const data = await formatBlogPostData(post, page);
+    console.log('data:', data);
 
     if (data.error) {
         notFound();
     }
 
-    const enabled = data.pageData.enabled;
+    const published = data.pageData.published;
 
-    if (!enabled) {
+    if (!published) {
         notFound();
     }
 
     return (
         <PageLayout {...data.layoutParams}>
-            <BlogFilterProvider>
-                <ContentBlocks data={data} />
-            </BlogFilterProvider>
+
+            <ContentBlocks data={data} />
+
         </PageLayout>
-    )
+    );
 }

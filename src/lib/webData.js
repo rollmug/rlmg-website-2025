@@ -17,7 +17,7 @@ export const formatPageData = async (slug) => {
       };
     }
 
-    const layoutParams = formatPageLayoutParams(globalSettings, navigation.topNav, navigation.bottomNav);
+    const layoutParams = formatPageLayoutParams(globalSettings, navigation.topNav, navigation.bottomNav, slug);
 
     try {
       var pageID;
@@ -55,6 +55,7 @@ export const formatPageData = async (slug) => {
       const contentBlocks = await getContentBlocksForPage(pageID);
 
       return {
+        activePage: slug,
         globalSettings,
         topNav: navigation.topNav,
         bottomNav: navigation.bottomNav,
@@ -535,13 +536,14 @@ export const formatNavigation = (navData) => {
   });
 };
 
-export const formatPageLayoutParams = (globalSettings, topNav, bottomNav) => {
+export const formatPageLayoutParams = (globalSettings, topNav, bottomNav, activePageSlug) => {
   return {
     orgName: globalSettings.companyName,
     companyShortName: globalSettings.companyShortName,
     logoImg: globalSettings?.companyLogo ? formatImageURL(globalSettings.companyLogo) : null,
     navItems: formatNavigation(topNav),
-    footerArgs: formatFooterArgs(globalSettings, bottomNav)
+    footerArgs: formatFooterArgs(globalSettings, bottomNav),
+    activePage: activePageSlug,
   }
 }
 
@@ -591,16 +593,16 @@ export const formatMetadata = (pageData, globalSettings) => {
 
   return {
     metadataBase: new URL(process.env.FILES_BASE_URL),
-    title: pageData.metaData.pageTitle || globalSettings.siteTitle,
-    description: pageData.metaData.metaDescription || globalSettings.metaDescription,
+    title: pageData?.metaData?.pageTitle || globalSettings.siteTitle,
+    description: pageData?.metaData?.metaDescription || globalSettings.metaDescription,
     manifest: '/site.webmanifest',
     authors: [{ name: 'RLMG', url: 'https://rlmg.com' }, { name: 'Dave Kobrenski', url: 'https://davekobrenski.com' }],
     openGraph: {
-      title: pageData.metaData.pageTitle || globalSettings.siteTitle,
-      description: pageData.metaData.socialMediaDescription || globalSettings.openGraphDescription,
+      title: pageData?.metaData?.pageTitle || globalSettings.siteTitle,
+      description: pageData?.metaData?.socialMediaDescription || globalSettings.openGraphDescription,
       url: globalSettings.siteURL || 'https://rlmg.com',
       type: 'website',
-      site_name: pageData.metaData.pageTitle || globalSettings.siteTitle,
+      site_name: pageData?.metaData?.pageTitle || globalSettings.siteTitle,
       images: [
         {
           url: ogImg,

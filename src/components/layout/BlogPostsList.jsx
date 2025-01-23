@@ -40,7 +40,7 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
                     <motion.div initial={variants.hidden} animate={variants.visible} transition={transition} className="">
                         {posts.length === 0 ? (
                             <ContentSection>
-                                <div className={`section-padded mb-10 lg:mb-16`}>
+                                <div className={`section-padded mt-12 md:mt-6 lg:mt-2 mb-10 lg:mb-16`}>
                                     <h2>{categoryName}</h2>
                                     <div className="alert mt-8">
                                         <FaCircleExclamation className="w-6 h-6" />
@@ -49,7 +49,7 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
                                 </div>
                             </ContentSection>
                         ) : (
-                            <FeaturedPosts headerText={categoryName} posts={allPosts} className={`mb-10 lg:mb-16`} disableAnimations={true} />
+                            <FeaturedPosts headerText={categoryName} posts={allPosts} className={`mt-12 md:mt-6 lg:mt-2 mb-10 lg:mb-16`} disableAnimations={true} />
                         )}
                     </motion.div>
                 )}

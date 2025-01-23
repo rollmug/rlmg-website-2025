@@ -5,7 +5,7 @@ export default {
     component: FeaturedPosts,
     //tags: ['!autodocs'],
     parameters: {
-        layout: 'fullscreen',
+        layout: 'centered',
         paddings: {
             values: [
                 { name: 'None', value: '0' },

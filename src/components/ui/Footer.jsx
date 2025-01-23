@@ -36,7 +36,7 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                             
                             <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
                                 <div className="flex-1">
-                                    <input type="email" placeholder="Enter Email*" className="input input-sm input-ghost p-1 pl-0 h-auto w-full max-w-full " />
+                                    <input type="email" placeholder="Enter Email*" className="input input-sm text-base input-ghost p-1 pl-0 h-auto w-full max-w-full " />
                                 </div>
                                 <button className="btn btn-ghost text-right !px-1">
                                     <HiArrowLongRight className="text-primary w-6 h-6" />

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Logo } from "./Logo";
 
-export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
+export const Navbar = ({ img = null, orgName, listItems, activePage, fixed = false }) => {
 
     /**
      * logo
@@ -17,7 +17,7 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
 
     return (
         <>
-            <header className={`${fixed ? 'fixed' : 'absolute'} top-0 left-0 bg-white shadow-md flex w-screen z-[1]`}>
+            <header className={`${fixed ? 'fixed' : 'absolute'} top-0 left-0 bg-white shadow-md flex w-screen z-[3]`}>
                 <nav className="navbar section-padded justify-between min-h-14 lg:min-h-16 py-0 lg:py-3">
                     <div className="flex-1">
                         <Link href="/" className="btn btn-link text-xl !px-0 py-[6px] lg:py-0 text-left">
@@ -32,11 +32,11 @@ export const Navbar = ({ img = null, orgName, listItems, fixed = false }) => {
                             <div tabIndex={0} role="button" className="!px-0 btn btn-ghost text-center lg:hidden" onClick={() => setMobileNavOpen((pv) => !pv)}>
                                 <MenuIcon open={mobileNavOpen} />
                             </div>
-                            <MobileLinks listItems={listItems} open={mobileNavOpen} />
+                            <MobileLinks listItems={listItems} open={mobileNavOpen} activePage={activePage} />
                         </div>
 
                         <ul className="menu menu-horizontal hidden lg:flex gap-12">
-                            <Links listItems={listItems} className="text-sm" />
+                            <Links listItems={listItems} activePage={activePage} className="text-sm" />
                         </ul>
                     </div>
                 </nav>
@@ -73,7 +73,7 @@ const MenuIcon = ({ open }) => {
     }
 }
 
-const MobileLinks = ({ listItems, open }) => {
+const MobileLinks = ({ listItems, open, activePage }) => {
     // if(!listItems || !listItems?.length) return null;
     return (
         <AnimatePresence mode="popLayout">
@@ -99,12 +99,12 @@ const MobileLinks = ({ listItems, open }) => {
     );
 }
 
-const Links = ({ listItems, className }) => {
+const Links = ({ listItems, className, activePage }) => {
     listItems = listItems && listItems.length > 0 ? listItems : [ { url: '/', text: 'Home'} ]; // fallback to home
     return (
         <>
             {listItems.map((item, index) => (
-                <li key={index} className={className}>
+                <li key={index} className={`${className} ${`/${activePage}` === item.url ? 'active' : ''}`}>
                     <Link className="inline-block" href={item.url}>{item.text}</Link>
                 </li>
             ))}
