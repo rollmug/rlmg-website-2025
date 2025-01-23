@@ -52,7 +52,7 @@ export const BlogPostBanner = ({ postData }) => {
                     </section>
                 </div>
             </div>
-            <div className="w-full h-[360px] md:h-[480px] lg:h-[640px] xl:h-[800px] bg-neutral -mt-12 lg:-mt-20 relative">
+            <div className="w-full h-[360px] md:h-[480px] lg:h-[640px] xl:h-[800px] bg-neutral -mt-12 lg:-mt-20 xl:-mt-24 relative">
                 {bannerImage && (
                     <AnimatePresence>
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0">
