@@ -41,7 +41,7 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
                         {posts.length === 0 ? (
                             <ContentSection>
                                 <div className={`section-padded mt-12 md:mt-6 lg:mt-2 mb-10 lg:mb-16`}>
-                                    <h2>{categoryName}</h2>
+                                    <h2 className="text-lgr md:text-xl lg:text-2xl">{categoryName}</h2>
                                     <div className="alert mt-8">
                                         <FaCircleExclamation className="w-6 h-6" />
                                         <span>No posts found for {categoryName}. Check back soon!</span>

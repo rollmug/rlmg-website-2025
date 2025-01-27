@@ -3,24 +3,27 @@ import PropTypes from 'prop-types';
 import { Button } from "../ui/Button";
 import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
+import { ContentSection } from "../layout/ContentSection"
 
 export const TextOnlyHero = ({ headerText, mainText, buttonText, buttonURL, className }) => {
     const cleanText = DOMPurify.sanitize(mainText);
     // pt-12 md:pt-16 lg:pt-24 pb-20 md:pb-24 lg:pb-40
     return (
-        <section className={`w-full bg-neutral pt-12 md:pt-16 lg:pt-24 pb-20 md:pb-24 lg:pb-40 slanted-bottom ${className}`}>
-            <div className={`section-padded`}>
-                <div className="flex flex-col justify-start lg:justify-center items-start lg:items-center gap-4">
-                    <h2 className="my-0 text-neutral-content">{headerText}</h2>
-                    <div className="mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-lg lg:text-center" dangerouslySetInnerHTML={{ __html: cleanText }} />
-                    <p className="my-0">
-                        <Link href={buttonURL}>
-                            <Button label={buttonText} />
-                        </Link>
-                    </p>
+        <ContentSection>
+            <section className={`w-full bg-neutral pt-12 md:pt-16 lg:pt-24 pb-20 md:pb-24 lg:pb-40 slanted-bottom ${className}`}>
+                <div className={`section-padded`}>
+                    <div className="flex flex-col justify-start lg:justify-center items-start lg:items-center gap-4">
+                        <h2 className="my-0 text-neutral-content">{headerText}</h2>
+                        <div className="mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-lg lg:text-center" dangerouslySetInnerHTML={{ __html: cleanText }} />
+                        <p className="my-0">
+                            <Link href={buttonURL}>
+                                <Button label={buttonText} />
+                            </Link>
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </ContentSection>
     );
 }
 

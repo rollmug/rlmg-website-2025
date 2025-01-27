@@ -13,6 +13,8 @@ import { ColumnText } from "../content-blocks/ColumnText";
 import { ColumnImages } from "../content-blocks/ColumnImages";
 import Image from "next/image";
 
+import { getPlaiceholder } from "plaiceholder";
+
 import { getBlogPostsByBlog } from "@/lib/blogData";
 
 import { marked } from "marked";
@@ -21,6 +23,23 @@ import smartquotes from "smartquotes";
 import { BlogMainPage } from "./Blog";
 import { BlogPostBanner } from "../ui/BlogBanner";
 import { RichText } from "../content-blocks/RichText";
+
+export default async function getBase64(imageUrl) {
+    try {
+        const res = await fetch(imageUrl)
+
+        if (!res.ok) {
+            throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`)
+        }
+
+        const buffer = await res.arrayBuffer()
+        const { base64 } = await getPlaiceholder(Buffer.from(buffer))
+        //console.log(`base64: ${base64}`)
+        return base64
+    } catch (e) {
+        if (e instanceof Error) console.log(e.stack)
+    }
+}
 
 export const ContentBlocks = async ({ data }) => {
     const blocks = data.contentBlocks;
@@ -89,6 +108,15 @@ export const ContentBlocks = async ({ data }) => {
             </>
         );
     } else if (pageData.pageType === 'blogPost') {
+        // const bannerImage = pageData.bannerImage ? formatImageURL(pageData.bannerImage) : null;
+        // const bannerBGVideo = pageData.bannerBGVideo ? formatImageURL(pageData.bannerBGVideo) : null;
+
+        // // const myBlurDataUrl = await getBase64('http://localhost:3000/coffee.jpg')
+        // let blurDataUrl;
+        // if(bannerImage && bannerBGVideo) {
+        //     blurDataUrl = await getBase64(bannerImage);
+        // }
+
         return (
             <>
                 <BlogPostBanner postData={pageData} />

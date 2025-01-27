@@ -422,6 +422,11 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
             filename_disk
             filename_download
           }
+          posterImage {
+            id
+            filename_disk
+            filename_download
+          }
           title
           captionText
         }

@@ -184,6 +184,10 @@ ul.menu li a {
   @apply my-8 md:my-12 lg:my-16;
 }
 
+.content-section:last-child {
+  @apply !mb-0;
+}
+
 .bg-video-banner .next-video-bg-video {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
 }

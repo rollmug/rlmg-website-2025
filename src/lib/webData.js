@@ -391,6 +391,11 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
             filename_disk
             filename_download
           }
+          posterImage {
+            id
+            filename_disk
+            filename_download
+          }
           title
           captionText
         }

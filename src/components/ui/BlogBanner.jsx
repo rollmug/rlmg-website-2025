@@ -62,19 +62,19 @@ export const BlogPostBanner = ({ postData }) => {
                                 fill
                                 // objectFit="cover"
                                 // objectPosition="end"
-                                className="object-cover object-end"
+                                className={`object-cover object-end ${bannerBGVideo ? 'md:hidden' : ''}`}
                             />
                         </motion.div>
                     </AnimatePresence>
                 )}
 
-                {/* {bannerBGVideo && (
+                {bannerBGVideo && (
                     <AnimatePresence>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 bg-neutral">
                             <BackgroundPlayer src={bannerBGVideo} className={`_bg-video-banner !hidden md:!grid`} />
                         </motion.div>
                     </AnimatePresence>
-                )} */}
+                )}
             </div>
         </>
     );
