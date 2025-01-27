@@ -184,7 +184,7 @@ ul.menu li a {
   @apply my-8 md:my-12 lg:my-16;
 }
 
-.content-section:last-child {
+.content-section.text-only-hero:last-child {
   @apply !mb-0;
 }
 

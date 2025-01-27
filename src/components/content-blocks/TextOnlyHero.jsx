@@ -9,7 +9,7 @@ export const TextOnlyHero = ({ headerText, mainText, buttonText, buttonURL, clas
     const cleanText = DOMPurify.sanitize(mainText);
     // pt-12 md:pt-16 lg:pt-24 pb-20 md:pb-24 lg:pb-40
     return (
-        <ContentSection>
+        <ContentSection className={`text-only-hero`}>
             <section className={`w-full bg-neutral pt-12 md:pt-16 lg:pt-24 pb-20 md:pb-24 lg:pb-40 slanted-bottom ${className}`}>
                 <div className={`section-padded`}>
                     <div className="flex flex-col justify-start lg:justify-center items-start lg:items-center gap-4">

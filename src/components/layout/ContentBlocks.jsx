@@ -12,6 +12,7 @@ import { Quote } from "../content-blocks/Quote";
 import { ColumnText } from "../content-blocks/ColumnText";
 import { ColumnImages } from "../content-blocks/ColumnImages";
 import Image from "next/image";
+import { Video } from "../content-blocks/Video";
 
 import { getPlaiceholder } from "plaiceholder";
 
@@ -131,12 +132,12 @@ export const ContentBlocks = async ({ data }) => {
     }
 };
 
-const ContentBlock = ({ block }) => {
+const ContentBlock = async ({ block }) => {
     const collection = block.collection;
     const item = block.item;
     if (!collection || !item) return null;
 
-    let text, posts, textBlocks, mainText, images;
+    let text, posts, textBlocks, mainText, images, videoArgs, blurDataUrl;
 
     // console.log('item:', item);
 
@@ -280,6 +281,25 @@ const ContentBlock = ({ block }) => {
                 columnSize={item.columnSize}
                 className={item.className}
             />;
+
+        case 'block_video':
+            // videoSrc, posterImage, blurDataURL, title, captionText
+            // let blurDataUrl;
+
+            const videoURL = item.video.id ? formatImageURL(item.video) : null;
+            const posterImageURL = item.posterImage.id ? formatImageURL(item.posterImage) : null;
+
+            // if(videoURL && posterImageURL) {
+            //     blurDataUrl = await getBase64(posterImageURL);
+            // }
+
+            videoArgs = {
+                videoSrc: videoURL,
+                posterImage: posterImageURL,
+                title: item.title,
+                captionText: item.captionText
+            };
+            return <Video {...videoArgs} />
 
         default:
             const formattedJson = JSON.stringify(block, null, 2);
