@@ -13,70 +13,87 @@ const formatImageURL = (image, presetKey) => {
 };
 
 export const BlogPostBanner = ({ postData }) => {
-    let customData, classNames, justifyContent = 'justify-center';
-    const blogSlug = postData.blog.urlSlug;
-
     const bannerImage = postData.bannerImage ? formatImageURL(postData.bannerImage) : null;
     const bannerBGVideo = postData.bannerBGVideo ? formatImageURL(postData.bannerBGVideo) : null;
 
-    if (postData.customData && postData.customData.length > 0) {
-        customData = formatCustomData(postData.customData);
+    if (!postData || !postData.postTitle || !postData.postSubtitle) return null;
+
+    if (bannerImage && bannerBGVideo) {
+        return (
+            <>
+                <BannerInfoHeader postData={postData} />
+                <div className="w-full h-[360px] md:h-[480px] lg:h-[640px] xl:h-[800px] bg-neutral -mt-12 lg:-mt-20 xl:-mt-24 relative">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute md:hidden inset-0 z-0">
+                        <Image
+                            src={bannerImage}
+                            alt={postData.postTitle}
+                            fill
+                            className={`object-cover object-end `}
+                        />
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 bg-neutral hidden md:block">
+                        <BackgroundPlayer src={bannerBGVideo} className={`!hidden md:!grid overflow-hidden`} poster={bannerImage} />
+                    </motion.div>
+
+                </div>
+            </>
+        );
     }
-
-    classNames = [
-        `min-h-[calc(50vh)] pb-14 pt-14 sm:_pb-24`, // mobile portrait
-        //`landscape:min-h-[calc(60vh)] landscape:pb-20`, // mobile landscape
-        `landscape:lg:pb-24`, // tablet landscape
-        //`landscape:xl:pb-24` // desktop
-    ];
-
-    const className = classNames.join(' ');
-    const classesOutput = twMerge(`${justifyContent} ${className}`);
-
-    if(!postData || !postData.postTitle || !postData.postSubtitle) return null;
 
     return (
         <>
-            <div className={`z-[2] banner-block relative bg-neutral slanted-less w-full flex flex-col ${classesOutput}`}>
-                <div className={`section-padded z-[2]`}>
-                    <section className="flex flex-col md:grid md:grid-cols-2 gap-4">
-                        <div>
-                            <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
-                            <p className="mt-0 text-base-100 leading-normal font-bold text-base/6 lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">
-                                {postData.postSubtitle}
-                            </p>
-                        </div>
-                        <div className="flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[400px] md:max-h-[450px] lg:max-h-[300px] max-w-full overflow-hidden ">
-                            {customData && <CustomDataBlock customData={customData} blogSlug={blogSlug} />}
-                        </div>
-                    </section>
-                </div>
-            </div>
+            <BannerInfoHeader postData={postData} />
             <div className="w-full h-[360px] md:h-[480px] lg:h-[640px] xl:h-[800px] bg-neutral -mt-12 lg:-mt-20 xl:-mt-24 relative">
-                {bannerImage && (
+                {(bannerImage) && (
                     <AnimatePresence>
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0">
                             <Image
                                 src={bannerImage}
                                 alt={postData.postTitle}
                                 fill
-                                // objectFit="cover"
-                                // objectPosition="end"
-                                className={`object-cover object-end ${bannerBGVideo ? 'md:hidden' : ''}`}
+                                className={`object-cover object-end `}
                             />
-                        </motion.div>
-                    </AnimatePresence>
-                )}
-
-                {bannerBGVideo && (
-                    <AnimatePresence>
-                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 bg-neutral">
-                            <BackgroundPlayer src={bannerBGVideo} className={`_bg-video-banner !hidden md:!grid`} />
                         </motion.div>
                     </AnimatePresence>
                 )}
             </div>
         </>
+    );
+};
+
+const BannerInfoHeader = ({ postData }) => {
+    let customData, classNames, justifyContent = 'justify-center';
+    const blogSlug = postData.blog.urlSlug;
+
+    if (postData.customData && postData.customData.length > 0) {
+        customData = formatCustomData(postData.customData);
+    }
+
+    classNames = [
+        `min-h-[calc(50vh)] pb-14 pt-14 sm:_pb-24`,
+        `landscape:lg:pb-24`,
+    ];
+
+    const className = classNames.join(' ');
+    const classesOutput = twMerge(`${justifyContent} ${className}`);
+
+    return (
+        <div className={`z-[2] banner-block relative bg-neutral slanted-less w-full flex flex-col ${classesOutput}`}>
+            <div className={`section-padded z-[2]`}>
+                <section className="flex flex-col md:grid md:grid-cols-2 gap-4">
+                    <div>
+                        <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
+                        <p className="mt-0 text-base-100 leading-normal font-bold text-base/6 lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">
+                            {postData.postSubtitle}
+                        </p>
+                    </div>
+                    <div className="flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[400px] md:max-h-[450px] lg:max-h-[300px] max-w-full overflow-hidden ">
+                        {customData && <CustomDataBlock customData={customData} blogSlug={blogSlug} />}
+                    </div>
+                </section>
+            </div>
+        </div>
     );
 };
 
