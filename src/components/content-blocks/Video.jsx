@@ -22,7 +22,7 @@ export const Video = ({ videoSrc, posterImage, blurDataURL, title, captionText }
                         </div>
                     )}
 
-                    <motion.div className="w-full aspect-video" initial={variants.hidden} whileInView={variants.visible} transition={transition}>
+                    <motion.div className="w-full _aspect-video" initial={variants.hidden} whileInView={variants.visible} transition={transition}>
                         <Player src={videoSrc} poster={posterImage} blurDataURL={blurDataURL || null} />
                     </motion.div>
 
