@@ -320,6 +320,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           buttonText
           buttonURL
           internalName
+          alignment
         }
         ... on block_columnText {
           id
@@ -413,6 +414,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
               firstName
               jobTitle
               lastName
+              bio
               photo {
                 id
                 filename_disk

@@ -20,11 +20,23 @@ export const RichText = ({ content, placement, padding, className = '' }) => {
                                 console.log('listItems:', listItems);
                                 // To do: these might be nested further
                                 return <BulletList key={index} listItems={listItems} />;
+                            case 'delimiter':
+                                return <hr className="my-6" key={index} />;
                             default:
-                                return null;
+                                const formattedJson = JSON.stringify(content, null, 2);
+                                return (
+                                    <>
+                                        <h3>{content.collection}</h3>
+                                        <pre className="text-xs">
+                                            <code>
+                                                {formattedJson}
+                                            </code>
+                                        </pre>
+                                    </>
+                                );
                         }
                     })}
-                </div>
+                </div >
             </section>
         </ContentSection>
     );

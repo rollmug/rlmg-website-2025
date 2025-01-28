@@ -14,6 +14,7 @@ import { ColumnImages } from "../content-blocks/ColumnImages";
 import Image from "next/image";
 import { Video } from "../content-blocks/Video";
 import { ImageSlider } from "../content-blocks/ImageSlider";
+import { TeamMembers } from "../ui/TeamMembers";
 
 import { getPlaiceholder } from "plaiceholder";
 
@@ -216,13 +217,14 @@ const ContentBlock = async ({ block }) => {
         case 'block_textOnlyHero':
             // headerText, mainText, buttonText, buttonURL, className
             mainText = smartquotes(stripHtml(marked.parse(item.mainText), {
-                ignoreTags: ['i', 'em', 'b', 'strong', 'ul', 'li']
+                ignoreTags: ['i', 'a', 'p', 'em', 'b', 'strong', 'ul', 'li']
             }).result);
             return <TextOnlyHero
                 headerText={item.headerText}
                 mainText={mainText}
                 buttonText={item.buttonText}
                 buttonURL={item.buttonURL}
+                alignment={item.alignment}
                 className=""
             />;
             break;
@@ -320,7 +322,9 @@ const ContentBlock = async ({ block }) => {
             console.log('sliderArgs:', sliderArgs);
 
             return <ImageSlider {...sliderArgs} />
-
+        
+        case 'block_teamMembers':
+            return <TeamMembers teamMembers={item.teamMembers} headerText={item.headerText} />
 
         default:
             const formattedJson = JSON.stringify(block, null, 2);

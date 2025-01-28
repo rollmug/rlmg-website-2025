@@ -92,6 +92,10 @@ hr {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
 }
 
+.slanted-top-slightly {
+  clip-path: polygon(0 0, 100% 7%, 100% 100%, 0% 100%);
+}
+
 .slanted-less {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));
 }

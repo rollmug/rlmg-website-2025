@@ -41,7 +41,7 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                         <div className={`aspect-video bg-base-200 flex justify-center items-center mb-4 lg:mb-8 w-full max-w-full overflow-hidden`}>
                             {image ? (
                                 <AnimatePresence>
-                                    <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full max-w-full">
+                                    <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full max-w-full border">
                                         <Image src={image} fill alt="" className={`object-cover`} />
                                     </motion.div>
                                 </AnimatePresence>

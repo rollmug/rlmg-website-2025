@@ -351,6 +351,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           buttonText
           buttonURL
           internalName
+          alignment
         }
         ... on block_columnText {
           id
@@ -444,6 +445,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
               firstName
               jobTitle
               lastName
+              bio
               photo {
                 id
                 filename_disk

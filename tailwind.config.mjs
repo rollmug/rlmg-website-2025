@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      aspectRatio: {
+        'video': '16 / 9',
+        'square': '1 / 1',
+      },
       fontFamily: {
         'nunito': ['var(--font-nunito)'],
       },
@@ -56,6 +60,7 @@ export default {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
     require('daisyui'),
     function ({ addBase }) {
       addBase({
