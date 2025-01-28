@@ -65,7 +65,7 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
                         <Image src={bannerImage} fill alt="" className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         <AnimatePresence>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 slanted">
-                                <BackgroundPlayer src={bannerBGVideo} className={`bg-video-banner !hidden md:!grid`} />
+                                <BackgroundPlayer src={bannerBGVideo} poster={bannerImage} className={`bg-video-banner !hidden md:!grid`} />
                             </motion.div>
                         </AnimatePresence>
                         {(bannerHeader || bannerSubheader) && (
