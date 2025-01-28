@@ -297,6 +297,8 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           id
           text:content
           internalName
+          placement
+          padding
         }
         ... on block_textWithImage {
           id

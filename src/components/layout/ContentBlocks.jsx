@@ -148,7 +148,7 @@ const ContentBlock = async ({ block }) => {
 
             // const js = JSON.stringify(blockData, null, 2);
             return (
-                <RichText content={blockData} />
+                <RichText content={blockData} placement={item.placement} padding={item.padding} />
             );
 
             break;

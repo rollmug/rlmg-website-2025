@@ -15,11 +15,13 @@ export const TextOnlyHero = ({ headerText, mainText, buttonText, buttonURL, clas
                     <div className="flex flex-col justify-start lg:justify-center items-start lg:items-center gap-4">
                         <h2 className="my-0 text-neutral-content">{headerText}</h2>
                         <div className="mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-lg lg:text-center" dangerouslySetInnerHTML={{ __html: cleanText }} />
-                        <p className="my-0">
-                            <Link href={buttonURL}>
-                                <Button label={buttonText} />
-                            </Link>
-                        </p>
+                        {buttonURL && buttonText && (
+                            <p className="my-0">
+                                <Link href={buttonURL}>
+                                    <Button label={buttonText} />
+                                </Link>
+                            </p>
+                        )}
                     </div>
                 </div>
             </section>

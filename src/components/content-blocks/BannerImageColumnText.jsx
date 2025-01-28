@@ -7,6 +7,7 @@ import { ContentSection } from "../layout/ContentSection";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import DOMPurify from "isomorphic-dompurify";
+import Link from "next/link";
 
 export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, image, buttonText, buttonURL, standout = false, className }) => {
     const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
@@ -34,7 +35,7 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
 
     return (
         <>
-            <ContentSection standout={standout}>
+            <ContentSection standout={standout} className={`banner-image-columns`}>
                 <section className={`section-padded full-mobile ${className}`}>
                     <div className="flex flex-col justify-start gap-2">
                         <div className={`aspect-video bg-base-200 flex justify-center items-center mb-4 lg:mb-8 w-full max-w-full overflow-hidden`}>
@@ -58,18 +59,28 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                                     {textBlocks.map((block, index) => {
                                         const cleanText = DOMPurify.sanitize(block.content);
                                         return (
+
                                             <motion.div key={index} variants={textVariants} initial="hidden" whileInView="visible">
                                                 <div className="max-w-[50ch] basis-full lg:basis-auto" dangerouslySetInnerHTML={{ __html: cleanText }} />
+
+                                                {(index === 0 && buttonText && buttonURL) && (
+                                                    <div className="my-4 lg:mt-6">
+                                                        <Link href={buttonURL}>
+                                                            <Button label={buttonText} url={buttonURL} className="" />
+                                                        </Link>
+                                                    </div>
+                                                )}
                                             </motion.div>
+
                                         )
                                     })}
                                 </div>
                             )}
-                            {buttonText && buttonURL && (
+                            {/* {buttonText && buttonURL && (
                                 <div className="my-4 lg:mt-2">
                                     <Button label={buttonText} url={buttonURL} className="" />
                                 </div>
-                            )}
+                            )} */}
                         </div>
 
                     </div>

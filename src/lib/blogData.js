@@ -328,6 +328,8 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           id
           text:content
           internalName
+          placement
+          padding
         }
         ... on block_textWithImage {
           id

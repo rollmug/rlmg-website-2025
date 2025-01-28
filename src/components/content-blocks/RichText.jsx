@@ -3,11 +3,11 @@ import Link from "next/link";
 import { BulletList } from "../typography/BulletList";
 import { ContentSection } from "../layout/ContentSection";
 
-export const RichText = ({ content, className = '' }) => {
+export const RichText = ({ content, placement, padding, className = '' }) => {
     return (
         <ContentSection>
             <section className={`section-padded ${className}`}>
-                <div className="max-w-prose mx-auto lg:max-w-screen-md my-16 lg:my-24">
+                <div className={`max-w-prose ${placement === 'left' ? '' : 'mx-auto'} ${padding === 'large' ? 'my-16 lg:my-24' : 'my-4 lg:my-8'} lg:max-w-screen-md`}>
                     {content.map((item, index) => {
                         switch (item.type) {
                             case 'header':

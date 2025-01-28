@@ -188,6 +188,14 @@ ul.menu li a {
   @apply !mb-0;
 }
 
+.banner-block + .content-section.banner-image-columns {
+  @apply mt-12 lg:!mt-20;
+}
+
+/* .content-section.banner-image-columns:first-child {
+  @apply !mt-24;
+} */
+
 .quote-section + .featured-posts.with-standout, .featured-posts.with-standout + .quote-section {
   @apply lg:!mt-0;
 }
