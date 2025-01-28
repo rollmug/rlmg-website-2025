@@ -6,7 +6,7 @@ import { MdFormatQuote } from "react-icons/md";
 export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', className }) => {
 
     return (
-        <ContentSection>
+        <ContentSection className={`quote-section`}>
             <div className={`quote-container py-10 lg:py-16 px-[10%] lg:px-[15%] ${template} ${className}`}>
 
                 <blockquote className={`quote pb-3`}>
@@ -15,7 +15,7 @@ export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', c
                             <MdFormatQuote className="text-primary w-14 h-14 -scale-[1]" />
                         </div>
 
-                        <p className="quote-text font-bold grow md:text-lg md:w-min md:max-w-prose px-3 mt-0 md:mt-4">{quoteText}</p>
+                        <p className={`quote-text ${template === 'dark' ? 'font-bold' : 'font-semibold'} grow md:text-lg md:w-min md:max-w-prose px-3 mt-0 md:mt-4`}>{quoteText}</p>
                         
                         <div className="self-end w-14 h-14 order-4 md:order-3">
                             <MdFormatQuote className="text-primary w-14 h-14" />
@@ -27,7 +27,7 @@ export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', c
                         <div className="basis-full order-3 md:order-4 flex flex-row justify-center">
                             <div className="w-14 hidden md:block"></div>
                             <p className="my-0 grow md:w-min md:max-w-prose px-3 md:text-lg">
-                                {sourceAuthor && <cite className="quote-author font-bold not-italic">{sourceAuthor}</cite>}
+                                {sourceAuthor && <cite className={`quote-author ${template === 'dark' ? 'font-bold' : 'font-semibold'} not-italic`}>{sourceAuthor}</cite>}
                                 {sourceAuthor && sourceOrg && <span className="quote-source-divider"> | </span>}
                                 {sourceOrg && <cite className="quote-source not-italic">{sourceOrg}</cite>}
                             </p>

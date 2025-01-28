@@ -13,6 +13,7 @@ import { ColumnText } from "../content-blocks/ColumnText";
 import { ColumnImages } from "../content-blocks/ColumnImages";
 import Image from "next/image";
 import { Video } from "../content-blocks/Video";
+import { ImageSlider } from "../content-blocks/ImageSlider";
 
 import { getPlaiceholder } from "plaiceholder";
 
@@ -188,6 +189,7 @@ const ContentBlock = async ({ block }) => {
                 linkToPage={item.linkToPage.urlSlug ? `/${item.linkToPage.urlSlug}` : null}
                 buttonText={item.buttonText}
                 posts={posts}
+                template={item.template}
                 standout={true}
             />;
             break;
@@ -300,6 +302,25 @@ const ContentBlock = async ({ block }) => {
                 captionText: item.captionText
             };
             return <Video {...videoArgs} />
+
+        case 'block_imageSlider':
+            let sliderArgs = {
+                galleryTitle: item.galleryTitle,
+                galleryDescription: item.galleryDescription,
+                images: item.images.map((image) => {
+                    const img = image.imageSliderImages_id.image;
+                    return {
+                        image: formatImageURL(img),
+                        width: img.width,
+                        height: img.height
+                    };
+                })
+            };
+
+            console.log('sliderArgs:', sliderArgs);
+
+            return <ImageSlider {...sliderArgs} />
+
 
         default:
             const formattedJson = JSON.stringify(block, null, 2);

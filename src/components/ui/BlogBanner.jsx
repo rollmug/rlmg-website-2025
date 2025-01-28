@@ -35,7 +35,6 @@ export const BlogPostBanner = ({ postData }) => {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 bg-neutral hidden md:block">
                         <BackgroundPlayer src={bannerBGVideo} className={`!hidden md:!grid overflow-hidden`} poster={bannerImage} />
                     </motion.div>
-
                 </div>
             </>
         );

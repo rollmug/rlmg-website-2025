@@ -8,8 +8,8 @@ import { AnimatePresence, motion } from "framer-motion";
 export const Video = ({ videoSrc, posterImage, blurDataURL, title, captionText }) => {
     const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     const variants = {
-        hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
-        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1 },
+        hidden: { filter: "blur(10px)", opacity: 0 },
+        visible: { filter: "blur(0)", opacity: 1 },
     };
 
     return (
@@ -22,11 +22,10 @@ export const Video = ({ videoSrc, posterImage, blurDataURL, title, captionText }
                         </div>
                     )}
 
-                    <AnimatePresence>
-                        <motion.div className="w-full" initial={variants.hidden} whileInView={variants.visible} transition={transition}>
-                            <Player src={videoSrc} poster={posterImage} blurDataURL={blurDataURL || null} />
-                        </motion.div>
-                    </AnimatePresence>
+                    <motion.div className="w-full aspect-video" initial={variants.hidden} whileInView={variants.visible} transition={transition}>
+                        <Player src={videoSrc} poster={posterImage} blurDataURL={blurDataURL || null} />
+                    </motion.div>
+
                     {captionText && (
                         <div className="section-padded-mobile-only">
                             <p className="my-0">{captionText}</p>

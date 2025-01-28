@@ -411,6 +411,8 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
                 id
                 filename_disk
                 filename_download
+                width
+                height
               }
             }
           }
@@ -453,6 +455,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           internalName
           headerText
           buttonText
+          template
           linkToPage {
             urlSlug
           }

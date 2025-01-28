@@ -8,7 +8,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
-export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, className, standout = false, disableAnimations = false }) => {
+export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, posts, className, standout = false, disableAnimations = false }) => {
     const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     const variants = {
         hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
@@ -16,10 +16,10 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, class
     };
     return (
         <>
-            <ContentSection standout={standout}>
+            <ContentSection standout={standout} template={template} className={`featured-posts ${standout ? 'with-standout' : ''}`}>
                 <div className={`section-padded ${className}`}>
                     <div className="flex flex-row flex-wrap justify-start gap-0">
-                        <h2 className="my-0 lg:w-1/2 order-1 text-lgr md:text-xl lg:text-2xl">{headerText ? headerText : 'Featured Posts'}</h2>
+                        <h2 className={`my-0 lg:w-1/2 order-1 text-lgr md:text-xl lg:text-2xl ${template === 'dark' ? 'text-white' : ''} `}>{headerText ? headerText : 'Featured Posts'}</h2>
                         <div className={`order-3 lg:order-2 lg:w-1/2 text-right`}>
                             {(buttonText && linkToPage) &&
                                 <Link href={linkToPage}>
@@ -53,8 +53,8 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, posts, class
                                         )}
 
                                     </div>
-                                    <Link href={post.urlSlug}><h3 className="my-0 ">{post.postTitle}</h3></Link>
-                                    <p className="my-0 text-sm lg:text-base">{post.postTeaser}</p>
+                                    <Link href={post.urlSlug}><h3 className={`my-0 ${template === 'dark' ? 'text-white' : ''} `}>{post.postTitle}</h3></Link>
+                                    <p className={`my-0 text-sm lg:text-base ${template === 'dark' ? 'text-white' : ''}`}>{post.postTeaser}</p>
                                 </div>
                             ))}
                         </div>

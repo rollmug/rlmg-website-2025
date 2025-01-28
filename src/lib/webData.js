@@ -380,6 +380,8 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
                 id
                 filename_disk
                 filename_download
+                width
+                height
               }
             }
           }
@@ -422,6 +424,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           internalName
           headerText
           buttonText
+          template
           linkToPage {
             urlSlug
           }
