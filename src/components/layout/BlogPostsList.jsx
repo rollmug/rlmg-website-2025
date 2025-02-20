@@ -8,7 +8,7 @@ import { ContentSection } from "./ContentSection";
 import { FaCircleExclamation } from "react-icons/fa6";
 
 const formatImageURL = (image, presetKey) => {
-    return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${image.filename_download}${presetKey ? `?key=${presetKey}` : ''}`;
+    return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${encodeURIComponent(image.filename_download)}${presetKey ? `?key=${presetKey}` : ''}`;
 };
 
 export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {

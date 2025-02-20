@@ -306,23 +306,29 @@ const ContentBlock = async ({ block }) => {
             return <Video {...videoArgs} />
 
         case 'block_imageSlider':
+            let galleryDescription = smartquotes(stripHtml(marked.parse(item.galleryDescription), {
+                ignoreTags: ['p', 'i', 'em', 'b', 'strong', 'ul', 'li', 'br']
+            }).result);
             let sliderArgs = {
                 galleryTitle: item.galleryTitle,
-                galleryDescription: item.galleryDescription,
+                galleryDescription: galleryDescription,
                 images: item.images.map((image) => {
                     const img = image.imageSliderImages_id.image;
-                    return {
-                        image: formatImageURL(img),
-                        width: img.width,
-                        height: img.height
-                    };
+                    if (img.width && img.height && (img.filesize < 15000000)) {
+                        return {
+                            image: formatImageURL(img, 'slider-image'),
+                            width: img.width,
+                            height: img.height,
+                            filesize: img.filesize
+                        };
+                    }
                 })
             };
 
             console.log('sliderArgs:', sliderArgs);
 
             return <ImageSlider {...sliderArgs} />
-        
+
         case 'block_teamMembers':
             return <TeamMembers teamMembers={item.teamMembers} headerText={item.headerText} />
 

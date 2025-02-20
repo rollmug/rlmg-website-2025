@@ -9,7 +9,7 @@ import Link from "next/link";
 import encodeUrl from "encodeurl";
 
 const formatImageURL = (image, presetKey) => {
-    return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${image.filename_download}${presetKey ? `?key=${presetKey}` : ''}`;
+    return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${encodeURIComponent(image.filename_download)}${presetKey ? `?key=${presetKey}` : ''}`;
 };
 
 export const BlogPostBanner = ({ postData }) => {

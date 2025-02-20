@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ContentSection } from "../layout/ContentSection"
 
 export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
-    const transition = { duration: 1, ease: [.25, .1, .25, 1] };
+    const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     const variants = {
         hidden: { filter: "blur(10px)", opacity: 0 },
         visible: { filter: "blur(0)", opacity: 1 },
@@ -23,30 +23,35 @@ export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
                     <section className={`section-padded`}>
                         <div className="max-w-prose mx-auto lg:max-w-screen-md my-10 ">
                             {galleryTitle && <h2>{galleryTitle}</h2>}
-                            {galleryDescription && <p dangerouslySetInnerHTML={{ __html: galleryDescription }} />}
+                            {galleryDescription && <div dangerouslySetInnerHTML={{ __html: galleryDescription }} />}
                         </div>
                     </section>
                 )}
 
-                <div className="carousel carousel-center w-full space-x-4 md:space-x-8 lg:space-x-10 py-4 hidden md:flex">
-                    {images.map((image, index) => (
-                        <div key={index} className="carousel-item">
-                            <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative">
-                                <Image src={image.image} width={image.width} height={image.height} alt="" className="w-[calc(100vw*.8)] xl:w-[calc(100vw*.6)]" />
-                            </motion.div>
-                        </div>
-                    ))}
-                </div>
+                <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition}>
+                    <div className="carousel carousel-center w-full space-x-4 md:space-x-8 lg:space-x-10 py-4 hidden md:flex">
+                        {images.map((image, index) => {
+                            if (image && image.width && image.height) {
+                                return <div key={index} className="carousel-item h-[calc(100vh*.6)]">
+                                    <Image src={image.image} width={image.width} height={image.height} alt="" className="max-h-full w-auto" />
+                                </div>
+                            }
+                        })}
+                    </div>
+                </motion.div>
 
-                <div className="carousel carousel-vertical carousel-center w-full space-y-4 py-0 flex md:hidden">
-                    {images.map((image, index) => (
-                        <div key={index} className="carousel-item">
-                            <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative">
-                                <Image src={image.image} width={image.width} height={image.height} alt="" className="max-w-full" />
-                            </motion.div>
-                        </div>
-                    ))}
-                </div>
+
+                <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="carousel carousel-vertical carousel-center w-full space-y-4 py-0 flex md:hidden">
+                    {images.map((image, index) => {
+                        if (image.width && image.height) {
+                            return <div key={index} className="carousel-item">
+                                <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition}>
+                                    <Image src={image.image} width={image.width} height={image.height} alt="" className="max-w-full" />
+                                </motion.div>
+                            </div>
+                        }
+                    })}
+                </motion.div>
             </ContentSection>
         </>
     )

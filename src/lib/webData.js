@@ -383,6 +383,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
                 id
                 filename_disk
                 filename_download
+                filesize
                 width
                 height
               }
@@ -560,7 +561,7 @@ export const formatPageLayoutParams = (globalSettings, topNav, bottomNav, active
 }
 
 export const formatImageURL = (image, presetKey) => {
-  return `${process.env.FILES_BASE_URL}/${image.id}/${image.filename_download}${presetKey ? `?key=${presetKey}` : ''}`;
+  return `${process.env.FILES_BASE_URL}/${image.id}/${encodeURIComponent(image.filename_download)}${presetKey ? `?key=${presetKey}` : ''}`;
 };
 
 export const formatFooterArgs = (globalSettings, bottomNav) => {

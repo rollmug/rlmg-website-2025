@@ -414,6 +414,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
                 id
                 filename_disk
                 filename_download
+                filesize
                 width
                 height
               }
