@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import PropTypes from 'prop-types';
 import { Logo } from "./Logo";
@@ -6,7 +8,20 @@ import { BulletList } from "../typography/BulletList";
 
 import { HiArrowLongRight } from "react-icons/hi2";
 
+import mailchimp from '@mailchimp/mailchimp_marketing';
+
+mailchimp.setConfig({
+    apiKey: process.env.MAILCHIMP_API_KEY,
+    server: process.env.MAILCHIMP_SERVER_PREFIX
+});
+
 export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
+
+    const mailChimpPing = async () => {
+        const response = await mailchimp.ping.get();
+        console.log(response);
+    };
+
     return (
         <footer className={`mt-6 py-4 ${className}`}>
             <section className="section-padded">
@@ -33,12 +48,12 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                     <div className="flex flex-col justify-between gap-6 lg:gap-10 flex-1 lg:order-3 xl:px-6">
                         <div className="flex flex-col gap-4 max-w-full">
                             <h3 className="my-0">Subscribe to Our Newsletter</h3>
-                            
+
                             <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
                                 <div className="flex-1">
                                     <input type="email" placeholder="Enter Email*" className="input input-sm text-base input-ghost p-1 pl-0 h-auto w-full max-w-full " />
                                 </div>
-                                <button className="btn btn-ghost text-right !px-1">
+                                <button className="btn btn-ghost text-right !px-1" onClick={mailChimpPing}>
                                     <HiArrowLongRight className="text-primary w-6 h-6" />
                                 </button>
                             </div>
