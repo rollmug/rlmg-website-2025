@@ -32,8 +32,8 @@ export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
                     <div className="carousel carousel-center w-full space-x-4 md:space-x-8 lg:space-x-10 py-4 hidden md:flex">
                         {images.map((image, index) => {
                             if (image && image.width && image.height) {
-                                return <div key={index} className="carousel-item h-[calc(100vh*.6)]">
-                                    <Image src={image.image} width={image.width} height={image.height} alt="" className="max-h-full w-auto" />
+                                return <div key={index} className="carousel-item _h-[calc(100vh*.6)] relative">
+                                    <Image src={image.image} width={image.width} height={image.height} alt="" className="_max-h-full w-auto" />
                                 </div>
                             }
                         })}

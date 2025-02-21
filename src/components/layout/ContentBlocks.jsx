@@ -316,7 +316,7 @@ const ContentBlock = async ({ block }) => {
                     const img = image.imageSliderImages_id.image;
                     if (img.width && img.height && (img.filesize < 15000000)) {
                         return {
-                            image: formatImageURL(img, 'slider-image'),
+                            image: formatImageURL(img, 'gallery-images'),
                             width: img.width,
                             height: img.height,
                             filesize: img.filesize
