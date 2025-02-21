@@ -247,3 +247,8 @@ input[type=email]::placeholder {
 .quote-container.dark .quote-source, .quote-container.dark .quote-source-divider {
   @apply text-primary-content;
 }
+
+.member-bio-modal .bio-text p {
+  font-size: inherit;
+  line-height: inherit;
+}
