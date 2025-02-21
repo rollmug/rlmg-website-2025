@@ -11,6 +11,7 @@ export async function POST(req) {
     try {
         const email = await req.json();
         let res = await validate(email);
+        console.log('res', res);
 
         if (res.valid) {
             const response = await mailchimp.lists.setListMember(
@@ -25,7 +26,7 @@ export async function POST(req) {
                 return Response.json({ error: 'Email not added' });
             }
         } else {
-            const errorBody = { error: 'Invalid Email' };
+            const errorBody = { error: 'Invalid Email', result: res };
             return Response.json(errorBody);
         }
     } catch (error) {
