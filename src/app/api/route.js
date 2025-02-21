@@ -10,7 +10,15 @@ mailchimp.setConfig({
 export async function POST(req) {
     try {
         const email = await req.json();
-        let res = await validate(email);
+        let res = await validate({
+            email: email,
+            sender: email,
+            validateRegex: true,
+            validateMx: true,
+            validateTypo: true,
+            validateDisposable: true,
+            validateSMTP: false,
+        });
         console.log('res', res);
 
         if (res.valid) {
