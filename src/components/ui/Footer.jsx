@@ -1,26 +1,45 @@
-'use client'
-
-import React from "react";
+import React, { useState, useRef, forwardRef } from "react";
 import PropTypes from 'prop-types';
 import { Logo } from "./Logo";
 import { SocialMediaIcons } from "./SocialMediaIcons";
 import { BulletList } from "../typography/BulletList";
-
 import { HiArrowLongRight } from "react-icons/hi2";
-
-import mailchimp from '@mailchimp/mailchimp_marketing';
-
-mailchimp.setConfig({
-    apiKey: process.env.MAILCHIMP_API_KEY,
-    server: process.env.MAILCHIMP_SERVER_PREFIX
-});
 
 export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
 
-    const mailChimpPing = async () => {
-        const response = await mailchimp.ping.get();
-        console.log(response);
+    const [formData, setFormData] = useState(null);
+    const [submissionStatus, setSubmissionStatus] = useState(null);
+    const openModalRef = useRef();
+    const emailInputRef = useRef();
+
+    const handleChange = (e) => {
+        setFormData(e.target.value);
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmissionStatus('loading');
+        openModalRef.current.showModal();
+
+        const response = await fetch('/api/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData.trim()),
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data.success) {
+            setSubmissionStatus('success');
+            emailInputRef.current.value = '';
+        }
+        else {
+            setSubmissionStatus('error');
+        }
+    }
 
     return (
         <footer className={`mt-6 py-4 ${className}`}>
@@ -49,14 +68,16 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                         <div className="flex flex-col gap-4 max-w-full">
                             <h3 className="my-0">Subscribe to Our Newsletter</h3>
 
-                            <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
-                                <div className="flex-1">
-                                    <input type="email" placeholder="Enter Email*" className="input input-sm text-base input-ghost p-1 pl-0 h-auto w-full max-w-full " />
+                            <form onSubmit={handleSubmit}>
+                                <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
+                                    <div className="flex-1">
+                                        <input ref={emailInputRef} type="email" placeholder="Enter Email*" className="input input-sm text-base input-ghost p-1 pl-0 h-auto w-full max-w-full" onChange={handleChange} required />
+                                    </div>
+                                    <button className="btn btn-ghost text-right !px-1">
+                                        <HiArrowLongRight className="text-primary w-6 h-6" />
+                                    </button>
                                 </div>
-                                <button className="btn btn-ghost text-right !px-1" onClick={mailChimpPing}>
-                                    <HiArrowLongRight className="text-primary w-6 h-6" />
-                                </button>
-                            </div>
+                            </form>
                         </div>
                         <div className="lg:self-end hidden lg:block">
                             <p className="text-xs my-0">&copy; 2025 {orgName}</p>
@@ -68,8 +89,65 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                     </div>
                 </div>
             </section>
+
+            <SubscribeModal ref={openModalRef} submissionStatus={submissionStatus} />
         </footer>
     );
+}
+
+const SubscribeModal = forwardRef(({ submissionStatus }, ref) => {
+
+    return (
+        <dialog className="member-bio-modal modal shadow-lg bg-base-content bg-opacity-90" ref={ref}>
+            <div className="modal-box bg-white !rounded-none relative p-6 w-full md:w-4/5 max-w-xl">
+
+                <form method="dialog">
+                    <button className="absolute z-10 top-2 right-2 md:top-4 md:right-4 text-lg text-secondary outline-none focus:outline-none p-4">
+                        <CloseIcon />
+                    </button>
+
+                    {submissionStatus === 'loading' && (
+
+                        <div role="status" className="flex flex-col justify-center items-center w-full h-24 my-4">
+                            <p className="text-secondary text-lgr mt-0">Loading…</p>
+                            <svg className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-secondary" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
+                                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
+                            </svg>
+                        </div>
+                    )}
+
+                    {submissionStatus === 'success' && (
+                        <section className="flex flex-col gap-3 p-2 my-4">
+                            <h3 className="text-secondary text-lgr font-black mt-0">Thank You!</h3>
+                            <p className="text-sm md:text-sm2/6 m-0">You have been subscribed to our newsletter. We look forward to being in touch!</p>
+                            <p className="text-sm md:text-sm2/6 m-0"><em>— The RLMG Team</em></p>
+                        </section>
+                    )}
+
+                    {submissionStatus === 'error' && (
+                        <section className="flex flex-col gap-3 p-2 my-4">
+                            <h3 className="text-secondary text-lgr font-black mt-0">Oops!</h3>
+                            <p className="text-sm md:text-sm2/6 m-0">Something went wrong. Please try again.</p>
+                        </section>
+                    )}
+                </form>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
+    );
+});
+
+SubscribeModal.displayName = SubscribeModal;
+
+const CloseIcon = (props) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" height="1em" width="1em" viewBox="0 -960 960 960" {...props}>
+            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+    )
 }
 
 Footer.propTypes = {
