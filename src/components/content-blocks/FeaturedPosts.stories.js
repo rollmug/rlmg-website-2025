@@ -23,6 +23,7 @@ export default {
                 postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
                 urlSlug: { pathname: './', query: { path: '/story/content-blocks-featured-posts--with-background' } },
                 bannerImage: 'https://rlmg-website-2025.vercel.app/storybook-imgs/Featured-1.jpg',
+                hoverPreviewBGVideo: 'https://manage.rlmg.com/assets/a717514a-9d5c-4767-9732-928ad65943b3/test-SSAB_gif_250207.mp4'
             },
             {
                 postTitle: 'Post Title',

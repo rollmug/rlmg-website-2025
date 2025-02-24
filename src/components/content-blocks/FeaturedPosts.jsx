@@ -8,12 +8,9 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
+import HoverVideoPlayer from 'react-hover-video-player';
+
 export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, posts, className, standout = false, disableAnimations = false }) => {
-    const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
-    const variants = {
-        hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
-        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1 },
-    };
     return (
         <>
             <ContentSection standout={standout} template={template} className={`featured-posts ${standout ? 'with-standout' : ''}`}>
@@ -31,27 +28,7 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, po
                             {posts.map((post, index) => (
                                 <div key={index} className="flex flex-col lg:gap-2">
                                     <div className={`aspect-video flex justify-center items-center mb-2 lg:mb-4 w-full max-w-full`}>
-
-                                        {disableAnimations && post.bannerImage ? (
-                                            <div className="relative w-full h-full">
-                                                <Link href={post.urlSlug} className="absolute inset-0">
-                                                    <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
-                                                </Link>
-                                            </div>
-                                        ) : (
-                                            <>
-                                                {post.bannerImage && (
-                                                    <AnimatePresence>
-                                                        <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
-                                                            <Link href={post.urlSlug} className="absolute inset-0">
-                                                                <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
-                                                            </Link>
-                                                        </motion.div>
-                                                    </AnimatePresence>
-                                                )}
-                                            </>
-                                        )}
-
+                                        <FeaturedPost post={post} disableAnimations={disableAnimations} />
                                     </div>
                                     <Link href={post.urlSlug}><h3 className={`my-0 ${template === 'dark' ? 'text-white' : ''} `}>{post.postTitle}</h3></Link>
                                     <p className={`my-0 text-sm lg:text-base ${template === 'dark' ? 'text-white' : ''}`}>{post.postTeaser}</p>
@@ -62,6 +39,74 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, po
                 </div>
             </ContentSection>
         </>
+    );
+}
+
+const FeaturedPost = ({ post, disableAnimations }) => {
+    const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
+    const variants = {
+        hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
+        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1 },
+    };
+
+    if (!post.bannerImage && disableAnimations) {
+        return <div className="flex items-center justify-center w-full h-full bg-gray-100">No Image</div>;
+    }
+
+    if (!post.bannerImage) {
+        return <AnimatePresence>
+            <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
+                <div className="flex items-center justify-center w-full h-full bg-gray-100">No Image</div>
+            </motion.div>
+        </AnimatePresence>;
+    }
+
+    if (post.hoverPreviewBGVideo && disableAnimations) {
+        return (
+            <HoverVideoPlayer
+                videoSrc={post.hoverPreviewBGVideo}
+                pausedOverlay={
+                    <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                }
+                className="w-full h-full"
+            />
+        )
+    }
+
+    if (post.hoverPreviewBGVideo) {
+        return (
+            <AnimatePresence>
+                <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
+                    <HoverVideoPlayer
+                        videoSrc={post.hoverPreviewBGVideo}
+                        pausedOverlay={
+                            <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                        }
+                        className="w-full h-full"
+                    />
+                </motion.div>
+            </AnimatePresence>
+        );
+    }
+
+    if (disableAnimations && post.bannerImage) {
+        return (
+            <div className="relative w-full h-full">
+                <Link href={post.urlSlug} className="absolute inset-0">
+                    <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                </Link>
+            </div>
+        );
+    }
+
+    return (
+        <AnimatePresence>
+            <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
+                <Link href={post.urlSlug} className="absolute inset-0">
+                    <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                </Link>
+            </motion.div>
+        </AnimatePresence>
     );
 }
 

@@ -450,6 +450,11 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
                 filename_disk
                 filename_download
               }
+              hoverPreviewBGVideo {
+                id
+                filename_download
+                filename_disk
+              }
             }
           }
         }

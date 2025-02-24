@@ -29,6 +29,7 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
                 postTeaser: post.postTeaser,
                 urlSlug: `/${blogData.urlSlug}/${post.urlSlug}`,
                 bannerImage: formatImageURL(post.bannerImage),
+                hoverPreviewBGVideo: (post.hoverPreviewBGVideo) ? formatImageURL(post.hoverPreviewBGVideo) : null,
             };
         });
     }

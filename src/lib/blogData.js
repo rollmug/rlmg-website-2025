@@ -265,6 +265,11 @@ const blogPostsByBlogQuery = gql`query BlogPosts($filter: blogPosts_filter, $sor
         filename_disk
         filename_download
     }
+    hoverPreviewBGVideo {
+      id
+      filename_disk
+      filename_download
+    }
   }
 }`;
 
@@ -310,7 +315,12 @@ const blogPostByIDQuery = gql`query BlogPosts_by_id($blogPostsByIdId: ID!) {
       filename_download
       filename_disk
     }
-      bannerBGVideo {
+    bannerBGVideo {
+      id
+      filename_download
+      filename_disk
+    }
+    hoverPreviewBGVideo {
       id
       filename_download
       filename_disk
@@ -474,6 +484,11 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
                 id
                 filename_disk
                 filename_download
+              }
+              hoverPreviewBGVideo {
+                id
+                filename_download
+                filename_disk
               }
               postTeaser
               postTitle
