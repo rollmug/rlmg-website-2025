@@ -266,6 +266,7 @@ const pageByIdQuery = gql`query Pages_by_id($pagesByIdId: ID!) {
         filename_download
     }
     bannerTextPlacement
+    bannerDisplayType
     connectedBlog {
       id
       categoryLabel
@@ -510,6 +511,12 @@ const globalSettingsQuery = gql`query Settings {
         url
       }
     }
+    additionalEmailAddresses {
+      orgContactEmails_id {
+        label
+        emailAddress
+      }
+    }
   }
 }`;
 
@@ -559,6 +566,7 @@ export const formatPageLayoutParams = (globalSettings, topNav, bottomNav, active
     navItems: formatNavigation(topNav),
     footerArgs: formatFooterArgs(globalSettings, bottomNav),
     activePage: activePageSlug,
+    globalSettings
   }
 }
 

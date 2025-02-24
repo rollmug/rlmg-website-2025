@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState, useRef, forwardRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import PropTypes from 'prop-types';
@@ -10,9 +10,12 @@ import DOMPurify from "isomorphic-dompurify";
 import { twMerge } from 'tailwind-merge'; // import { clsx } from 'clsx';
 import { BlogFilterContext } from "@/app/blogFilterContext";
 import Link from "next/link";
+import { SubscribeModal } from "./Footer";
+import { HiArrowLongRight } from "react-icons/hi2";
+import { SocialMediaIcons } from "./SocialMediaIcons";
 
-export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerBGVideo, blogButtons, categoryLabel, isBlog = false }) => {
-
+export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, socialLinks, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerBGVideo, blogButtons, categoryLabel, isBlog = false, globalSettings }) => {
+    console.log('globalSettings', globalSettings);
     let justifyContent, bannerGradient, videoClass, classNames = [];
     switch (bannerTextPlacement) {
         case 'top':
@@ -56,6 +59,12 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
     const className = classNames.join(' ');
     const classesOutput = twMerge(`${justifyContent} ${className}`);
     const imgClasses = 'object-cover object-center lg:object-center transition-all ease-in-out duration-1000 opacity-0';
+
+    if (bannerDisplayType === 'contact') {
+        return (
+            <ContactTypeBanner bannerHeader={bannerHeader} socialLinks={socialLinks} globalSettings={globalSettings} />
+        );
+    }
 
     if (bannerImage && bannerBGVideo) {
         return (
@@ -109,6 +118,103 @@ export const Banner = ({ bannerTextPlacement, bannerHeader, bannerSubheader, ban
         </>
     );
 }
+
+const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
+    const [formData, setFormData] = useState({ fname: '', lname: '', email: '' });
+    const [submissionStatus, setSubmissionStatus] = useState(null);
+    const openModalRef = useRef();
+    const emailInputRef = useRef();
+
+    let additionalEmailAddresses = [];
+    if (globalSettings && globalSettings.additionalEmailAddresses && Array.isArray(globalSettings.additionalEmailAddresses) && globalSettings.additionalEmailAddresses.length > 0) {
+        additionalEmailAddresses = globalSettings.additionalEmailAddresses.map(email => email.orgContactEmails_id);
+        console.log('additionalEmailAddresses', additionalEmailAddresses);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmissionStatus('getname');
+        openModalRef.current.showModal();
+        const formData = new FormData(e.target);
+
+        setFormData({
+            name: formData.get('fname'),
+            email: formData.get('email')
+        });
+    }
+
+    useEffect(() => {
+        if (submissionStatus === 'success') {
+            emailInputRef.current.value = '';
+        }
+    }, [submissionStatus]);
+
+    const classNames = [
+        `min-h-[calc(50vh)] pb-14 pt-4 md:pt1 sm:pb-24`, // mobile portrait
+        `landscape:min-h-[calc(60vh)] landscape:pb-20`, // mobile landscape
+        `landscape:lg:pb-24 landscape:lg:pt-0`, // tablet landscape
+        `landscape:xl:pb-24` // desktop
+    ];
+
+    const justifyContent = 'justify-center';
+    const className = classNames.join(' ');
+    const classesOutput = twMerge(`${justifyContent} ${className}`);
+
+    return (
+        <>
+            <div className={`banner-block relative bg-gradient-to-t from-primary _via-primary to-info md:bg-gradient-to-tr md:from-info md:via-info md:to-primary slanted-bottom w-full flex flex-col ${classesOutput}`}>
+                <div className={`section-padded my-4 md:my-12 z-[2]`}>
+
+                    {bannerHeader && <h1 className={`smaller md:max-w-sm !mb-8 md:!mb-16`}>{bannerHeader}</h1>}
+
+                    <section className={`flex flex-col md:flex-row md:items-start md:justify-start gap-10 md:gap-20`}>
+                        {/* Subscribe */}
+                        <div className={`flex flex-col gap-8 md:gap-16 md:w-1/2`}>
+                            <div className={`flex flex-col gap-4 text-primary-content md:max-w-sm`}>
+                                <div className="flex flex-col gap-4 max-w-full">
+                                    <h3 className="-mb-2 md:my-0 text-primary-content">Subscribe to Our Newsletter</h3>
+
+                                    <form onSubmit={handleSubmit}>
+                                        <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 border-opacity-40 mb-6 lg:mb-4">
+                                            <div className="flex-1">
+                                                <input ref={emailInputRef} name="email" type="email" placeholder="Enter Email*" className="input input-sm !text-primary-content !placeholder-white input-ghost bg-transparent p-1 pl-0 h-auto w-full max-w-full" required />
+                                            </div>
+                                            <button type="submit" className="btn btn-ghost text-right !px-1">
+                                                <HiArrowLongRight className="text-accent w-6 h-6" />
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div>
+                                    <h3 className="my-0 text-primary-content">Follow Us</h3>
+                                    <SocialMediaIcons links={socialLinks} className="my-2" size="medium" color="white" />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Additional Email Addresses */}
+                        <div className={`text-primary-content md:w-1/2`}>
+                            {additionalEmailAddresses.length > 0 && (
+                                <div className="flex flex-col gap-4 md:gap-6">
+                                    {additionalEmailAddresses.map((email, index) => {
+                                        return (
+                                            <div key={index} className="flex flex-col md:gap-1">
+                                                <strong className="font-bold text-sm md:text-base">{email.label}</strong>
+                                                <a href={`mailto:${email.emailAddress}`} className="self-start text-accent font-extrabold text-lg md:text-xl md:underline">{email.emailAddress}</a>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <SubscribeModal ref={openModalRef} submissionStatus={submissionStatus} setSubmissionStatus={setSubmissionStatus} formData={formData} setFormData={setFormData} />
+        </>
+    );
+};
 
 const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerTextPlacement, blogButtons, categoryLabel }) => {
     let cleanSubheader;

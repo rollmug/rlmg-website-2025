@@ -22,7 +22,7 @@ export default async function BlogPost({ params }) {
     const page = (await params).page;
     const post = (await params).post;
     const data = await formatBlogPostData(post, page);
-    console.log('data:', data);
+    // console.log('data:', data);
 
     if (data.error) {
         notFound();

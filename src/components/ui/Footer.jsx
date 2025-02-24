@@ -6,6 +6,7 @@ import { BulletList } from "../typography/BulletList";
 import { HiArrowLongRight } from "react-icons/hi2";
 
 export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
+    // console.log('socialLinks', socialLinks);
 
     const [formData, setFormData] = useState({ fname: '', lname: '', email: '' });
     const [submissionStatus, setSubmissionStatus] = useState(null);
@@ -16,7 +17,6 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
         e.preventDefault();
         setSubmissionStatus('getname');
         openModalRef.current.showModal();
-
         const formData = new FormData(e.target);
 
         setFormData({
@@ -85,7 +85,7 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
     );
 }
 
-const SubscribeModal = forwardRef(({ submissionStatus, setSubmissionStatus, formData, setFormData }, ref) => {
+export const SubscribeModal = forwardRef(({ submissionStatus, setSubmissionStatus, formData, setFormData }, ref) => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
     const emailRef = useRef(null);
@@ -143,7 +143,7 @@ const SubscribeModal = forwardRef(({ submissionStatus, setSubmissionStatus, form
         });
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         if (data.success) {
             setSubmissionStatus('success');

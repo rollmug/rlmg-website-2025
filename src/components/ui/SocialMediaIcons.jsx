@@ -7,7 +7,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 
-export const SocialMediaIcons = ({ links = [], className, size = 'medium' }) => {
+export const SocialMediaIcons = ({ links = [], className, size = 'medium', color = 'neutral' }) => {
     let iconSize;
 
     switch (size) {
@@ -32,25 +32,25 @@ export const SocialMediaIcons = ({ links = [], className, size = 'medium' }) => 
         <div className={`flex gap-3 ${className}`}>
             {links.map((link, index) => {
                 return (
-                    <SocialLink key={index} platform={link.platform} displayText={link.displayText} url={link.url} iconSize={iconSize} />
+                    <SocialLink key={index} platform={link.platform} displayText={link.displayText} url={link.url} iconSize={iconSize} color={color} />
                 );
             })}
         </div>
     );
 }
 
-const SocialLink = ({ platform, displayText, url, iconSize }) => {
+const SocialLink = ({ platform, displayText, url, iconSize, color }) => {
     return (
-        <Link href={url} target="_blank" title={displayText} className="btn btn-link text-neutral !px-0">
+        <Link href={url} target="_blank" title={displayText} className={`btn btn-link ${color === 'white' ? 'text-white' : 'text-neutral'} !px-0`}>
             {(() => {
                 switch (platform) {
-                    case 'linkedin':
+                    case 'LinkedIn':
                         return <FaLinkedin className={`${iconSize}`} />
-                    case 'facebook':
+                    case 'Facebook':
                         return <FaFacebook className={`${iconSize}`} />
-                    case 'instagram':
+                    case 'Instagram':
                         return <FaInstagram className={`${iconSize}`} />
-                    case 'twitter':
+                    case 'Twitter':
                         return <FaSquareXTwitter className={`${iconSize}`} />
                     default:
                         return null;
@@ -76,22 +76,22 @@ SocialMediaIcons.defaultProps = {
     links: [
         {
             displayText: 'LinkedIn',
-            platform: 'linkedin',
+            platform: 'LinkedIn',
             url: 'https://www.linkedin.com'
         },
         {
             displayText: 'Facebook',
-            platform: 'facebook',
+            platform: 'Facebook',
             url: 'https://www.facebook.com'
         },
         {
             displayText: 'Instagram',
-            platform: 'instagram',
+            platform: 'Instagram',
             url: 'https://www.instagram.com'
         },
         {
             displayText: 'Twitter',
-            platform: 'twitter',
+            platform: 'Twitter',
             url: 'https://www.twitter.com'
         },
     ],

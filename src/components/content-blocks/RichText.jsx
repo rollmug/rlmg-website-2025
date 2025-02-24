@@ -17,7 +17,7 @@ export const RichText = ({ content, placement, padding, className = '' }) => {
                             case 'nestedlist':
                                 // item.data.style - ordered or unordered
                                 const listItems = item.data.items.map((listItem) => ({ text: listItem.content }));
-                                console.log('listItems:', listItems);
+                                // console.log('listItems:', listItems);
                                 // To do: these might be nested further
                                 return <BulletList key={index} listItems={listItems} />;
                             case 'delimiter':

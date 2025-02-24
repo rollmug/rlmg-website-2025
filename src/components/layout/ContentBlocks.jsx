@@ -11,7 +11,6 @@ import { ResponsiveColumns } from "../content-blocks/ResponsiveColumns";
 import { Quote } from "../content-blocks/Quote";
 import { ColumnText } from "../content-blocks/ColumnText";
 import { ColumnImages } from "../content-blocks/ColumnImages";
-// import Image from "next/image";
 import { Video } from "../content-blocks/Video";
 import { ImageSlider } from "../content-blocks/ImageSlider";
 import { TeamMembers } from "../ui/TeamMembers";
@@ -48,8 +47,18 @@ export const ContentBlocks = async ({ data }) => {
     const blocks = data.contentBlocks;
     const pageData = data.pageData;
 
+    // pageLayoutParams: data.layoutParams, footerArgs, socialLinks
+    //const { pageLayoutParams } = data;
+    //const { footerArgs } = pageLayoutParams;
+
+    // console.log('Social Links:', data.layoutParams.footerArgs.socialLinks);
+    // console.log('additionalEmailAddresses:', data.globalSettings.additionalEmailAddresses); 
+
     const bannerVars = [
         'bannerTextPlacement',
+        'bannerDisplayType',
+        'socialLinks',
+        'globalSettings',
         'bannerHeader',
         'bannerSubheader',
         'bannerCallToActionLink',
@@ -65,12 +74,15 @@ export const ContentBlocks = async ({ data }) => {
                     bannerVars.some((varName) => pageData[varName]) && (
                         <Banner
                             bannerTextPlacement={pageData.bannerTextPlacement}
+                            bannerDisplayType={pageData.bannerDisplayType}
+                            socialLinks={data.layoutParams.footerArgs?.socialLinks || []}
                             bannerHeader={pageData.bannerHeader}
                             bannerSubheader={pageData.bannerSubheader}
                             bannerCallToActionLink={pageData.bannerCallToActionLink}
                             bannerCallToActionText={pageData.bannerCallToActionText}
                             bannerImage={pageData?.bannerImage?.id ? formatImageURL(pageData.bannerImage) : null}
                             bannerBGVideo={pageData?.bannerBGVideo?.id ? formatImageURL(pageData.bannerBGVideo) : null}
+                            globalSettings={data.globalSettings}
                         />
                     )
                 }
