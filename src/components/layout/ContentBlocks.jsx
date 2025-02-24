@@ -193,7 +193,8 @@ const ContentBlock = async ({ block }) => {
                     bannerImage: post.bannerImage.id ? formatImageURL(post.bannerImage) : null,
                     postTeaser: post.postTeaser,
                     postTitle: post.postTitle,
-                    urlSlug: urlSlug
+                    urlSlug: urlSlug,
+                    hoverPreviewBGVideo: (post.hoverPreviewBGVideo) ? formatImageURL(post.hoverPreviewBGVideo) : null,
                 };
             });
 
