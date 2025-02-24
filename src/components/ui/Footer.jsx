@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef } from "react";
+import React, { useState, useRef, forwardRef, useEffect } from "react";
 import PropTypes from 'prop-types';
 import { Logo } from "./Logo";
 import { SocialMediaIcons } from "./SocialMediaIcons";
@@ -7,39 +7,29 @@ import { HiArrowLongRight } from "react-icons/hi2";
 
 export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
 
-    const [formData, setFormData] = useState(null);
+    const [formData, setFormData] = useState({ fname: '', lname: '', email: '' });
     const [submissionStatus, setSubmissionStatus] = useState(null);
     const openModalRef = useRef();
     const emailInputRef = useRef();
 
-    const handleChange = (e) => {
-        setFormData(e.target.value);
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setSubmissionStatus('loading');
+        setSubmissionStatus('getname');
         openModalRef.current.showModal();
 
-        const response = await fetch('/api/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData.trim()),
+        const formData = new FormData(e.target);
+
+        setFormData({
+            name: formData.get('fname'),
+            email: formData.get('email')
         });
+    }
 
-        const data = await response.json();
-        console.log(data);
-
-        if (data.success) {
-            setSubmissionStatus('success');
+    useEffect(() => {
+        if (submissionStatus === 'success') {
             emailInputRef.current.value = '';
         }
-        else {
-            setSubmissionStatus('error');
-        }
-    }
+    }, [submissionStatus]);
 
     return (
         <footer className={`mt-6 py-4 ${className}`}>
@@ -71,9 +61,9 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                             <form onSubmit={handleSubmit}>
                                 <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 mb-6 lg:mb-4">
                                     <div className="flex-1">
-                                        <input ref={emailInputRef} type="email" placeholder="Enter Email*" className="input input-sm text-base input-ghost p-1 pl-0 h-auto w-full max-w-full" onChange={handleChange} required />
+                                        <input ref={emailInputRef} name="email" type="email" placeholder="Enter Email*" className="input input-sm text-base input-ghost p-1 pl-0 h-auto w-full max-w-full" required />
                                     </div>
-                                    <button className="btn btn-ghost text-right !px-1">
+                                    <button type="submit" className="btn btn-ghost text-right !px-1">
                                         <HiArrowLongRight className="text-primary w-6 h-6" />
                                     </button>
                                 </div>
@@ -90,12 +80,81 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                 </div>
             </section>
 
-            <SubscribeModal ref={openModalRef} submissionStatus={submissionStatus} />
+            <SubscribeModal ref={openModalRef} submissionStatus={submissionStatus} setSubmissionStatus={setSubmissionStatus} formData={formData} setFormData={setFormData} />
         </footer>
     );
 }
 
-const SubscribeModal = forwardRef(({ submissionStatus }, ref) => {
+const SubscribeModal = forwardRef(({ submissionStatus, setSubmissionStatus, formData, setFormData }, ref) => {
+    const firstNameRef = useRef(null);
+    const lastNameRef = useRef(null);
+    const emailRef = useRef(null);
+
+    const [emailError, setEmailError] = useState(false);
+    const [fnameError, setFnameError] = useState(false);
+    const [lnameError, setLnameError] = useState(false);
+
+    useEffect(() => {
+        firstNameRef.current.focus()
+        emailRef.current.value = formData.email;
+    }, [formData]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setSubmissionStatus('loading');
+        const submit = {
+            fname: firstNameRef.current.value.trim(),
+            lname: lastNameRef.current.value.trim(),
+            email: emailRef.current.value.trim(),
+        }
+
+        setFormData(submit);
+
+        if (!submit.fname) {
+            setFnameError(true);
+            setSubmissionStatus('getname');
+            return;
+        } else {
+            setFnameError(false);
+        }
+
+        if (!submit.lname) {
+            setLnameError(true);
+            setSubmissionStatus('getname');
+            return;
+        } else {
+            setLnameError(false);
+        }
+
+        if (!submit.email) {
+            setEmailError(true);
+            setSubmissionStatus('getname');
+            return;
+        } else {
+            setEmailError(false);
+        }
+
+        const response = await fetch('/api/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submit),
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data.success) {
+            setSubmissionStatus('success');
+            emailRef.current.value = '';
+            firstNameRef.current.value = '';
+            lastNameRef.current.value = '';
+        }
+        else {
+            setSubmissionStatus('error');
+        }
+    };
 
     return (
         <dialog className="member-bio-modal modal shadow-lg bg-base-content bg-opacity-90" ref={ref}>
@@ -131,6 +190,33 @@ const SubscribeModal = forwardRef(({ submissionStatus }, ref) => {
                             <p className="text-sm md:text-sm2/6 m-0">Something went wrong. Please try again.</p>
                         </section>
                     )}
+                </form>
+
+                <form onClick={handleSubmit} className={`${submissionStatus === 'getname' ? 'block' : 'hidden'}`}>
+                    <section className={`flex flex-col gap-3 p-2 my-4 _mt-6`}>
+                        <h3 className="text-secondary text-lgr font-black mt-0">Almost there!</h3>
+                        <div className="flex flex-col md:flex-row gap-2">
+                            <label className="form-control w-full md:w-1/2">
+                                <input ref={firstNameRef} autoFocus type="text" name="fname" placeholder="First name" className={`input ${fnameError ? 'input-error' : ''} input-bordered w-full`} required />
+                                <div className="label">
+                                    <span className="label-text-alt">First name</span>
+                                </div>
+                            </label>
+                            <label className="form-control w-full md:w-1/2">
+                                <input ref={lastNameRef} type="text" name="lname" placeholder="Last name" className={`input ${lnameError ? 'input-error' : ''} input-bordered w-full`} required />
+                                <div className="label">
+                                    <span className="label-text-alt">Last name</span>
+                                </div>
+                            </label>
+                        </div>
+                        <label className="form-control w-full">
+                            <input ref={emailRef} type="text" name="email" placeholder="Email" className={`input ${emailError ? 'input-error' : 'input-success'} input-bordered w-full`} required />
+                            <div className="label">
+                                <span className="label-text-alt">Email</span>
+                            </div>
+                        </label>
+                        <button type="submit" className="btn btn-primary">Subscribe</button>
+                    </section>
                 </form>
             </div>
             <form method="dialog" className="modal-backdrop">

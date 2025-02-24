@@ -9,7 +9,13 @@ mailchimp.setConfig({
 
 export async function POST(req) {
     try {
-        const email = await req.json();
+        const data = await req.json();
+        const email = data.email;
+
+        if (!email) {
+            return Response.json({ error: 'Email is required' });
+        }
+
         let res = await validate({
             email: email,
             sender: email,
@@ -19,13 +25,21 @@ export async function POST(req) {
             validateDisposable: true,
             validateSMTP: false,
         });
+
         console.log('res', res);
 
         if (res.valid) {
             const response = await mailchimp.lists.setListMember(
                 process.env.MAILCHIMP_AUDIENCE_ID,
                 md5(email.toLowerCase()),
-                { email_address: email, status_if_new: "subscribed" }
+                {
+                    email_address: email,
+                    status_if_new: "subscribed",
+                    merge_fields: {
+                        FNAME: data.fname.trim(),
+                        LNAME: data.lname.trim()
+                    }
+                }
             );
 
             if (response.email_address && response.status === 'subscribed') {
