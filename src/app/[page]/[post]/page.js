@@ -1,7 +1,6 @@
 import React from "react";
 import { notFound } from 'next/navigation';
-// import { formatPageData } from "@/lib/webData";
-import { getBlogPostByID, getPostBySlug, formatBlogPostData } from "@/lib/blogData";
+import { formatBlogPostData } from "@/lib/blogData"; // getBlogPostByID, getPostBySlug, 
 import { PageLayout } from "@/components/layout/PageLayout";
 import { ContentBlocks } from "@/components/layout/ContentBlocks";
 

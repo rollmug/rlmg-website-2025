@@ -28,19 +28,34 @@ export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
                     </section>
                 )}
 
+                {/* Desktop Carousel */}
                 <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition}>
                     <div className="carousel carousel-center w-full space-x-4 md:space-x-8 lg:space-x-10 py-4 hidden md:flex">
                         {images.map((image, index) => {
                             if (image && image.width && image.height) {
-                                return <div key={index} className="carousel-item _h-[calc(100vh*.6)] relative">
-                                    <Image src={image.image} width={image.width} height={image.height} alt="" className="_max-h-full w-auto" />
-                                </div>
+                                if (image.height > image.width) {
+                                    const h = 1080;
+                                    const w = Math.round((image.width * h) / image.height);
+                                    return <div key={index} className={`carousel-item`}>
+                                        <Image
+                                            src={image.image} width={w} height={h} alt=""
+                                            className={`h-96 xl:h-[520px] w-auto`} />
+                                    </div>
+                                } else {
+                                    const w = 1080;
+                                    const h = Math.round((image.height * w) / image.width);
+                                    return <div key={index} className={`carousel-item`}>
+                                        <Image
+                                            src={image.image} width={w} height={h} alt=""
+                                            className={`h-96 xl:h-[520px] w-auto`} />
+                                    </div>
+                                }
                             }
                         })}
                     </div>
                 </motion.div>
 
-
+                {/* Mobile Carousel */}
                 <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="carousel carousel-vertical carousel-center w-full space-y-4 py-0 flex md:hidden">
                     {images.map((image, index) => {
                         if (image.width && image.height) {

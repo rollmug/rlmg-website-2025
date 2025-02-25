@@ -43,7 +43,7 @@ export default async function getBase64(imageUrl) {
     }
 }
 
-export const ContentBlocks = async ({ data }) => {
+export const ContentBlocks = async ({ data, blogFilters }) => {
     const blocks = data.contentBlocks;
     const pageData = data.pageData;
 
@@ -115,7 +115,7 @@ export const ContentBlocks = async ({ data }) => {
                     isBlog={true}
                 />
 
-                <BlogMainPage blogData={blogData} posts={posts} />
+                <BlogMainPage blogData={blogData} posts={posts} blogFilters={blogFilters} />
 
                 {
                     blocks.map((block, index) => <ContentBlock key={index} block={block} />)

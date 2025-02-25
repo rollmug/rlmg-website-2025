@@ -11,7 +11,7 @@ const formatImageURL = (image, presetKey) => {
     return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${encodeURIComponent(image.filename_download)}${presetKey ? `?key=${presetKey}` : ''}`;
 };
 
-export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
+export const BlogPostsList = ({ blogData, categoryName, slug, posts, blogFilters }) => {
     const { filter } = useContext(BlogFilterContext);
 
     const transition = { duration: .5, ease: [.25, .1, .25, 1] };
@@ -20,7 +20,11 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
         visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1 },
     };
 
-    let allPosts = [];
+    let allPosts = [], topicFilter;
+
+    if (blogFilters && blogFilters?.topic && blogFilters?.value) {
+        topicFilter = `${blogFilters.topic}: ${blogFilters.value}`;
+    }
 
     if (posts.length > 0) {
         allPosts = posts.map((post) => {
@@ -45,7 +49,14 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts }) => {
                                     <h2 className="text-lgr md:text-xl lg:text-2xl">{categoryName}</h2>
                                     <div className="alert mt-8">
                                         <FaCircleExclamation className="w-6 h-6" />
-                                        <span>No posts found for {categoryName}. Check back soon!</span>
+
+                                        {topicFilter && (
+                                            <span>No posts found for <span className="badge">{topicFilter}</span> in <span className="badge">{categoryName}</span></span>
+                                        )}
+
+                                        {!topicFilter && (
+                                            <span>No posts found for in <span className="badge">{categoryName}</span></span>
+                                        )}
                                     </div>
                                 </div>
                             </ContentSection>

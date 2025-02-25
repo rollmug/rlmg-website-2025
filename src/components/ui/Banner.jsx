@@ -8,7 +8,7 @@ import BackgroundPlayer from 'next-video/background-player';
 import { Button } from "./Button";
 import DOMPurify from "isomorphic-dompurify";
 import { twMerge } from 'tailwind-merge'; // import { clsx } from 'clsx';
-import { BlogFilterContext } from "@/app/blogFilterContext";
+import { BlogFilterContext, BlogTopicContext } from "@/app/blogFilterContext";
 import Link from "next/link";
 import { SubscribeModal } from "./Footer";
 import { HiArrowLongRight } from "react-icons/hi2";
@@ -240,9 +240,17 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
 };
 
 const BlogButtons = ({ blogButtons, categoryLabel }) => {
-    const { filter, setFilter } = useContext(BlogFilterContext);
+    const { filter, setFilter } = useContext(BlogFilterContext); //BlogTopicContext
+    const blogFilters = useContext(BlogTopicContext);
+    console.log('blogFilters:', blogFilters);
 
     useEffect(() => {
+        // if (typeof blogFilters === 'object' && blogFilters !== null) {
+        //     setFilter(null);
+        // } else {
+        //     setFilter(blogButtons[0].slug);
+        // }
+
         setFilter(blogButtons[0].slug);
     }, []);
 
