@@ -17,6 +17,7 @@ export default {
         headerText: 'Featured Projects',
         linkToPage: '/',
         buttonText: 'See All Projects',
+        disableAnimations:false,
         posts: [
             {
                 postTitle: 'Post Title',

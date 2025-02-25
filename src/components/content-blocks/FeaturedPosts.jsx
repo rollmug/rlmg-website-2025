@@ -50,26 +50,32 @@ const FeaturedPost = ({ post, disableAnimations }) => {
     };
 
     if (!post.bannerImage && disableAnimations) {
-        return <div className="flex items-center justify-center w-full h-full bg-gray-100">No Image</div>;
+        return <Link href={post.urlSlug} className="relative w-full h-full">
+            <div className="flex items-center justify-center w-full h-full bg-gray-100">No Image</div>
+        </Link>;
     }
 
     if (!post.bannerImage) {
         return <AnimatePresence>
             <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
-                <div className="flex items-center justify-center w-full h-full bg-gray-100">No Image</div>
+                <Link href={post.urlSlug} className="absolute inset-0">
+                    <div className="flex items-center justify-center w-full h-full bg-gray-100">No Image</div>
+                </Link>
             </motion.div>
         </AnimatePresence>;
     }
 
     if (post.hoverPreviewBGVideo && disableAnimations) {
         return (
-            <HoverVideoPlayer
-                videoSrc={post.hoverPreviewBGVideo}
-                pausedOverlay={
-                    <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
-                }
-                className="w-full h-full"
-            />
+            <Link href={post.urlSlug} className="relative w-full h-full">
+                <HoverVideoPlayer
+                    videoSrc={post.hoverPreviewBGVideo}
+                    pausedOverlay={
+                        <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                    }
+                    className="w-full h-full"
+                />
+            </Link>
         )
     }
 
@@ -77,13 +83,15 @@ const FeaturedPost = ({ post, disableAnimations }) => {
         return (
             <AnimatePresence>
                 <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
-                    <HoverVideoPlayer
-                        videoSrc={post.hoverPreviewBGVideo}
-                        pausedOverlay={
-                            <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
-                        }
-                        className="w-full h-full"
-                    />
+                    <Link href={post.urlSlug} className="absolute inset-0">
+                        <HoverVideoPlayer
+                            videoSrc={post.hoverPreviewBGVideo}
+                            pausedOverlay={
+                                <Image src={post.bannerImage} fill alt="" className={`object-cover`} />
+                            }
+                            className="w-full h-full"
+                        />
+                    </Link>
                 </motion.div>
             </AnimatePresence>
         );
