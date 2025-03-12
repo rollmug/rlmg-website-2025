@@ -26,7 +26,7 @@ export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', c
 
                         <div className="basis-full  order-3 md:order-4 flex flex-row justify-center">
                             <div className="w-14 hidden md:block"></div>
-                            <p className="quote-citation my-0 grow md:w-min md:max-w-prose md:text-lg px-3">
+                            <p className="quote-citation my-0 grow md:w-min md:max-w-prose md:text-lg !leading-tight px-3">
                                 <span className="text-sm md:text-sm2">
                                     {sourceAuthor && <cite className={`quote-author ${template === 'dark' ? 'font-bold' : 'font-semibold'} not-italic`}>{sourceAuthor}</cite>}
                                     {sourceAuthor && sourceOrg && <span className="quote-source-divider"> | </span>}
