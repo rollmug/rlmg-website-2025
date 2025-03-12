@@ -15,7 +15,7 @@ export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', c
                             <MdFormatQuote className="text-primary w-14 h-14 -scale-[1]" />
                         </div>
 
-                        <p className={`quote-text ${template === 'dark' ? 'font-bold' : 'font-semibold'} grow md:text-lg md:w-min md:max-w-prose px-3 mt-0 md:mt-4`}>{quoteText}</p>
+                        <p className={`quote-text ${template === 'dark' ? 'font-bold' : 'font-semibold'}  grow md:text-lg md:w-min md:max-w-prose px-3 mt-0 md:mt-4`}>{quoteText}</p>
                         
                         <div className="self-end w-14 h-14 order-4 md:order-3">
                             <MdFormatQuote className="text-primary w-14 h-14" />
@@ -24,9 +24,9 @@ export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', c
                         {/* md:pl-14 ml-3 */}
                         {/*  md:w-min md:max-w-prose px-3 */}
 
-                        <div className="basis-full order-3 md:order-4 flex flex-row justify-center">
+                        <div className="basis-full  order-3 md:order-4 flex flex-row justify-center">
                             <div className="w-14 hidden md:block"></div>
-                            <p className="quote-citation my-0 grow md:w-min md:max-w-prose px-3">
+                            <p className="quote-citation my-0 grow md:w-min md:max-w-prose  md:text-lg px-3">
                                 {sourceAuthor && <cite className={`quote-author ${template === 'dark' ? 'font-bold' : 'font-semibold'} not-italic`}>{sourceAuthor}</cite>}
                                 {sourceAuthor && sourceOrg && <span className="quote-source-divider"> | </span>}
                                 {sourceOrg && <cite className="quote-source not-italic">{sourceOrg}</cite>}
