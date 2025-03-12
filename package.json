@@ -27,6 +27,7 @@
     "highlight.js": "^11.11.1",
     "isomorphic-dompurify": "^2.20.0",
     "js-md5": "^0.8.3",
+    "markdown-it-attrs": "^4.3.1",
     "marked": "^15.0.6",
     "next": "15.1.4",
     "next-video": "^2.0.0",

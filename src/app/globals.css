@@ -149,6 +149,21 @@ ul li {
   padding-right: 1.3rem;
 }
 
+/* .btn.btn-block.btn-forward-link */
+
+.btn.btn-block {
+  @apply w-full flex;
+}
+
+.btn.btn-block.btn-forward-link {
+  @apply flex text-primary text-left items-center justify-between md:gap-12 flex-nowrap;
+}
+
+.btn.btn-block.btn-forward-link::after {
+  content: '→';
+  @apply inline-block md:text-lg;
+}
+
 .btn.btn-filter {
   @apply bg-neutral text-primary-content btn-xs md:btn-sm lg:btn-md border-[1px] md:border-2 border-primary  text-xs md:text-sm font-normal md:font-bold h-6 md:h-9 min-h-6 md:min-h-9;
 }

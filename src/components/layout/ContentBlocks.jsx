@@ -20,6 +20,11 @@ import { getPlaiceholder } from "plaiceholder";
 import { getBlogPostsByBlog } from "@/lib/blogData";
 
 import { marked } from "marked";
+
+import markdownIt from "markdown-it";
+import markdownItAttrs from "markdown-it-attrs";
+const md = markdownIt().use(markdownItAttrs);
+
 import { stripHtml } from "string-strip-html";
 import smartquotes from "smartquotes";
 import { BlogMainPage } from "./Blog";
@@ -230,9 +235,16 @@ const ContentBlock = async ({ block }) => {
 
         case 'block_textOnlyHero':
             // headerText, mainText, buttonText, buttonURL, className
-            mainText = smartquotes(stripHtml(marked.parse(item.mainText), {
-                ignoreTags: ['i', 'a', 'p', 'em', 'b', 'strong', 'ul', 'li']
-            }).result);
+
+            const mdWithAttrs = md.render(item.mainText);
+
+            // mainText = smartquotes(stripHtml(marked.parse(item.mainText), {
+            //     ignoreTags: ['i', 'a', 'p', 'em', 'b', 'strong', 'ul', 'li']
+            // }).result);
+
+            mainText = mdWithAttrs;
+
+
             return <TextOnlyHero
                 headerText={item.headerText}
                 mainText={mainText}
