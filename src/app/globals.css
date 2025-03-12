@@ -156,12 +156,12 @@ ul li {
 }
 
 .btn.btn-block.btn-forward-link {
-  @apply flex text-primary text-left items-center justify-between md:gap-12 flex-nowrap;
+  @apply block leading-[2.6rem] md:flex text-primary text-left items-center justify-between md:gap-12 md:flex-nowrap truncate;
 }
 
 .btn.btn-block.btn-forward-link::after {
   content: '→';
-  @apply inline-block md:text-lg;
+  @apply hidden md:inline-block md:text-lg;
 }
 
 .btn.btn-filter {
