@@ -593,6 +593,7 @@ export const formatFooterArgs = (globalSettings, bottomNav) => {
     logoImg: globalSettings?.companyLogo ? formatImageURL(globalSettings.companyLogo) : null,
     orgName: globalSettings.companyName,
     address: globalSettings.streetAddress,
+    cityStateZip: globalSettings.cityStateZip,
     email: globalSettings.emailAddress,
     listItems: listItems,
     socialLinks: socialLinks,

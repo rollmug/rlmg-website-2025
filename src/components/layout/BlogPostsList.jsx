@@ -32,7 +32,7 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts, blogFilters
                 postTitle: post.postTitle,
                 postTeaser: post.postTeaser,
                 urlSlug: `/${blogData.urlSlug}/${post.urlSlug}`,
-                bannerImage: formatImageURL(post.bannerImage),
+                bannerImage: (post.bannerImage) ? formatImageURL(post.bannerImage) : null, // formatImageURL(post.bannerImage),
                 hoverPreviewBGVideo: (post.hoverPreviewBGVideo) ? formatImageURL(post.hoverPreviewBGVideo) : null,
             };
         });

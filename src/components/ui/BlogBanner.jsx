@@ -107,7 +107,7 @@ const CustomDataBlock = ({ customData, blogSlug }) => {
                         <h4 className="text-base-100 font-extrabold text-[13px]/3 md:text-[15px]/3 text-nowrap">{data.dataLabel}</h4>
                         <ul className="list-none !ml-0">
                             {data.dataContent.map((content, index) => {
-                                const linkable = data.linkable;
+                                const linkable = data?.linkable || false;
                                 if (linkable) {
                                     const label = makeUrlSafe(data.dataLabel);
                                     const val = makeUrlSafe(content);
@@ -140,7 +140,7 @@ const formatCustomData = (customData) => {
         const dataItem = {
             dataLabel: data.dataLabel,
             dataContent: formatDataContent(data.dataContent),
-            linkable: data.linkable
+            linkable: data?.linkable || false
         };
         formattedData.push(dataItem);
     });

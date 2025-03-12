@@ -5,7 +5,7 @@ import { SocialMediaIcons } from "./SocialMediaIcons";
 import { BulletList } from "../typography/BulletList";
 import { HiArrowLongRight } from "react-icons/hi2";
 
-export const Footer = ({ logoImg, orgName, email, address, listItems, socialLinks, className }) => {
+export const Footer = ({ logoImg, orgName, email, address, cityStateZip, listItems, socialLinks, className }) => {
     // console.log('socialLinks', socialLinks);
 
     const [formData, setFormData] = useState({ fname: '', lname: '', email: '' });
@@ -43,7 +43,7 @@ export const Footer = ({ logoImg, orgName, email, address, listItems, socialLink
                         </div>
                         <div className="flex flex-col gap-1">
                             <h3 className="my-0 font-extrabold text-lgr md:text-xl lg:text-2xl text-primary">{email}</h3>
-                            <p className="my-0 text-sm lg:text-sm2 xl:text-nowrap">{address}</p>
+                            <p className="my-0 text-sm lg:text-sm2 xl:text-nowrap">{address}, {cityStateZip}</p>
                             <SocialMediaIcons links={socialLinks} className="my-2" size="medium" />
                         </div>
                     </div>
