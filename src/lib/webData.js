@@ -17,7 +17,8 @@ export const formatPageData = async (slug) => {
       };
     }
 
-    const layoutParams = formatPageLayoutParams(globalSettings, navigation.topNav, navigation.bottomNav, slug);
+    // const layoutParams = formatPageLayoutParams(globalSettings, navigation.topNav, navigation.bottomNav, slug);
+    const layoutParams = formatPageLayoutParams(globalSettings, navigation, slug);
 
     try {
       var pageID;
@@ -548,6 +549,11 @@ const navigationQuery = gql`query NavigationSettings($filter: navigationSettings
         }
       }
     }
+    contactPage {
+      urlSlug
+      id
+    }
+    contactPageButtonText
   }
 }`;
 
@@ -563,12 +569,22 @@ export const formatNavigation = (navData) => {
   });
 };
 
-export const formatPageLayoutParams = (globalSettings, topNav, bottomNav, activePageSlug) => {
+export const formatPageLayoutParams = (globalSettings, navigation, activePageSlug) => {
+  // navigation.topNav, navigation.bottomNav
+  const topNav = navigation.topNav;
+  const bottomNav = navigation.bottomNav;
+
+  // navigation.contactPage (object), navigation.contactPageButtonText (string)
+
   return {
     orgName: globalSettings.companyName,
     companyShortName: globalSettings.companyShortName,
     logoImg: globalSettings?.companyLogo ? formatImageURL(globalSettings.companyLogo) : null,
     navItems: formatNavigation(topNav),
+    contactPageSettings: {
+      contactPageSlug: '/' + navigation?.contactPage?.urlSlug,
+      contactPageButtonText: navigation.contactPageButtonText,
+    },
     footerArgs: formatFooterArgs(globalSettings, bottomNav),
     activePage: activePageSlug,
     globalSettings

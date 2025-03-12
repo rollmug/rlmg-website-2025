@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 
 import { UsersnapProvider } from "@/app/usersnap/UsersnapContext";
 
-export const PageLayout = ({ children, orgName, logoImg, navItems, footerArgs, className, activePage }) => {
+export const PageLayout = ({ children, orgName, logoImg, navItems, contactPageSettings, footerArgs, className, activePage }) => {
     return (
         <UsersnapProvider>
             <main className={`page w-full min-h-screen mx-auto pb-4 lg:pb-10 ${className} flex flex-col items-stretch justify-between`}>
-                <Navbar img={logoImg} orgName={orgName} listItems={navItems} activePage={activePage} fixed />
+                <Navbar img={logoImg} orgName={orgName} email={footerArgs.email} contactPageSettings={contactPageSettings} listItems={navItems} activePage={activePage} fixed />
                 <section className="page-content pt-[3.5rem] lg:pt-[4.9rem] grow">
                     {children}
                 </section>

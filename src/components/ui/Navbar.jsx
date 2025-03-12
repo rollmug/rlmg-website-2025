@@ -3,8 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Logo } from "./Logo";
+import { Button } from "./Button";
 
-export const Navbar = ({ img = null, orgName, listItems, activePage, fixed = false }) => {
+export const Navbar = ({ img = null, orgName, email, contactPageSettings, listItems, activePage, fixed = false }) => {
 
     /**
      * logo
@@ -15,9 +16,11 @@ export const Navbar = ({ img = null, orgName, listItems, activePage, fixed = fal
 
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
+    console.log('contactPageSettings:', contactPageSettings);
+
     return (
         <>
-            <header className={`${fixed ? 'fixed' : 'absolute'} top-0 left-0 bg-white shadow-md flex w-screen z-[3]`}>
+            <header className={`${fixed ? 'fixed' : 'absolute'} ${mobileNavOpen ? 'bg-neutral' : 'bg-white'} top-0 left-0  shadow-md flex w-screen z-[3]`}>
                 <nav className="navbar section-padded justify-between min-h-14 lg:min-h-16 py-0 lg:py-3">
                     <div className="flex-1">
                         <Link href="/" className="btn btn-link text-xl !px-0 py-[6px] lg:py-0 text-left">
@@ -32,7 +35,7 @@ export const Navbar = ({ img = null, orgName, listItems, activePage, fixed = fal
                             <div tabIndex={0} role="button" className="!px-0 btn btn-ghost text-center lg:hidden" onClick={() => setMobileNavOpen((pv) => !pv)}>
                                 <MenuIcon open={mobileNavOpen} />
                             </div>
-                            <MobileLinks listItems={listItems} open={mobileNavOpen} activePage={activePage} />
+                            <MobileLinks listItems={listItems} open={mobileNavOpen} activePage={activePage} contactPageSettings={contactPageSettings} email={email} />
                         </div>
 
                         <ul className="menu menu-horizontal hidden lg:flex gap-12">
@@ -46,10 +49,9 @@ export const Navbar = ({ img = null, orgName, listItems, activePage, fixed = fal
 };
 
 const MenuIcon = ({ open }) => {
-
     if (open) {
         return (
-            <svg className="h-7 w-7 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg className="h-7 w-7 _text-primary text-base-100" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g strokeWidth="0"></g>
                 <g strokeLinecap="round" strokeLinejoin="round"></g>
                 <g>
@@ -73,8 +75,28 @@ const MenuIcon = ({ open }) => {
     }
 }
 
-const MobileLinks = ({ listItems, open, activePage }) => {
+const Links = ({ listItems, className, activePage }) => {
+    listItems = listItems && listItems.length > 0 ? listItems : [{ url: '/', text: 'Home' }]; // fallback to home
+    return (
+        <>
+            {listItems.map((item, index) => (
+                <li key={index} className={`${className} ${`/${activePage}` === item.url ? 'active' : ''}`}>
+                    <Link className="inline-block" href={item.url}><span>{item.text}</span></Link>
+                </li>
+            ))}
+        </>
+    );
+}
+
+const MobileLinks = ({ listItems, open, activePage, contactPageSettings, email }) => {
     // if(!listItems || !listItems?.length) return null;
+
+    let useContactButton = false;
+
+    if (typeof contactPageSettings === 'object' && contactPageSettings.contactPageSlug && contactPageSettings.contactPageButtonText) {
+        useContactButton = true;
+    }
+
     return (
         <AnimatePresence mode="popLayout">
             {open && (
@@ -90,22 +112,35 @@ const MobileLinks = ({ listItems, open, activePage }) => {
                     }}
                     className=""
                 >
-                    <ul tabIndex={0} className="left-0 mt-0 !mx-0 w-full absolute menu menu-mobile menu-lg bg-base-100 z-[1 p-0 shadow-md [&_li>*]:rounded-none items-stretch text-center">
-                        <Links listItems={listItems} />
-                    </ul>
+                    <div className="bg-neutral absolute h-[calc(100vh-56px)] left-0 w-full">
+                        <ul tabIndex={0} className="bg-neutral left-0 mt-0 !mx-0 w-full _absolute menu menu-mobile menu-lg  z-[1] p-0 _shadow-md [&_li>*]:rounded-none items-stretch text-left">
+                            <MobileMenuLinks listItems={listItems} activePage={activePage} className={`mobile-menu-item`} />
+                        </ul>
+                        <div className="pt-9 px-6">
+                            <h3 className="text-lgr font-extrabold text-base-100">{email}</h3>
+                            {useContactButton && (
+                                <div className="pt-3">
+                                    <Link href={contactPageSettings.contactPageSlug}>
+                                        <Button label={contactPageSettings.contactPageButtonText} />
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>
     );
 }
 
-const Links = ({ listItems, className, activePage }) => {
-    listItems = listItems && listItems.length > 0 ? listItems : [ { url: '/', text: 'Home'} ]; // fallback to home
+const MobileMenuLinks = ({ listItems, className, activePage }) => {
+    // listItems = listItems && listItems.length > 0 ? listItems : [{ url: '/', text: 'Home' }]; // fallback to home
+    listItems = [{ url: '/', text: 'Home' }, ...listItems];
     return (
         <>
             {listItems.map((item, index) => (
                 <li key={index} className={`${className} ${`/${activePage}` === item.url ? 'active' : ''}`}>
-                    <Link className="inline-block" href={item.url}>{item.text}</Link>
+                    <Link className="inline-block text-base-100" href={item.url}><span>{item.text}</span></Link>
                 </li>
             ))}
         </>

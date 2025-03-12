@@ -19,7 +19,8 @@ export const formatBlogPostData = async (slug, page) => {
       };
     }
 
-    const layoutParams = formatPageLayoutParams(globalSettings, navigation.topNav, navigation.bottomNav, page);
+    // const layoutParams = formatPageLayoutParams(globalSettings, navigation.topNav, navigation.bottomNav, page);
+    const layoutParams = formatPageLayoutParams(globalSettings, navigation, slug);
 
     try {
       let postID = await getPostBySlug(slug);

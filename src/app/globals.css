@@ -157,7 +157,7 @@ ul li {
   @apply bg-primary;
 }
 
-.navbar .menu li.active {
+.navbar .menu li:not(.mobile-menu-item).active {
   @apply border-b-2 border-primary;
 }
 
@@ -171,8 +171,16 @@ ul.menu li a {
   @apply py-2;
 }
 
+.menu-mobile li.mobile-menu-item a {
+  @apply py-3;
+}
+
 .menu-mobile.menu-lg {
   font-size: 1.075rem;
+}
+
+.menu-mobile li.mobile-menu-item.active a span {
+  @apply border-b-2 border-primary;
 }
 
 .next-video-bg-video {
