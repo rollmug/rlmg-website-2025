@@ -35,7 +35,7 @@ export const ColumnImages = ({ headerText, columnImages, columnSize, className }
                                                 whileInView={{ scale: 1, opacity: 1 }}
                                                 transition={{ ease: "easeIn", duration: .5, delay: delay }}
                                                 className="lg:justify-self-stretch flex lg:justify-center items-center">
-                                                <Image src={image.src} alt={image.alt} width={image.width} height={image.height} className="max-w-full" />
+                                                <Image src={image.src} alt={image.alt} width={image.width} height={image.height} className="w-auto max-w-full max-h-24" />
                                                 {/* w-full _max-w-max _h-auto max-h-max */}
                                             </motion.div>
                                         </AnimatePresence>
