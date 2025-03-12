@@ -16,7 +16,7 @@ export const Navbar = ({ img = null, orgName, email, contactPageSettings, listIt
 
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-    console.log('contactPageSettings:', contactPageSettings);
+    // console.log('contactPageSettings:', contactPageSettings);
 
     return (
         <>

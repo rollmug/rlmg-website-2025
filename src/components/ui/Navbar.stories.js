@@ -29,6 +29,11 @@ export const Navigation = {
     args: {
         img: RLMG,
         orgName: 'RLMG',
+        email: 'hello@rlmg.com',
+        contactPageSettings: {
+            contactPageSlug: '/contact',
+            contactPageButtonText: 'Contact Us'
+        },
         fixed: true,
         listItems: [
             { text: 'About Us', url: { pathname: './', query: { path: '/story/ui-elements-navbar--navigation' } } },

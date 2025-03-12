@@ -193,6 +193,7 @@ const ContentBlock = async ({ block }) => {
                     bannerImage: post.bannerImage.id ? formatImageURL(post.bannerImage) : null,
                     postTeaser: post.postTeaser,
                     postTitle: post.postTitle,
+                    postSubtitle: post.postSubtitle,
                     urlSlug: urlSlug,
                     hoverPreviewBGVideo: (post.hoverPreviewBGVideo) ? formatImageURL(post.hoverPreviewBGVideo) : null,
                 };
@@ -338,7 +339,7 @@ const ContentBlock = async ({ block }) => {
                 })
             };
 
-            console.log('sliderArgs:', sliderArgs);
+            // console.log('sliderArgs:', sliderArgs);
 
             return <ImageSlider {...sliderArgs} />
 

@@ -86,7 +86,7 @@ const bannerArgs = {
 
 export default function Home() {
   const data = useContext(DataContext);
-  console.log(data);
+  // console.log(data);
   return (
     <PageLayout {...pageLayoutParams}>
       <Banner bannerTextPlacement='top' bannerImage={testImg} bannerHeader="Experience is Everything" bannerBGVideo={videoLoop} />

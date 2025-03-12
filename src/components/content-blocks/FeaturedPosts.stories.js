@@ -5,7 +5,7 @@ export default {
     component: FeaturedPosts,
     //tags: ['!autodocs'],
     parameters: {
-        layout: 'centered',
+        layout: 'fullscreen',
         paddings: {
             values: [
                 { name: 'None', value: '0' },
@@ -21,6 +21,7 @@ export default {
         posts: [
             {
                 postTitle: 'Post Title',
+                postSubtitle: 'Subtitle',
                 postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
                 urlSlug: { pathname: './', query: { path: '/story/content-blocks-featured-posts--with-background' } },
                 bannerImage: 'https://rlmg-website-2025.vercel.app/storybook-imgs/Featured-1.jpg',
@@ -28,6 +29,7 @@ export default {
             },
             {
                 postTitle: 'Post Title',
+                postSubtitle: 'Subtitle',
                 postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
                 urlSlug: { pathname: './', query: { path: '/story/content-blocks-featured-posts--with-background' } },
                 bannerImage: 'https://rlmg-website-2025.vercel.app/storybook-imgs/Featured-2.jpg',

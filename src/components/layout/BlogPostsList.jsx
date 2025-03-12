@@ -30,6 +30,7 @@ export const BlogPostsList = ({ blogData, categoryName, slug, posts, blogFilters
         allPosts = posts.map((post) => {
             return {
                 postTitle: post.postTitle,
+                postSubtitle: post.postSubtitle,
                 postTeaser: post.postTeaser,
                 urlSlug: `/${blogData.urlSlug}/${post.urlSlug}`,
                 bannerImage: (post.bannerImage) ? formatImageURL(post.bannerImage) : null, // formatImageURL(post.bannerImage),

@@ -11,9 +11,12 @@ import Link from "next/link";
 import HoverVideoPlayer from 'react-hover-video-player';
 
 export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, posts, className, standout = false, disableAnimations = false }) => {
+
+    // console.log('posts:', posts);
+
     return (
         <>
-            <ContentSection standout={standout} template={template} className={`featured-posts ${standout ? 'with-standout' : ''}`}>
+            <ContentSection standout={standout} template={template} className={`featured-posts w-full ${standout ? 'with-standout' : ''}`}>
                 <div className={`section-padded ${className}`}>
                     <div className="flex flex-row flex-wrap justify-start gap-0">
                         <h2 className={`my-0 lg:w-1/2 order-1 text-lgr md:text-xl lg:text-2xl ${template === 'dark' ? 'text-white' : ''} `}>{headerText ? headerText : 'Featured Posts'}</h2>
@@ -24,14 +27,18 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, po
                                 </Link>
                             }
                         </div>
-                        <div className="my-5 lg:my-8 order-2 lg:order-3 basis-full grid lg:grid-cols-2 grid-flow-row auto-rows-max gap-6">
+                        <div className="my-5 lg:my-8 order-2 lg:order-3 basis-full grid lg:grid-cols-2 grid-flow-row auto-rows-max gap-x-6 gap-y-10 md:gap-y-16 xl:gap-y-20">
                             {posts.map((post, index) => (
                                 <div key={index} className="flex flex-col lg:gap-2">
                                     <div className={`aspect-video flex justify-center items-center mb-2 lg:mb-4 w-full max-w-full`}>
                                         <FeaturedPost post={post} disableAnimations={disableAnimations} />
                                     </div>
-                                    <Link href={post.urlSlug}><h3 className={`my-0 ${template === 'dark' ? 'text-white' : ''} `}>{post.postTitle}</h3></Link>
-                                    <p className={`my-0 text-sm lg:text-base ${template === 'dark' ? 'text-white' : ''}`}>{post.postTeaser}</p>
+                                    <Link href={post.urlSlug}><h3 className={`my-0 leading-tight ${template === 'dark' ? 'text-white' : ''} `}>{post.postTitle}</h3></Link>
+                                    {/* <p className={`my-0 text-sm lg:text-base ${template === 'dark' ? 'text-white' : ''}`}>{post.postTeaser}</p> */}
+                                    {post.postSubtitle && (
+                                        <p className={`my-0 text-sm lg:text-base text-primary`}>{post.postSubtitle}</p>
+                                    )}
+                                    
                                 </div>
                             ))}
                         </div>
@@ -133,12 +140,14 @@ FeaturedPosts.defaultProps = {
     posts: [
         {
             postTitle: 'Post Title',
+            postSubtitle: 'Subtitle',
             postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
             urlSlug: '/',
             bannerImage: '',
         },
         {
             postTitle: 'Post Title',
+            postSubtitle: 'Subtitle',
             postTeaser: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec purus feugiat.',
             urlSlug: '/',
             bannerImage: '',

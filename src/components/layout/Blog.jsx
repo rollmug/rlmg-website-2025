@@ -68,7 +68,7 @@ export const BlogMainPage = ({ blogData, posts, blogFilters }) => {
                 const categoryName = category.blogCategories_id.categoryName;
                 const slug = category.blogCategories_id.slug;
                 const categoryPosts = getPostsByCategory(posts, category.blogCategories_id);
-                console.log(`Category "${categoryName}":`, categoryPosts);
+                // console.log(`Category "${categoryName}":`, categoryPosts);
 
                 return (
                     <BlogPostsList key={index} blogData={blogData} slug={slug} categoryName={categoryName} posts={categoryPosts} blogFilters={blogFilters} />

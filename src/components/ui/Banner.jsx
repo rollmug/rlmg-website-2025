@@ -15,7 +15,7 @@ import { HiArrowLongRight } from "react-icons/hi2";
 import { SocialMediaIcons } from "./SocialMediaIcons";
 
 export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, socialLinks, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerBGVideo, blogButtons, categoryLabel, isBlog = false, globalSettings }) => {
-    console.log('globalSettings', globalSettings);
+    // console.log('globalSettings', globalSettings);
     let justifyContent, bannerGradient, videoClass, classNames = [];
     switch (bannerTextPlacement) {
         case 'top':
@@ -128,7 +128,7 @@ const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
     let additionalEmailAddresses = [];
     if (globalSettings && globalSettings.additionalEmailAddresses && Array.isArray(globalSettings.additionalEmailAddresses) && globalSettings.additionalEmailAddresses.length > 0) {
         additionalEmailAddresses = globalSettings.additionalEmailAddresses.map(email => email.orgContactEmails_id);
-        console.log('additionalEmailAddresses', additionalEmailAddresses);
+        // console.log('additionalEmailAddresses', additionalEmailAddresses);
     }
 
     const handleSubmit = async (e) => {
@@ -242,7 +242,7 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
 const BlogButtons = ({ blogButtons, categoryLabel }) => {
     const { filter, setFilter } = useContext(BlogFilterContext); //BlogTopicContext
     const blogFilters = useContext(BlogTopicContext);
-    console.log('blogFilters:', blogFilters);
+    // console.log('blogFilters:', blogFilters);
 
     useEffect(() => {
         // if (typeof blogFilters === 'object' && blogFilters !== null) {

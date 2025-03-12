@@ -172,7 +172,7 @@ ul.menu li a {
 }
 
 .menu-mobile li.mobile-menu-item a {
-  @apply py-3;
+  @apply py-[0.65rem];
 }
 
 .menu-mobile.menu-lg {
