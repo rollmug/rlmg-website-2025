@@ -195,7 +195,7 @@ const ContentBlock = async ({ block }) => {
                 const post = item.blogPosts_id;
                 const urlSlug = `/${post.blog.urlSlug}/${post.urlSlug}`;
                 return {
-                    bannerImage: post.bannerImage.id ? formatImageURL(post.bannerImage) : null,
+                    bannerImage: post.bannerImage?.id ? formatImageURL(post.bannerImage) : null,
                     postTeaser: post.postTeaser,
                     postTitle: post.postTitle,
                     postSubtitle: post.postSubtitle,

@@ -16,7 +16,8 @@ export const BlogPostBanner = ({ postData }) => {
     const bannerImage = postData.bannerImage ? formatImageURL(postData.bannerImage) : null;
     const bannerBGVideo = postData.bannerBGVideo ? formatImageURL(postData.bannerBGVideo) : null;
 
-    if (!postData || !postData.postTitle || !postData.postSubtitle) return null;
+    // if (!postData || !postData.postTitle || !postData.postSubtitle) return null;
+    if (!postData || !postData.postTitle) return null;
 
     if (bannerImage && bannerBGVideo) {
         return (
@@ -84,9 +85,11 @@ const BannerInfoHeader = ({ postData }) => {
                 <section className="flex flex-col md:grid md:grid-cols-2 gap-4">
                     <div>
                         <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
-                        <p className="mt-0 text-base-100 leading-normal font-bold text-base/6 lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">
-                            {postData.postSubtitle}
-                        </p>
+                        {postData.postSubtitle && (
+                            <p className="mt-0 text-base-100 leading-normal font-bold text-base/6 lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">
+                                {postData.postSubtitle}
+                            </p>
+                        )}
                     </div>
                     <div className="flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[400px] md:max-h-[450px] lg:max-h-[300px] max-w-full overflow-hidden ">
                         {customData && <CustomDataBlock customData={customData} blogSlug={blogSlug} />}
