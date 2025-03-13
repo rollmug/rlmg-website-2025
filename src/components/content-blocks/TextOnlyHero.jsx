@@ -14,7 +14,7 @@ export const TextOnlyHero = ({ headerText, mainText, buttonText, buttonURL, alig
                 <div className={`section-padded`}>
                     <div className={`flex flex-col justify-start ${alignment === 'center' ? 'items-start lg:items-center' : 'items-start'} lg:justify-center gap-4 `}>
                         <h2 className="my-0 text-neutral-content">{headerText}</h2>
-                        <div className={`mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-full md:max-w-lg ${alignment === 'center' ? 'lg:text-center':''} `} dangerouslySetInnerHTML={{ __html: cleanText }} />
+                        <div className={`mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-full md:max-w-lg ${alignment === 'center' ? 'lg:text-center':'self-stretch lg:max-w-xl'} `} dangerouslySetInnerHTML={{ __html: cleanText }} />
                         {buttonURL && buttonText && (
                             <p className="my-0">
                                 <Link href={buttonURL}>
