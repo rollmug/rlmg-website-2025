@@ -7,7 +7,7 @@ export const Quote = ({ quoteText, sourceAuthor, sourceOrg, template = 'dark', c
     // px-[10%] lg:px-[15%]
     return (
         <ContentSection className={`quote-section`}>
-            <div className={`quote-container section-padded py-10 lg:py-16  ${template} ${className}`}>
+            <div className={`quote-container _section-padded px-[10%] lg:px-[15%] py-10 lg:py-16  ${template} ${className}`}>
 
                 <blockquote className={`quote pb-3`}>
                     <div className="flex flex-col md:flex-row md:flex-wrap justify-center">
