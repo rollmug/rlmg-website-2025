@@ -184,7 +184,7 @@ const ContentBlock = async ({ block }) => {
                 width={600}
                 alt="Test image"
                 imagePlacement={item.alignment === 'image_right' ? 'right' : 'left'}
-                className={`my-2 mt-6 lg:my-8`
+                className={`py-4 my-6 mt-10 lg:my-16`
                 }
             />;
             break;

@@ -64,9 +64,9 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                                                 <div className="max-w-[50ch] basis-full lg:basis-auto" dangerouslySetInnerHTML={{ __html: cleanText }} />
 
                                                 {(index === 0 && buttonText && buttonURL) && (
-                                                    <div className="my-4 lg:mt-6">
+                                                    <div className="hidden md:block my-4 lg:mt-6">
                                                         <Link href={buttonURL}>
-                                                            <Button label={buttonText} url={buttonURL} className="" />
+                                                            <Button label={buttonText} url={buttonURL} />
                                                         </Link>
                                                     </div>
                                                 )}
@@ -76,11 +76,11 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                                     })}
                                 </div>
                             )}
-                            {/* {buttonText && buttonURL && (
-                                <div className="my-4 lg:mt-2">
-                                    <Button label={buttonText} url={buttonURL} className="" />
+                            {buttonText && buttonURL && (
+                                <div className="block md:hidden my-4 lg:mt-2">
+                                    <Button label={buttonText} url={buttonURL} />
                                 </div>
-                            )} */}
+                            )}
                         </div>
 
                     </div>

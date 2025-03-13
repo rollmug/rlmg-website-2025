@@ -20,7 +20,7 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
     switch (bannerTextPlacement) {
         case 'top':
             videoClass = 'place-top';
-            justifyContent = 'justify-start pt-[10%] sm:pt-[12%] md:pt-[10%] lg:pt-[7%] xl:pt-[5%]';
+            justifyContent = 'justify-start pt-[13%] sm:pt-[14%] md:pt-[10%] lg:pt-[10%] xl:pt-[7%]';
             // bannerGradient = 'bg-gradient-to-b h-2/3 lg:h-2/3 w-full top-0';
             bannerGradient = 'bg-gradient-to-br h-full lg:h-full w-full top-0';
             break;
