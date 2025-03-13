@@ -330,6 +330,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           headerText
           columnText
           columnSize
+          collapseLongContentOnMobile
         }
         ... on block_responsiveColumnText {
           id

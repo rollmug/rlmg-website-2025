@@ -6,9 +6,9 @@ import DOMPurify from "isomorphic-dompurify";
 import PropTypes from 'prop-types';
 import Link from "next/link";
 
-export const ColumnText = ({ headerText, columnSize, columnText, standout = false, className }) => {
+export const ColumnText = ({ headerText, columnSize, columnText, standout = false, className, collapseLongContentOnMobile }) => {
     const { width } = useWindowSize();
-    let gridClass;
+    let gridClass, useShowMore = false;
     columnSize = Number(columnSize) || 1;
     if (columnText && columnText.length >= 1) {
         switch (columnSize) {
@@ -18,6 +18,10 @@ export const ColumnText = ({ headerText, columnSize, columnText, standout = fals
             case 4: gridClass = 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'; break;
             default: gridClass = 'grid-cols-1';
         }
+    }
+
+    if (collapseLongContentOnMobile && columnText.length > 1) {
+        useShowMore = true;
     }
 
     const transitionShow = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
@@ -49,12 +53,16 @@ export const ColumnText = ({ headerText, columnSize, columnText, standout = fals
                                         const cleanText = DOMPurify.sanitize(block.content);
                                         return (
                                             <motion.div key={index} variants={variants} initial="hidden" whileInView="visible">
-                                                <div className={`${index > 0 ? `${showMore ? 'block' : 'hidden'} md:block` : ''}`} dangerouslySetInnerHTML={{ __html: cleanText }} />
+                                                <div className={`${index > 0 && useShowMore ? `${showMore ? 'block' : 'hidden'} md:block` : ''}`} dangerouslySetInnerHTML={{ __html: cleanText }} />
                                             </motion.div>
                                         )
                                     })}
                                 </div>
-                                <Link href="#" className="btn btn-link inline-block md:hidden !px-0 !text-base" onClick={handleShowMore}>{showMore ? 'See Less' : 'See More'}</Link>
+
+                                {useShowMore && (
+                                    <Link href="#" className="btn btn-link inline-block md:hidden !px-0 !text-base" onClick={handleShowMore}>{showMore ? 'See Less' : 'See More'}</Link>
+                                )}
+
                             </div>
                         )}
                     </div>

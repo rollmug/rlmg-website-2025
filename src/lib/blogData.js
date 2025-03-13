@@ -370,6 +370,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           headerText
           columnText
           columnSize
+          collapseLongContentOnMobile
         }
         ... on block_responsiveColumnText {
           id

@@ -292,6 +292,7 @@ const ContentBlock = async ({ block }) => {
                 headerText={item.headerText}
                 columnText={textBlocks}
                 columnSize={item.columnSize}
+                collapseLongContentOnMobile={item.collapseLongContentOnMobile}
                 standout={true}
             />;
 
