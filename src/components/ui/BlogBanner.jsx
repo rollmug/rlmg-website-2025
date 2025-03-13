@@ -111,18 +111,18 @@ const CustomDataBlock = ({ customData, blogSlug }) => {
                         <ul className="list-none !ml-0">
                             {data.dataContent.map((content, index) => {
                                 const linkable = data?.linkable || false;
-                                if (linkable) {
-                                    const label = makeUrlSafe(data.dataLabel);
-                                    const val = makeUrlSafe(content);
-                                    const url = encodeUrl(`/${blogSlug}/t/${label}/${val}`);
-                                    return (
-                                        <li key={index} className="text-base-100 pb-1 text-[13px]/3 md:text-sm/5 max-w-[18ch] xl:max-w-[22ch]">
-                                            <Link href={url} className="underline mb-1 md:mb-0 inline-block">
-                                                {content}
-                                            </Link>
-                                        </li>
-                                    );
-                                }
+                                // if (linkable) {
+                                //     const label = makeUrlSafe(data.dataLabel);
+                                //     const val = makeUrlSafe(content);
+                                //     const url = encodeUrl(`/${blogSlug}/t/${label}/${val}`);
+                                //     return (
+                                //         <li key={index} className="text-base-100 pb-1 text-[13px]/3 md:text-sm/5 max-w-[18ch] xl:max-w-[22ch]">
+                                //             <Link href={url} className="underline mb-1 md:mb-0 inline-block">
+                                //                 {content}
+                                //             </Link>
+                                //         </li>
+                                //     );
+                                // }
                                 return (
                                     <li key={index} className="text-base-100 text-[13px]/4 md:text-sm/5 pb-1 max-w-[16ch] xl:max-w-[22ch]">
                                         {content}
