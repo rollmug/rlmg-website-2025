@@ -29,7 +29,7 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, po
                         </div>
                         <div className="my-5 lg:my-8 order-2 lg:order-3 basis-full grid lg:grid-cols-2 grid-flow-row auto-rows-max gap-x-6 gap-y-10 md:gap-y-16 xl:gap-y-20">
                             {posts.map((post, index) => (
-                                <div key={index} className="flex flex-col lg:gap-2">
+                                <div key={index} className="flex flex-col lg:gap-0.5">
                                     <div className={`aspect-video flex justify-center items-center mb-2 lg:mb-4 w-full max-w-full`}>
                                         <FeaturedPost post={post} disableAnimations={disableAnimations} />
                                     </div>
