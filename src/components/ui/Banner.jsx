@@ -177,7 +177,7 @@ const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
                                     <form onSubmit={handleSubmit}>
                                         <div className="flex flex-row items-center justify-between gap-2 border-b border-base-300 border-opacity-40 mb-6 lg:mb-4">
                                             <div className="flex-1">
-                                                <input ref={emailInputRef} name="email" type="email" placeholder="Enter Email*" className="input input-sm !text-primary-content !placeholder-white input-ghost bg-transparent p-1 pl-0 h-auto w-full max-w-full" required />
+                                                <input ref={emailInputRef} name="email" type="email" placeholder="Enter Email*" className=" border-0 outline-none outline-0 banner-input input input-sm input-ghost bg-transparent p-1 pl-0 h-auto w-full max-w-full" required />
                                             </div>
                                             <button type="submit" className="btn btn-ghost text-right !px-1">
                                                 <HiArrowLongRight className="text-accent w-6 h-6" />

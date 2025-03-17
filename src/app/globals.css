@@ -243,12 +243,34 @@ ul.menu li a {
   @apply !hidden  !p-0 border border-primary w-full !h-full !min-h-full;
 }
 
+input[type=email], input[type=email].banner-input {
+  @apply border-0 outline-none outline-0;
+}
+
 input[type=email]:focus {
   @apply border-0 outline-none outline-0;
 }
 
 input[type=email]::placeholder {
   @apply text-base-content;
+}
+
+input[type=email]:focus::placeholder {
+  @apply !text-opacity-0;
+}
+
+/* text-primary-content !placeholder-white */
+
+input[type=email].banner-input {
+  @apply text-primary-content;
+}
+
+input[type=email].banner-input::placeholder {
+  @apply text-primary-content;
+}
+
+input[type=email].banner-input:focus::placeholder {
+  @apply !text-opacity-0;
 }
 
 .quote-container.light {
