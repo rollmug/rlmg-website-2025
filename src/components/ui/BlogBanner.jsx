@@ -126,7 +126,7 @@ const CustomDataBlock = ({ customData, blogSlug }) => {
                                 //     );
                                 // }
                                 return (
-                                    <li key={index} className="text-base-100 text-[13px]/4 md:text-sm/5 pb-1 max-w-[16ch] xl:max-w-[22ch]">
+                                    <li key={index} className="text-base-100 text-[13px]/4 md:text-sm/4 pb-1 md:pb-2 max-w-[16ch] xl:max-w-[22ch]">
                                         {content}
                                     </li>
                                 );
