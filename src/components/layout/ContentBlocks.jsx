@@ -30,6 +30,7 @@ import smartquotes from "smartquotes";
 import { BlogMainPage } from "./Blog";
 import { BlogPostBanner } from "../ui/BlogBanner";
 import { RichText } from "../content-blocks/RichText";
+import { SingleImage } from "../content-blocks/SingleImage";
 
 export default async function getBase64(imageUrl) {
     try {
@@ -183,11 +184,20 @@ const ContentBlock = async ({ block }) => {
                 image={item.image.id ? formatImageURL(item.image) : null}
                 width={item.image.width}
                 height={item.image.height}
-                alt="Test image"
+                alt=""
                 imagePlacement={item.alignment === 'image_right' ? 'right' : 'left'}
-                className={`py-4 my-6 mt-10 lg:my-16`
-                }
+                className={`py-4 my-6 mt-10 lg:my-16`}
             />;
+            break;
+
+        case 'block_singleImage':
+            return <SingleImage
+                image={item.image.id ? formatImageURL(item.image) : null}
+                width={item.image.width}
+                height={item.image.height}
+                alt=""
+            />
+
             break;
 
         case 'block_featuredPosts':
