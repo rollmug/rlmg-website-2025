@@ -29,6 +29,8 @@ export const BlogPostBanner = ({ postData }) => {
                             src={bannerImage}
                             alt={postData.postTitle}
                             fill
+                            sizes="100vw"
+                            priority
                             className={`object-cover object-end `}
                         />
                     </motion.div>
@@ -82,7 +84,7 @@ const BannerInfoHeader = ({ postData }) => {
     return (
         <div className={`z-[2] banner-block relative bg-neutral slanted-less w-full flex flex-col ${classesOutput}`}>
             <div className={`section-padded z-[2]`}>
-                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[42%_1fr] gap-4">
+                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[35%_1fr] xl:grid-cols-[42%_1fr] gap-4">
                     <div>
                         <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
                         {postData.postSubtitle && (
@@ -91,7 +93,7 @@ const BannerInfoHeader = ({ postData }) => {
                             </p>
                         )}
                     </div>
-                    <div className="flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[400px] md:max-h-[450px] lg:max-h-[300px] max-w-full overflow-hidden ">
+                    <div className="flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[370px] md:max-h-[400px] lg:max-h-[300px] max-w-full overflow-hidden ">
                         {customData && <CustomDataBlock customData={customData} blogSlug={blogSlug} />}
                     </div>
                 </section>
