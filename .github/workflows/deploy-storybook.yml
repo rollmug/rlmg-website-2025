@@ -2,8 +2,8 @@
 name: 'Storybook Publish'
 on:
   push:
-    branches:
-      - "main" # change to the branch you wish to deploy from
+    tags:
+      - "v1.0.0" # change to the branch you wish to deploy from
 
 permissions:
   contents: read
