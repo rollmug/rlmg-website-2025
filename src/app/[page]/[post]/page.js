@@ -8,8 +8,10 @@ export async function generateMetadata({ params }) {
     let data;
     // const page = (await params).page;
     const post = (await params).post;
+
     try {
         data = await formatBlogPostData(post);
+        // console.log('data:', data);
     } catch (error) {
         console.error('Error fetching page data:', error);
         data = { metaData: {} }; // Fallback data
