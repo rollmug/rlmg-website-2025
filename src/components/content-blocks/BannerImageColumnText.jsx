@@ -19,9 +19,14 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
     const transitionShow = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     const transitionHide = { duration: .1, ease: [.25, .1, .25, 1], delay: 0 };
 
+    // const textVariants = {
+    //     hidden: { filter: "blur(0)", clipPath: 'inset(0px 100% 0px 0px)', opacity: 0, transition: transitionHide },
+    //     visible: { filter: "blur(0)", clipPath: 'inset(0px 0% 0px 0px)', opacity: 1, transition: transitionShow },
+    // };
+
     const textVariants = {
-        hidden: { filter: "blur(0)", clipPath: 'inset(0px 100% 0px 0px)', opacity: 0, transition: transitionHide },
-        visible: { filter: "blur(0)", clipPath: 'inset(0px 0% 0px 0px)', opacity: 1, transition: transitionShow },
+        hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0, transition: transitionHide },
+        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1, transition: transitionShow },
     };
 
     let gridClass;

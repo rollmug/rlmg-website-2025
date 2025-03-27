@@ -125,6 +125,14 @@ const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
     const openModalRef = useRef();
     const emailInputRef = useRef();
 
+    const transitionShow = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
+    const transitionHide = { duration: .1, ease: [.25, .1, .25, 1], delay: 0 };
+
+    const variants = {
+        hidden: { filter: "blur(0)", transform: "translateY(2rem)", opacity: 0, transition: transitionHide },
+        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1, transition: transitionShow },
+    };
+
     let additionalEmailAddresses = [];
     if (globalSettings && globalSettings.additionalEmailAddresses && Array.isArray(globalSettings.additionalEmailAddresses) && globalSettings.additionalEmailAddresses.length > 0) {
         additionalEmailAddresses = globalSettings.additionalEmailAddresses.map(email => email.orgContactEmails_id);
@@ -163,9 +171,11 @@ const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
     return (
         <>
             <div className={`banner-block relative bg-gradient-to-t from-primary _via-primary to-info md:bg-gradient-to-tr md:from-info md:via-info md:to-primary slanted-bottom w-full flex flex-col ${classesOutput}`}>
-                <div className={`section-padded my-4 md:my-12 z-[2]`}>
+                <motion.div className={`section-padded my-4 md:my-12 z-[2]`} variants={variants} initial="hidden" whileInView="visible">
 
-                    {bannerHeader && <h1 className={`smaller md:max-w-sm !mb-8 md:!mb-16`}>{bannerHeader}</h1>}
+                    {bannerHeader && (
+                        <h1 className={`smaller md:max-w-sm !mb-8 md:!mb-16`}>{bannerHeader}</h1>
+                    )}
 
                     <section className={`flex flex-col md:flex-row md:items-start md:justify-start gap-10 md:gap-20`}>
                         {/* Subscribe */}
@@ -208,7 +218,7 @@ const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
                             )}
                         </div>
                     </section>
-                </div>
+                </motion.div>
             </div>
 
             <SubscribeModal ref={openModalRef} submissionStatus={submissionStatus} setSubmissionStatus={setSubmissionStatus} formData={formData} setFormData={setFormData} />

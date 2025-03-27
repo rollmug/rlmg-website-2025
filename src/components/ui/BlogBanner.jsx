@@ -72,8 +72,8 @@ const BannerInfoHeader = ({ postData }) => {
     }
 
     classNames = [
-        `min-h-[calc(50vh)] pb-14 pt-14 sm:_pb-24`,
-        `landscape:lg:pb-24`,
+        `min-h-[calc(50vh)] pb-14 pt-12 sm:_pb-24`,
+        `landscape:lg:pb-14`,
     ];
 
     const className = classNames.join(' ');
@@ -82,7 +82,7 @@ const BannerInfoHeader = ({ postData }) => {
     return (
         <div className={`z-[2] banner-block relative bg-neutral slanted-less w-full flex flex-col ${classesOutput}`}>
             <div className={`section-padded z-[2]`}>
-                <section className="flex flex-col md:grid md:grid-cols-2 gap-4">
+                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[42%_1fr] gap-4">
                     <div>
                         <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
                         {postData.postSubtitle && (
