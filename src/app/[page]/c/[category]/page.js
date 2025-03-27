@@ -7,9 +7,11 @@ import { BlogFilterProvider, BlogTopicProvider } from "@/app/blogFilterContext";
 
 export async function generateMetadata({ params }) {
     let data;
-    const page = (await params).page
+    const page = (await params).page;
+    const post = (await params).post;
     try {
         data = await formatPageData(page);
+        // data = await formatBlogPostData(post);
     } catch (error) {
         console.error('Error fetching page data:', error);
         data = { metaData: {} }; // Fallback data

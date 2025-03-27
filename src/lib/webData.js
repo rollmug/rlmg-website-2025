@@ -633,7 +633,7 @@ export const formatBannerArgs = (pageData) => {
 };
 
 export const formatOGImage = (pageData, globalSettings) => {
-  console.log('pageData:', pageData);
+  // console.log('pageData:', pageData);
   return pageData?.metaData?.openGraphImage ? formatImageURL(pageData.metaData.openGraphImage, 'opengraph') : formatImageURL(globalSettings.openGraphImage, 'opengraph');
 };
 

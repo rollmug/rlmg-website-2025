@@ -252,8 +252,8 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
 
 const rootDir = (path) => {
     const pathParts = path.split("/");
-    const directory = pathParts.slice(0, pathParts.length - 2).join("/");
-    return directory;
+    const directory = pathParts[1];
+    return `/${directory}`;
 }
 
 const BlogButtons = ({ blogButtons, categoryLabel }) => {
