@@ -31,6 +31,8 @@ export const BlogPostBanner = ({ postData }) => {
                             fill
                             sizes="100vw"
                             priority
+                            quality={100}
+                            //unoptimized
                             className={`object-cover object-end `}
                         />
                     </motion.div>
