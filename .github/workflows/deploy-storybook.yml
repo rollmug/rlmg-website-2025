@@ -3,7 +3,7 @@ name: 'Storybook Publish'
 on:
   push:
     tags:
-      - "v1.0.0" # change to the branch you wish to deploy from
+      - "*" # change to the branch you wish to deploy from
 
 permissions:
   contents: read
