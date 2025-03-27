@@ -2,6 +2,7 @@
 
 import React, { useContext, useState, useRef, forwardRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from 'next/navigation'
 import Image from "next/image";
 import PropTypes from 'prop-types';
 import BackgroundPlayer from 'next-video/background-player';
@@ -249,19 +250,26 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
     </div>)
 };
 
+const rootDir = (path) => {
+    const pathParts = path.split("/");
+    const directory = pathParts.slice(0, pathParts.length - 2).join("/");
+    return directory;
+}
+
 const BlogButtons = ({ blogButtons, categoryLabel }) => {
+    const pathname = usePathname()
     const { filter, setFilter } = useContext(BlogFilterContext); //BlogTopicContext
     const blogFilters = useContext(BlogTopicContext);
     // console.log('blogFilters:', blogFilters);
 
     useEffect(() => {
-        // if (typeof blogFilters === 'object' && blogFilters !== null) {
-        //     setFilter(null);
-        // } else {
-        //     setFilter(blogButtons[0].slug);
-        // }
+        if (typeof blogFilters === 'object' && blogFilters !== null) {
+            setFilter(blogFilters.category);
+        } else {
+            setFilter(blogButtons[0].slug);
+        }
 
-        setFilter(blogButtons[0].slug);
+        // setFilter(blogButtons[0].slug);
     }, []);
 
     const handleClick = (event, slug) => {
@@ -274,7 +282,7 @@ const BlogButtons = ({ blogButtons, categoryLabel }) => {
             {/* <span className="text-primary">{filter}</span> */}
             <div className="flex flex-row flex-wrap justify-start gap-2 md:gap-4 pt-1 md:pt-4">
                 {blogButtons.map((button, index) => {
-                    return <Link key={index} onClick={(event) => { handleClick(event, button.slug) }} slug={button.slug} href="/blog/c/[category]" as={`/blog/c/${button.slug}`}>
+                    return <Link key={index} onClick={(event) => { handleClick(event, button.slug) }} slug={button.slug} href={`${rootDir(pathname)}/c/${button.slug}`} as={`${rootDir(pathname)}/c/${button.slug}`}>
                         <Button label={button.categoryName} shortLabel={button.buttonShortName} type="filter" active={filter === button.slug} />
                     </Link>
                 })}

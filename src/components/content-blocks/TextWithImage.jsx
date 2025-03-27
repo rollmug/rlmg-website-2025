@@ -3,7 +3,7 @@ import { FeaturedImage } from "../ui/FeaturedImage";
 import PropTypes from 'prop-types';
 import { ContentSection } from "../layout/ContentSection";
 
-export const TextWithImage = ({ header, subheader, text, image, width, alt, className, imagePlacement = 'right' }) => {
+export const TextWithImage = ({ header, subheader, text, image, width, height, alt, className, imagePlacement = 'right' }) => {
     return (
         <ContentSection>
             <section className={`section-padded ${className}`}>
@@ -17,7 +17,7 @@ export const TextWithImage = ({ header, subheader, text, image, width, alt, clas
                         </div>
                     </div>
                     <div className={`w-full lg:w-1/2 px-3 py-8 lg:px-4 lg:py-4 flex items-center ${imagePlacement === 'left' ? 'justify-center' : 'justify-center'}`}>
-                        {image && <FeaturedImage src={image} alt={alt} width={width} />}
+                        {image && <FeaturedImage src={image} alt={alt} width={width} height={height} />}
                     </div>
                 </div>
             </section>

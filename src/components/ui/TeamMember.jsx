@@ -33,7 +33,7 @@ export const TeamMember = ({ firstName, lastName, jobTitle, photo, bio }) => {
             <div className="team-member flex flex-col w-full">
                 <div className="_aspect-w-3 _aspect-h-4 _slanted-top-slightly">
                     <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative aspect-w-3 aspect-h-4 slanted-top-slightly">
-                        <Image onClick={openModal} fill src={photoUrl} alt={`${firstName} ${lastName}`} className="object-cover object-center cursor-pointer transition-all duration-500 ease-in-out grayscale hover:grayscale-0" />
+                        <Image onClick={openModal} fill sizes={`(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw`} src={photoUrl} alt={`${firstName} ${lastName}`} className="object-cover object-center cursor-pointer transition-all duration-500 ease-in-out grayscale hover:grayscale-0" />
                     </motion.div>
                 </div>
                 <h3 className="text-sm2/4 lg:text-lg/4 mt-2 lg:mt-4 mb-1">{firstName} {lastName}</h3>

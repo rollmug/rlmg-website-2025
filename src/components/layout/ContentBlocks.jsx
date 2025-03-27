@@ -181,7 +181,8 @@ const ContentBlock = async ({ block }) => {
                 subheader={item.subheaderText}
                 text={text}
                 image={item.image.id ? formatImageURL(item.image) : null}
-                width={600}
+                width={item.image.width}
+                height={item.image.height}
                 alt="Test image"
                 imagePlacement={item.alignment === 'image_right' ? 'right' : 'left'}
                 className={`py-4 my-6 mt-10 lg:my-16`

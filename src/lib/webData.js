@@ -311,6 +311,8 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
             id
             filename_disk
             filename_download
+            width
+            height
           }
           alignment
           internalName
@@ -641,7 +643,7 @@ export const formatMetadata = (pageData, globalSettings) => {
     metadataBase: new URL(process.env.FILES_BASE_URL),
     title: pageData?.metaData?.pageTitle || globalSettings.siteTitle,
     description: pageData?.metaData?.metaDescription || globalSettings.metaDescription,
-    manifest: '/site.webmanifest',
+    manifest: '/manifest.webmanifest',
     authors: [{ name: 'RLMG', url: 'https://rlmg.com' }, { name: 'Dave Kobrenski', url: 'https://davekobrenski.com' }],
     openGraph: {
       title: pageData?.metaData?.pageTitle || globalSettings.siteTitle,
