@@ -86,8 +86,8 @@ const BannerInfoHeader = ({ postData }) => {
     return (
         <div className={`z-[2] banner-block relative bg-neutral slanted-less w-full flex flex-col ${classesOutput}`}>
             <div className={`section-padded z-[2]`}>
-                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[35%_1fr] xl:grid-cols-[42%_1fr] gap-4">
-                    <div>
+                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[35%_1fr] xl:grid-cols-[42%_1fr] gap-4 md:gap-6 lg:gap-10 xl:gap-12">
+                    <div className="">
                         <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
                         {postData.postSubtitle && (
                             <p className="mt-0 text-base-100 leading-normal font-bold text-base/6 lg:text-lg md:max-w-screen-sm lg:max-w-screen-md">

@@ -273,6 +273,7 @@ const BlogButtons = ({ blogButtons, categoryLabel }) => {
     }, []);
 
     const handleClick = (event, slug) => {
+        return true;
         event.preventDefault();
         setFilter(slug);
     };
