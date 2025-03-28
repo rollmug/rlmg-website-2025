@@ -34,7 +34,6 @@ export const IconsGroup = {
                 platform: 'youtube',
                 displayText: 'YouTube',
                 url: 'https://www.youtube.com/@rlmgmedia',
-',
             },
         ]
     }
