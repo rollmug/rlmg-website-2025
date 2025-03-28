@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import { FaLinkedin } from "react-icons/fa6";
+import { FaLinkedin, FaSquareYoutube } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
@@ -52,6 +52,8 @@ const SocialLink = ({ platform, displayText, url, iconSize, color }) => {
                         return <FaInstagram className={`${iconSize}`} />
                     case 'Twitter':
                         return <FaSquareXTwitter className={`${iconSize}`} />
+                    case 'YouTube':
+                        return <FaSquareYoutube className={`${iconSize}`} />
                     default:
                         return null;
                 }

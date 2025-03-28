@@ -29,7 +29,13 @@ export const IconsGroup = {
                 platform: 'twitter',
                 displayText: 'Twitter',
                 url: 'https://twitter.com/rlmgmedia',
-            }
+            },
+            {
+                platform: 'youtube',
+                displayText: 'YouTube',
+                url: 'https://www.youtube.com/@rlmgmedia',
+',
+            },
         ]
     }
 }
