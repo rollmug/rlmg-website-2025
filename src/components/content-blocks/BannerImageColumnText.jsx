@@ -38,6 +38,8 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
         }
     }
 
+    const isAnchorLink = buttonURL && buttonURL.startsWith('#');
+
     return (
         <>
             <ContentSection standout={standout} className={`banner-image-columns`}>
@@ -71,7 +73,7 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                                                 {(index === 0 && buttonText && buttonURL) && (
                                                     <div className="hidden md:block my-4 lg:mt-6">
                                                         <Link href={buttonURL}>
-                                                            <Button label={buttonText} url={buttonURL} />
+                                                            <Button label={buttonText} />
                                                         </Link>
                                                     </div>
                                                 )}
@@ -83,7 +85,9 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                             )}
                             {buttonText && buttonURL && (
                                 <div className="block md:hidden my-4 lg:mt-2">
-                                    <Button label={buttonText} url={buttonURL} />
+                                    <Link href={buttonURL}>
+                                        <Button label={buttonText} />
+                                    </Link>
                                 </div>
                             )}
                         </div>

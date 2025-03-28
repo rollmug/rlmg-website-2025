@@ -25,6 +25,7 @@ body {
   line-height: 1.8;
   font-family: var(--font-nunito);
   @apply bg-base-100;
+  scroll-behavior: smooth;
 }
 
 body {

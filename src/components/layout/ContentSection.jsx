@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-export const ContentSection = ({ children, className, standout = false, template }) => {
+export const ContentSection = ({ children, className, standout = false, template, id }) => {
     // slanted-reverse
 
     let classes;
@@ -13,7 +13,7 @@ export const ContentSection = ({ children, className, standout = false, template
 
     return (
         <>
-            <section className={`content-section w-full mx-auto ${classes}  ${className}`}>
+            <section id={id || null} className={`content-section w-full mx-auto ${classes || ''} ${className || ''}`}>
                 {children}
             </section>
         </>

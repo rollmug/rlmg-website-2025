@@ -368,6 +368,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           buttonURL
           internalName
           alignment
+          containerHashValue
         }
         ... on block_columnText {
           id

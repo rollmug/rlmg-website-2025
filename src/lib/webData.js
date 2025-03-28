@@ -327,6 +327,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           buttonURL
           internalName
           alignment
+          containerHashValue
         }
         ... on block_columnText {
           id

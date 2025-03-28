@@ -264,6 +264,7 @@ const ContentBlock = async ({ block }) => {
                 buttonURL={item.buttonURL}
                 alignment={item.alignment}
                 className=""
+                containerHashValue={item.containerHashValue}
             />;
             break;
 
