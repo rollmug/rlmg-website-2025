@@ -25,6 +25,7 @@
     "encodeurl": "^2.0.0",
     "framer-motion": "^11.17.0",
     "highlight.js": "^11.11.1",
+    "html-entities": "^2.5.3",
     "isomorphic-dompurify": "^2.20.0",
     "js-md5": "^0.8.3",
     "markdown-it-attrs": "^4.3.1",

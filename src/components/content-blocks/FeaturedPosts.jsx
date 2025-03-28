@@ -7,6 +7,7 @@ import { ContentSection } from "../layout/ContentSection";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { encode } from 'html-entities';
 
 import HoverVideoPlayer from 'react-hover-video-player';
 
@@ -38,7 +39,7 @@ export const FeaturedPosts = ({ headerText, linkToPage, buttonText, template, po
                                     {post.postSubtitle && (
                                         <p className={`my-0 text-sm lg:text-base text-primary`}>{post.postSubtitle}</p>
                                     )}
-                                    
+
                                 </div>
                             ))}
                         </div>
@@ -78,7 +79,7 @@ const FeaturedPost = ({ post, disableAnimations }) => {
                 <HoverVideoPlayer
                     videoSrc={post.hoverPreviewBGVideo}
                     pausedOverlay={
-                        <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt="" className={`object-cover`} />
+                        <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt={encode(post.postTitle)} className={`object-cover`} />
                     }
                     className="w-full h-full"
                 />
@@ -94,7 +95,7 @@ const FeaturedPost = ({ post, disableAnimations }) => {
                         <HoverVideoPlayer
                             videoSrc={post.hoverPreviewBGVideo}
                             pausedOverlay={
-                                <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt="" className={`object-cover`} />
+                                <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt={encode(post.postTitle)} className={`object-cover`} />
                             }
                             className="w-full h-full"
                         />
@@ -108,7 +109,7 @@ const FeaturedPost = ({ post, disableAnimations }) => {
         return (
             <div className="relative w-full h-full">
                 <Link href={post.urlSlug} className="absolute inset-0">
-                    <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt="" className={`object-cover`} />
+                    <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt={encode(post.postTitle)} className={`object-cover`} />
                 </Link>
             </div>
         );
@@ -118,7 +119,7 @@ const FeaturedPost = ({ post, disableAnimations }) => {
         <AnimatePresence>
             <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full">
                 <Link href={post.urlSlug} className="absolute inset-0">
-                    <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt="" className={`object-cover`} />
+                    <Image src={post.bannerImage} fill sizes="(max-width: 1024px) 100vw, 50vw" alt={encode(post.postTitle)} className={`object-cover`} />
                 </Link>
             </motion.div>
         </AnimatePresence>

@@ -3,7 +3,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { ContentSection } from "../layout/ContentSection"
+import { ContentSection } from "../layout/ContentSection";
 
 export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
     const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
@@ -38,7 +38,7 @@ export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
                                     const w = Math.round((image.width * h) / image.height);
                                     return <div key={index} className={`carousel-item`}>
                                         <Image
-                                            src={image.image} width={w} height={h} alt=""
+                                            src={image.image} width={w} height={h} alt={image.imageAltTag}
                                             className={`h-96 xl:h-[520px] w-auto`} />
                                     </div>
                                 } else {
@@ -46,7 +46,7 @@ export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
                                     const h = Math.round((image.height * w) / image.width);
                                     return <div key={index} className={`carousel-item`}>
                                         <Image
-                                            src={image.image} width={w} height={h} alt=""
+                                            src={image.image} width={w} height={h} alt={image.imageAltTag}
                                             className={`h-96 xl:h-[520px] w-auto`} />
                                     </div>
                                 }
@@ -61,7 +61,7 @@ export const ImageSlider = ({ images, galleryTitle, galleryDescription }) => {
                         if (image.width && image.height) {
                             return <div key={index} className="carousel-item">
                                 <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition}>
-                                    <Image src={image.image} width={image.width} height={image.height} alt="" className="max-w-full" />
+                                    <Image src={image.image} width={image.width} height={image.height} alt={image.imageAltTag} className="max-w-full" />
                                 </motion.div>
                             </div>
                         }

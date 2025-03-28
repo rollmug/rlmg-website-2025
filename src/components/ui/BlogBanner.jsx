@@ -5,8 +5,8 @@ import { twMerge } from 'tailwind-merge'; // import { clsx } from 'clsx';
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import BackgroundPlayer from 'next-video/background-player';
-import Link from "next/link";
-import encodeUrl from "encodeurl";
+// import Link from "next/link";
+// import encodeUrl from "encodeurl";
 
 const formatImageURL = (image, presetKey) => {
     return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${encodeURIComponent(image.filename_download)}${presetKey ? `?key=${presetKey}` : ''}`;
@@ -114,7 +114,7 @@ const CustomDataBlock = ({ customData, blogSlug }) => {
                         <h4 className="text-base-100 font-extrabold text-[13px]/3 md:text-[15px]/3 text-nowrap">{data.dataLabel}</h4>
                         <ul className="list-none !ml-0">
                             {data.dataContent.map((content, index) => {
-                                const linkable = data?.linkable || false;
+                                // const linkable = data?.linkable || false;
                                 // if (linkable) {
                                 //     const label = makeUrlSafe(data.dataLabel);
                                 //     const val = makeUrlSafe(content);

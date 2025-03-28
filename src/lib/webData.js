@@ -256,8 +256,9 @@ const pageByIdQuery = gql`query Pages_by_id($pagesByIdId: ID!) {
     bannerSubheader
     bannerImage {
       id
-        filename_disk
-        filename_download
+      title
+      filename_disk
+      filename_download
     }
     bannerCallToActionText
     bannerCallToActionLink
@@ -309,6 +310,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           content
           image {
             id
+            title
             filename_disk
             filename_download
             width
@@ -350,6 +352,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
             filename_disk
             filename_download
           }
+          imageAltTag
           headerText
           subheaderText
           textBlocks
@@ -370,6 +373,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           internalName
           image {
             id
+            title
             filename_disk
             filename_download
             width
@@ -453,6 +457,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
               }
               bannerImage {
                 id
+                title
                 filename_disk
                 filename_download
               }

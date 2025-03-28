@@ -263,6 +263,7 @@ const blogPostsByBlogQuery = gql`query BlogPosts($filter: blogPosts_filter, $sor
     }
     bannerImage {
         id
+        title
         filename_disk
         filename_download
     }
@@ -313,6 +314,7 @@ const blogPostByIDQuery = gql`query BlogPosts_by_id($blogPostsByIdId: ID!) {
     customData
     bannerImage {
       id
+      title
       filename_download
       filename_disk
     }
@@ -349,6 +351,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           content
           image {
             id
+            title
             filename_disk
             filename_download
             width
@@ -390,6 +393,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
             filename_disk
             filename_download
           }
+          imageAltTag
           headerText
           subheaderText
           textBlocks
@@ -410,6 +414,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           internalName
           image {
             id
+            title
             filename_disk
             filename_download
             width
@@ -488,6 +493,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
               urlSlug
               bannerImage {
                 id
+                title
                 filename_disk
                 filename_download
               }

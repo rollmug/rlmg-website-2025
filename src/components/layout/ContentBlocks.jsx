@@ -14,7 +14,7 @@ import { ColumnImages } from "../content-blocks/ColumnImages";
 import { Video } from "../content-blocks/Video";
 import { ImageSlider } from "../content-blocks/ImageSlider";
 import { TeamMembers } from "../ui/TeamMembers";
-
+import { encode } from 'html-entities';
 import { getPlaiceholder } from "plaiceholder";
 
 import { getBlogPostsByBlog } from "@/lib/blogData";
@@ -87,6 +87,7 @@ export const ContentBlocks = async ({ data, blogFilters }) => {
                             bannerCallToActionLink={pageData.bannerCallToActionLink}
                             bannerCallToActionText={pageData.bannerCallToActionText}
                             bannerImage={pageData?.bannerImage?.id ? formatImageURL(pageData.bannerImage) : null}
+                            bannerImgAltTag={pageData?.bannerImage?.title ? encode(pageData.bannerImage.title) : ''}
                             bannerBGVideo={pageData?.bannerBGVideo?.id ? formatImageURL(pageData.bannerBGVideo) : null}
                             globalSettings={data.globalSettings}
                         />
@@ -177,14 +178,13 @@ const ContentBlock = async ({ block }) => {
             }).result);
 
             return <TextWithImage
-                header={item.headerText
-                }
+                header={item.headerText}
                 subheader={item.subheaderText}
                 text={text}
                 image={item.image.id ? formatImageURL(item.image) : null}
                 width={item.image.width}
                 height={item.image.height}
-                alt=""
+                alt={item.imageAltTag ? encode(item.imageAltTag) : encode(item.image.title)}
                 imagePlacement={item.alignment === 'image_right' ? 'right' : 'left'}
                 className={`py-4 my-6 mt-10 lg:my-16`}
             />;
@@ -195,7 +195,7 @@ const ContentBlock = async ({ block }) => {
                 image={item.image.id ? formatImageURL(item.image) : null}
                 width={item.image.width}
                 height={item.image.height}
-                alt=""
+                alt={item.imageAltTag ? encode(item.imageAltTag) : encode(item.image.title)}
             />
 
             break;
@@ -239,6 +239,7 @@ const ContentBlock = async ({ block }) => {
                 subheaderText={item.subheaderText}
                 textBlocks={textBlocks}
                 image={item.image.id ? formatImageURL(item.image) : null}
+                imageAltTag={item?.imageAltTag ? encode(item.imageAltTag) : ''}
                 buttonText={item.buttonText}
                 buttonURL={item.buttonURL}
             />;
@@ -357,7 +358,9 @@ const ContentBlock = async ({ block }) => {
                             image: formatImageURL(img, 'gallery-images'),
                             width: img.width,
                             height: img.height,
-                            filesize: img.filesize
+                            filesize: img.filesize,
+                            imageAltTag: image.imageSliderImages_id.imageAltTag ? 
+                                encode(image.imageSliderImages_id.imageAltTag) : (image.imageSliderImages_id.imageTitle ? encode(image.imageSliderImages_id.imageTitle) : ''),
                         };
                     }
                 })

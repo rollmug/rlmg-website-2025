@@ -15,7 +15,7 @@ import { SubscribeModal } from "./Footer";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { SocialMediaIcons } from "./SocialMediaIcons";
 
-export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, socialLinks, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerBGVideo, blogButtons, categoryLabel, isBlog = false, globalSettings }) => {
+export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, socialLinks, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerImgAltTag, bannerBGVideo, blogButtons, categoryLabel, isBlog = false, globalSettings }) => {
     // console.log('globalSettings', globalSettings);
     let justifyContent, bannerGradient, videoClass, classNames = [];
     switch (bannerTextPlacement) {
@@ -72,7 +72,7 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
             <>
                 <div className={`banner-block relative bg-neutral slanted w-full flex flex-col ${classesOutput}`}>
                     <div className="absolute inset-0 z-0 slanted">
-                        <Image src={bannerImage} fill quality={100} sizes="100vw" alt="" className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
+                        <Image src={bannerImage} fill quality={100} sizes="100vw" alt={bannerImgAltTag} className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         <AnimatePresence>
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 slanted">
                                 <BackgroundPlayer src={bannerBGVideo} poster={bannerImage} className={`bg-video-banner !hidden md:!grid`} />
@@ -99,7 +99,7 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
             <div className={`banner-block relative bg-neutral slanted w-full flex flex-col ${classesOutput}`}>
                 {(bannerImage && !bannerBGVideo) && (
                     <div className="absolute inset-0 z-0">
-                        <Image src={bannerImage} fill quality={100} sizes="100vw" alt="" className={`${imgClasses}`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
+                        <Image src={bannerImage} fill quality={100} sizes="100vw" alt={bannerImgAltTag} className={`${imgClasses}`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         {(bannerHeader || bannerSubheader) && (
                             <div className={`${bannerGradient} from-black to-transparent absolute opacity-70`}></div>
                         )}

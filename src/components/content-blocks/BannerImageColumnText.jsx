@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import DOMPurify from "isomorphic-dompurify";
 import Link from "next/link";
 
-export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, image, buttonText, buttonURL, standout = false, className }) => {
+export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, image, imageAltTag, buttonText, buttonURL, standout = false, className }) => {
     const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     const variants = {
         hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
@@ -47,7 +47,7 @@ export const BannerImageColumnText = ({ headerText, subheaderText, textBlocks, i
                             {image ? (
                                 <AnimatePresence>
                                     <motion.div initial={variants.hidden} whileInView={variants.visible} transition={transition} className="relative w-full h-full max-w-full border">
-                                        <Image src={image} fill alt="" className={`object-cover`} />
+                                        <Image src={image} fill alt={imageAltTag} className={`object-cover`} />
                                     </motion.div>
                                 </AnimatePresence>
                             ) : 'Image goes here'}
