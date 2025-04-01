@@ -9,7 +9,7 @@ export const TextOnlyHero = ({ headerText, mainText, buttonText, buttonURL, alig
     const cleanText = DOMPurify.sanitize(mainText);
     // pt-12 md:pt-16 lg:pt-24 pb-20 md:pb-24 lg:pb-40
 
-    console.log('containerHashValue', containerHashValue);
+    // console.log('containerHashValue', containerHashValue);
     return (
         <ContentSection className={`text-only-hero`} id={containerHashValue}>
             <section className={`w-full bg-neutral pt-12 md:pt-16 lg:pt-24 ${alignment === 'center' ? 'pb-20 md:pb-24 lg:pb-40' : 'pb-12 md:pb-16 lg:pb-32'}  slanted-bottom ${className || ''}`}>
