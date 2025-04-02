@@ -52,7 +52,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
           <img
             src="https://manage.rlmg.com/assets/4eb2a8ec-8e93-41e5-8f08-020833980f67/facebook.png"
             width="20" height="20"
-            style={{ display: "inline-block", marginRight: "10x", width: "20px", height: "20px" }} />
+            style={{ display: "inline-block", marginRight: "10px", width: "20px", height: "20px" }} />
         </a>
 
         <a href="https://www.instagram.com/rlmg_media/" style={{ textDecoration: "none!important" }}>
