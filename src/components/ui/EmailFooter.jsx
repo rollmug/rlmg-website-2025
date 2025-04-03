@@ -1,6 +1,9 @@
-import React from "react";
+'use client'
+
+import React from 'react';
 
 export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => {
+
   return (
     <>
       <p>
@@ -55,7 +58,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
             style={{ display: "inline-block", marginRight: "10px", width: "20px", height: "20px" }} />
         </a>
 
-        <a href="https://www.instagram.com/rlmg_media/" style={{ textDecoration: "none!important" }}>
+        <a href="https://www.linkedin.com/company/richard-lewis-media-group" style={{ textDecoration: "none!important" }}>
           <img
             src="https://manage.rlmg.com/assets/a519d317-51ba-4519-af75-23aefb2de7fc/linkedin.png"
             width="20" height="20"
