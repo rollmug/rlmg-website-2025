@@ -20,6 +20,7 @@
     "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@usersnap/browser": "^1.0.1",
     "clsx": "^2.1.1",
+    "copy-to-clipboard": "^3.3.3",
     "deep-email-validator": "^0.1.21",
     "dompurify": "^3.2.3",
     "encodeurl": "^2.0.0",
