@@ -1,12 +1,11 @@
 'use client';
 
-import React from "react";
+import React, { useState } from "react";
 import { twMerge } from 'tailwind-merge'; // import { clsx } from 'clsx';
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import BackgroundPlayer from 'next-video/background-player';
-// import Link from "next/link";
-// import encodeUrl from "encodeurl";
+import Link from "next/link";
 
 const formatImageURL = (image, presetKey) => {
     return `${process.env.NEXT_PUBLIC_FILES_BASE_URL}/${image.id}/${encodeURIComponent(image.filename_download)}${presetKey ? `?key=${presetKey}` : ''}`;
@@ -76,17 +75,32 @@ const BannerInfoHeader = ({ postData }) => {
     }
 
     classNames = [
-        `min-h-[calc(50vh)] pb-14 pt-12 sm:_pb-24`,
+        `md:min-h-[calc(50vh)] pb-14 pt-12 sm:_pb-24`,
         `landscape:lg:pb-14`,
     ];
 
     const className = classNames.join(' ');
     const classesOutput = twMerge(`${justifyContent} ${className}`);
 
+    const transitionShow = { duration: .25, ease: [.25, .1, .25, 1], delay: 0 };
+    const transitionHide = { duration: .1, ease: [.25, .1, .25, 1], delay: 0 };
+
+    const variants = {
+        hidden: { filter: "blur(0)", transform: "translateY(-2rem)", opacity: 0, transition: transitionHide },
+        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1, transition: transitionShow },
+    };
+
+    const [showMore, setShowMore] = useState(false);
+
+    const handleShowMore = (e) => {
+        e.preventDefault();
+        setShowMore(!showMore);
+    }
+
     return (
         <div className={`z-[2] banner-block relative bg-neutral slanted-less w-full flex flex-col ${classesOutput}`}>
             <div className={`section-padded z-[2]`}>
-                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[35%_1fr] xl:grid-cols-[42%_1fr] gap-4 md:gap-6 lg:gap-10 xl:gap-12">
+                <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[35%_1fr] xl:grid-cols-[42%_1fr] _gap-4 md:gap-6 lg:gap-10 xl:gap-12">
                     <div className="">
                         <h2 className="mt-0 text-lg/6 md:text-xl">{postData.postTitle}</h2>
                         {postData.postSubtitle && (
@@ -95,10 +109,21 @@ const BannerInfoHeader = ({ postData }) => {
                             </p>
                         )}
                     </div>
-                    <div className="flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[370px] md:max-h-[400px] lg:max-h-[300px] max-w-full overflow-hidden ">
+                    
+                    {/* Desktop */}
+                    <div className="hidden md:flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[370px] md:max-h-[400px] lg:max-h-[300px] max-w-full overflow-hidden">
                         {customData && <CustomDataBlock customData={customData} blogSlug={blogSlug} />}
                     </div>
+
+                    {/* Mobile */}
+                    <AnimatePresence>
+                        <motion.div variants={variants} animate={showMore ? 'visible' : 'hidden'} className={`flex md:hidden flex-col flex-wrap gap-y-1 gap-x-2 ${showMore ? 'max-h-[390px]' : 'h-0'}  max-w-full overflow-hidden`}>
+                            {customData && <CustomDataBlock customData={customData} blogSlug={blogSlug} />}
+                        </motion.div>
+                    </AnimatePresence>
                 </section>
+
+                <Link href="#" className="btn btn-link inline-block md:hidden !px-0 !h-auto !min-h-fit !text-xs !text-white !font-normal" onClick={handleShowMore}>{showMore ? 'Hide Project Details' : 'See Project Details'}</Link>
             </div>
         </div>
     );
@@ -106,27 +131,16 @@ const BannerInfoHeader = ({ postData }) => {
 
 const CustomDataBlock = ({ customData, blogSlug }) => {
     // border border-white border-opacity-10
+
     return (
         <>
+
             {customData.map((data, index) => {
                 return (
                     <div key={index} className="">
                         <h4 className="text-base-100 font-extrabold text-[13px]/3 md:text-[15px]/3 text-nowrap">{data.dataLabel}</h4>
                         <ul className="list-none !ml-0">
                             {data.dataContent.map((content, index) => {
-                                // const linkable = data?.linkable || false;
-                                // if (linkable) {
-                                //     const label = makeUrlSafe(data.dataLabel);
-                                //     const val = makeUrlSafe(content);
-                                //     const url = encodeUrl(`/${blogSlug}/t/${label}/${val}`);
-                                //     return (
-                                //         <li key={index} className="text-base-100 pb-1 text-[13px]/3 md:text-sm/5 max-w-[18ch] xl:max-w-[22ch]">
-                                //             <Link href={url} className="underline mb-1 md:mb-0 inline-block">
-                                //                 {content}
-                                //             </Link>
-                                //         </li>
-                                //     );
-                                // }
                                 return (
                                     <li key={index} className="text-base-100 text-[13px]/4 md:text-sm/4 pb-1 md:pb-2 max-w-[16ch] xl:max-w-[22ch]">
                                         {content}
