@@ -9,10 +9,18 @@ export const ColumnImages = ({ headerText, columnImages, columnSize, className }
     let gridClass;
     columnSize = Number(columnSize) || 3;
     if (columnImages && columnImages.length >= 1) {
+        let numImages = columnImages.length;
         switch (columnSize) {
             case 1: gridClass = 'grid-cols-1'; break;
             case 2: gridClass = 'md:grid-cols-2'; break;
-            case 3: gridClass = 'grid-cols-1 md:grid-cols-3'; break;
+            case 3:
+                if (numImages === 6) {
+                    gridClass = `grid-cols-2 md:grid-cols-2 lg:grid-cols-3`;
+                } else {
+                    gridClass = `grid-cols-1 md:grid-cols-3`;
+                }
+                break;
+
             case 4: gridClass = 'grid-cols-2 lg:grid-cols-4'; break;
             default: gridClass = 'grid-cols-1';
         }

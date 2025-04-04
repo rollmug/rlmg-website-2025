@@ -27,12 +27,14 @@ export default {
 export const Default = {
     args: {
         headerText: 'Awards',
-        columnSize: 4,
+        columnSize: 3,
         columnImages: [
-            { src: 'https://placehold.co/400x300', alt: 'Placeholder Image 1' },
-            { src: 'https://placehold.co/300x100', alt: 'Placeholder Image 2' },
-            { src: 'https://placehold.co/600x400', alt: 'Placeholder Image 3' },
-            { src: 'https://placehold.co/500x100', alt: 'Placeholder Image 4' },
+            { src: 'https://placehold.co/400x300', alt: 'Placeholder Image 1', width: 400, height: 300 },
+            { src: 'https://placehold.co/300x100', alt: 'Placeholder Image 2', width: 300, height: 100 },
+            { src: 'https://placehold.co/600x400', alt: 'Placeholder Image 3', width: 600, height: 400 },
+            { src: 'https://placehold.co/500x100', alt: 'Placeholder Image 4', width: 500, height: 100 },
+            { src: 'https://placehold.co/400x300', alt: 'Placeholder Image 5', width: 400, height: 300 },
+            { src: 'https://placehold.co/300x100', alt: 'Placeholder Image 6', width: 300, height: 100 },
         ]
     }
 };
