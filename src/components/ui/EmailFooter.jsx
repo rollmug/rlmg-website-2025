@@ -135,7 +135,7 @@ const MobileNum = ({ mobileNum }) => {
   </tr>`;
 }
 
-const HeaderTemplate = `<div style="min-width: 300px; max-width:100%;"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+const HeaderTemplate = `<div style="max-width:100%;"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
       <tbody>
         <tr>
           <td style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
