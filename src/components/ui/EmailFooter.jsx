@@ -55,7 +55,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
 
   return (
     <>
-      <div className="badge badge-soft badge-info text-xs mb-4">Updated April 7 2025 at 11:31 am</div>
+      <div className="badge badge-accent text-xs mb-4">Updated April 7 2025 at 12:29 pm</div>
       <p className="text-base mt-0">Use the form controls at the bottom of this page to create your email signature for Gmail.</p>
       <p className='text-sm'>
         Enter your full name, your job title, and optionally, your pronouns and phone numbers.
@@ -135,18 +135,18 @@ const MobileNum = ({ mobileNum }) => {
   </tr>`;
 }
 
-const HeaderTemplate = `<div style="max-width:100%;"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+const HeaderTemplate = `<div style="width:100%;max-width:100%"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
       <tbody>
         <tr>
           <td style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
             <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
-            <div style="margin:0px;">
+            <div style="margin:0px; width: 100% !important">
               <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                 <tbody>
                   <tr>
                     <td style="direction: ltr;font-size: 0px;padding: 10px 0;text-align: center;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                       <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
-                      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
+                      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100% !important; max-width: 100%;">
                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
                           <tbody>
                             <tr>
