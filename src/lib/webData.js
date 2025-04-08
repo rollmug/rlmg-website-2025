@@ -543,7 +543,9 @@ const navigationQuery = gql`query NavigationSettings($filter: navigationSettings
     topNav(filter: $filter) {
       order
       pages_id {
+        id
         urlSlug
+        pageType
         metaData {
           navigationTitle
           pageTitle
@@ -554,6 +556,7 @@ const navigationQuery = gql`query NavigationSettings($filter: navigationSettings
       order
       pages_id {
         urlSlug
+        pageType
         metaData {
           navigationTitle
           pageTitle

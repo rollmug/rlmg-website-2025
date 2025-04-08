@@ -55,7 +55,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
 
   return (
     <>
-      <div className="badge badge-accent text-xs mb-4">Updated April 7 2025 at 12:29 pm</div>
+      <div className="badge badge-accent text-xs mb-4">Updated April 7 2025 at 1:29 pm</div>
       <p className="text-base mt-0">Use the form controls at the bottom of this page to create your email signature for Gmail.</p>
       <p className='text-sm'>
         Enter your full name, your job title, and optionally, your pronouns and phone numbers.
