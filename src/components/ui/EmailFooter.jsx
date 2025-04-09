@@ -94,179 +94,355 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
   );
 };
 
+
+
+
+// Helper functions to create the HTML blocks for the email signature
+
 const NameBlock = ({ name }) => {
-  return `<tr>
-    <td align="left" style="font-size: 0px;padding: 10px 0 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <div style="font-family:'arial black', Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:20px;font-weight:bold;line-height:1.5;text-align:left;color:#015a8d;">${name}</div>
-    </td>
-  </tr>`;
+  return `<div
+      style="
+        font-family: 'arial black', Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1.5;
+        text-align: left;
+        color: #015a8d;
+        margin-top: 20px;
+      "
+    >
+    ${name}
+    </div>`;
 }
 
+// const NameBlock = ({ name }) => {
+//   return `<tr>
+//     <td align="left" style="font-size: 0px;padding: 10px 0 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//       <div style="font-family:'arial black', Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:20px;font-weight:bold;line-height:1.5;text-align:left;color:#015a8d;">${name}</div>
+//     </td>
+//   </tr>`;
+// }
+
 const TitleBlock = ({ title, pronouns }) => {
-  return `<tr>
-    <td align="left" style="font-size: 0px;padding: 0 0 16px;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <div style="font-family:Georgia,Times,'Times New Roman',serif;font-size:14px;line-height:1.5;text-align:left;color:#000000;">
-          ${title}
-          ${pronouns && pronouns.length > 0 ? `&nbsp;|&nbsp;<em>${pronouns}</em>` : ''}
-      </div>
-    </td>
-  </tr>`;
+  return `<div
+      style="
+        font-family: Georgia, Times, 'Times New Roman', serif;
+        font-size: 14px;
+        line-height: 1.5;
+        text-align: left;
+        color: #000000;
+      "
+    >
+      ${title} ${pronouns && pronouns.length > 0 ? `&nbsp;|&nbsp; <em>${pronouns}</em>` : ''}
+    </div>`;
 }
+
+// const TitleBlock = ({ title, pronouns }) => {
+//   return `<tr>
+//     <td align="left" style="font-size: 0px;padding: 0 0 16px;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//       <div style="font-family:Georgia,Times,'Times New Roman',serif;font-size:14px;line-height:1.5;text-align:left;color:#000000;">
+//           ${title}
+//           ${pronouns && pronouns.length > 0 ? `&nbsp;|&nbsp;<em>${pronouns}</em>` : ''}
+//       </div>
+//     </td>
+//   </tr>`;
+// }
 
 const OfficeNum = ({ officeNum }) => {
   if (officeNum === undefined || officeNum.length === 0) {
     return '';
   }
-  return `<tr>
-    <td align="left" style="font-size: 0px;padding: 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#000000;">Office: ${officeNum}</div>
-    </td>
-  </tr>`;
+
+  return `<div
+      style="
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+        text-align: left;
+        color: #000000;
+        margin-top: 20px;
+      "
+    >
+      Office: ${officeNum}
+    </div>`;
+
+  // return `<tr>
+  //   <td align="left" style="font-size: 0px;padding: 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+  //     <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#000000;">Office: ${officeNum}</div>
+  //   </td>
+  // </tr>`;
 }
 
 const MobileNum = ({ mobileNum }) => {
   if (mobileNum === undefined || mobileNum.length === 0) {
     return '';
   }
-  return `<tr>
-    <td align="left" style="font-size: 0px;padding: 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#000000;">Mobile: ${mobileNum}</div>
-    </td>
-  </tr>`;
+  return `<div
+      style="
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 13px;
+        line-height: 1.5;
+        text-align: left;
+        color: #000000;
+      "
+    >
+      Mobile: ${mobileNum}
+    </div>`;
+
+  // return `<tr>
+  //   <td align="left" style="font-size: 0px;padding: 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+  //     <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:13px;line-height:1.5;text-align:left;color:#000000;">Mobile: ${mobileNum}</div>
+  //   </td>
+  // </tr>`;
 }
 
-const HeaderTemplate = `<div style="width:100%;max-width:100%"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <tbody>
-        <tr>
-          <td style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-            <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
-            <div style="margin:0px; width: 100% !important">
-              <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <tbody>
-                  <tr>
-                    <td style="direction: ltr;font-size: 0px;padding: 10px 0;text-align: center;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                      <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
-                      <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100% !important; max-width: 100%;">
-                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                          <tbody>
-                            <tr>
-                              <td style="vertical-align: top;padding: 0px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" width="100%">
-                                  <tbody>
-                                    <tr>
-                                      <td align="left" style="font-size: 0px;padding: 10px 0 16px;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse: collapse;border-spacing: 0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                          <tbody>
-                                            <tr>
-                                              <td style="width: 100px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                                                <a href="https://rlmg.com" target="_blank">
-                                                  <img alt src="https://manage.rlmg.com/assets/fc96f888-8461-48bb-9508-16b6c93d6955/rlmg-email-logo.png" style="border: 0;display: block;outline: none;text-decoration: none;height: auto;width: 100%;font-size: 13px;line-height: 100%;-ms-interpolation-mode: bicubic;" width="100" height="auto">
-                                                </a>
-                                              </td>
-                                            </tr>
-                                          </tbody>
-                                        </table>
-                                      </td>
-                                    </tr>
-                                    <!-- End Header HTML -->`;
+const HeaderTemplate = `<br />
+<div>
+  <a href="https://rlmg.com" target="_blank">
+      <img
+        alt
+        src="https://manage.rlmg.com/assets/fc96f888-8461-48bb-9508-16b6c93d6955/rlmg-email-logo.png?width=100"
+        width="100"
+        height="auto"
+      />
+    </a>`;
+
+// const HeaderTemplateOld = `<div style="width:100%;max-width:100%"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//       <tbody>
+//         <tr>
+//           <td style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//             <!--[if mso | IE]><table align="center" border="0" cellpadding="0" cellspacing="0" class="" role="presentation" style="width:600px;" width="600" bgcolor="#ffffff" ><tr><td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"><![endif]-->
+//             <div style="margin:0px; width: 100% !important">
+//               <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                 <tbody>
+//                   <tr>
+//                     <td style="direction: ltr;font-size: 0px;padding: 10px 0;text-align: center;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                       <!--[if mso | IE]><table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td class="" style="vertical-align:top;width:600px;" ><![endif]-->
+//                       <div class="mj-column-per-100 mj-outlook-group-fix" style="font-size:0px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100% !important; max-width: 100%;">
+//                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                           <tbody>
+//                             <tr>
+//                               <td style="vertical-align: top;padding: 0px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                                 <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" width="100%">
+//                                   <tbody>
+//                                     <tr>
+//                                       <td align="left" style="font-size: 0px;padding: 10px 0 16px;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse: collapse;border-spacing: 0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                                           <tbody>
+//                                             <tr>
+//                                               <td style="width: 100px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                                                 <a href="https://rlmg.com" target="_blank">
+//                                                   <img alt src="https://manage.rlmg.com/assets/fc96f888-8461-48bb-9508-16b6c93d6955/rlmg-email-logo.png" style="border: 0;display: block;outline: none;text-decoration: none;height: auto;width: 100%;font-size: 13px;line-height: 100%;-ms-interpolation-mode: bicubic;" width="100" height="auto">
+//                                                 </a>
+//                                               </td>
+//                                             </tr>
+//                                           </tbody>
+//                                         </table>
+//                                       </td>
+//                                     </tr>
+//                                     <!-- End Header HTML -->`;
+
 
 const SocialIcons = ({ officeNum, mobileNum }) => {
-  const padding = officeNum?.length > 0 || mobileNum?.length > 0 ? 20 : 0;
-  return `<tr>
-    <td align="left" style="font-size: 0px;padding:${padding}px 0 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <!--[if mso | IE]><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" ><tr><td><![endif]-->
-      <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float: none;display: inline-table;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-        <tbody>
-          <tr>
-            <td style="padding: 0 10px 0 0;vertical-align: middle;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius: 3px;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <tbody>
-                  <tr>
-                    <td style="font-size: 0;height: 20px;vertical-align: middle;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                      <a href="https://www.instagram.com/rlmg_media/" target="_blank">
-                        <img alt height="20" src="https://manage.rlmg.com/assets/c6685262-7fbd-4822-9c04-eec1ae39330c/instagram.png" style="border-radius: 3px;display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="20">
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!--[if mso | IE]></td><td><![endif]-->
-      <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float: none;display: inline-table;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-        <tbody>
-          <tr>
-            <td style="padding: 0 10px 0 0;vertical-align: middle;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius: 3px;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <tbody>
-                  <tr>
-                    <td style="font-size: 0;height: 20px;vertical-align: middle;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                      <a href="https://www.facebook.com/RLMGMedia/" target="_blank">
-                        <img alt height="20" src="https://manage.rlmg.com/assets/4eb2a8ec-8e93-41e5-8f08-020833980f67/facebook.png" style="border-radius: 3px;display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="20">
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!--[if mso | IE]></td><td><![endif]-->
-      <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float: none;display: inline-table;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-        <tbody>
-          <tr>
-            <td style="padding: 0 10px 0 0;vertical-align: middle;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius: 3px;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                <tbody>
-                  <tr>
-                    <td style="font-size: 0;height: 20px;vertical-align: middle;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-                      <a href="https://www.linkedin.com/company/richard-lewis-media-group" target="_blank">
-                        <img alt height="20" src="https://manage.rlmg.com/assets/a519d317-51ba-4519-af75-23aefb2de7fc/linkedin.png" style="border-radius: 3px;display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="20">
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!--[if mso | IE]></td></tr></table><![endif]-->
-    </td>
-  </tr>
+  const padding = officeNum?.length > 0 || mobileNum?.length > 0 ? 20 : 20;
 
-  <!-- Web Address -->
-  <tr>
-    <td align="left" class="website" style="font-size: 0px;padding: 20px 0 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
-      <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:13px;font-weight:bold;line-height:1;text-align:left;color:#019ff9;"><a href="https://rlmg.com" style="color: #019ff9; text-decoration:underline">rlmg.com</a></div>
-    </td>
-  </tr>`
-
+  return `<div style="margin: ${padding}px 0">
+      <a
+        href="https://www.instagram.com/rlmg_media/"
+        style="
+          text-decoration: none !important;
+          display: inline-block;
+          padding: 0;
+          width: 20px;
+          height: 20px;
+        "
+        target="_blank"
+      >
+        <img
+          alt="Instagram Logo"
+          height="20"
+          src="https://manage.rlmg.com/assets/c6685262-7fbd-4822-9c04-eec1ae39330c/instagram.png"
+          style="
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+          "
+          width="20"
+        />
+      </a>
+    
+      <a
+        href="https://www.facebook.com/RLMGMedia/"
+        style="
+          text-decoration: none !important;
+          display: inline-block;
+          padding: 0;
+          width: 20px;
+          height: 20px;
+        "
+        target="_blank"
+      >
+        <img
+          alt=""
+          height="20"
+          src="https://manage.rlmg.com/assets/4eb2a8ec-8e93-41e5-8f08-020833980f67/facebook.png"
+          style="
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+          "
+          width="20"
+        />
+      </a>
+    
+      <a
+        href="https://www.linkedin.com/company/richard-lewis-media-group"
+        target="_blank"
+        style="
+          text-decoration: none !important;
+          display: inline-block;
+          padding: 0;
+          width: 20px;
+          height: 20px;
+        "
+      >
+        <img
+          alt=""
+          height="20"
+          src="https://manage.rlmg.com/assets/a519d317-51ba-4519-af75-23aefb2de7fc/linkedin.png"
+          style="
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+          "
+          width="20"
+        />
+      </a>
+    </div>`;
 }
 
-const FooterTemplate = `
-                                  <!-- Begin Footer HTML -->
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                      <!--[if mso | IE]></td></tr></table><![endif]-->
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <!--[if mso | IE]></td></tr></table><![endif]-->
-          </td>
-        </tr>
-      </tbody>
-    </table></div>`;
+// const SocialIconsOld = ({ officeNum, mobileNum }) => {
+//   const padding = officeNum?.length > 0 || mobileNum?.length > 0 ? 20 : 0;
+//   return `<tr>
+//     <td align="left" style="font-size: 0px;padding:${padding}px 0 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//       <!--[if mso | IE]><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" ><tr><td><![endif]-->
+//       <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float: none;display: inline-table;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//         <tbody>
+//           <tr>
+//             <td style="padding: 0 10px 0 0;vertical-align: middle;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//               <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius: 3px;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                 <tbody>
+//                   <tr>
+//                     <td style="font-size: 0;height: 20px;vertical-align: middle;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                       <a href="https://www.instagram.com/rlmg_media/" target="_blank">
+//                         <img alt height="20" src="https://manage.rlmg.com/assets/c6685262-7fbd-4822-9c04-eec1ae39330c/instagram.png" style="border-radius: 3px;display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="20">
+//                       </a>
+//                     </td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </td>
+//           </tr>
+//         </tbody>
+//       </table>
+//       <!--[if mso | IE]></td><td><![endif]-->
+//       <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float: none;display: inline-table;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//         <tbody>
+//           <tr>
+//             <td style="padding: 0 10px 0 0;vertical-align: middle;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//               <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius: 3px;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                 <tbody>
+//                   <tr>
+//                     <td style="font-size: 0;height: 20px;vertical-align: middle;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                       <a href="https://www.facebook.com/RLMGMedia/" target="_blank">
+//                         <img alt height="20" src="https://manage.rlmg.com/assets/4eb2a8ec-8e93-41e5-8f08-020833980f67/facebook.png" style="border-radius: 3px;display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="20">
+//                       </a>
+//                     </td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </td>
+//           </tr>
+//         </tbody>
+//       </table>
+//       <!--[if mso | IE]></td><td><![endif]-->
+//       <table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="float: none;display: inline-table;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//         <tbody>
+//           <tr>
+//             <td style="padding: 0 10px 0 0;vertical-align: middle;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//               <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-radius: 3px;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                 <tbody>
+//                   <tr>
+//                     <td style="font-size: 0;height: 20px;vertical-align: middle;width: 20px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//                       <a href="https://www.linkedin.com/company/richard-lewis-media-group" target="_blank">
+//                         <img alt height="20" src="https://manage.rlmg.com/assets/a519d317-51ba-4519-af75-23aefb2de7fc/linkedin.png" style="border-radius: 3px;display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" width="20">
+//                       </a>
+//                     </td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </td>
+//           </tr>
+//         </tbody>
+//       </table>
+//       <!--[if mso | IE]></td></tr></table><![endif]-->
+//     </td>
+//   </tr>
+
+//   <!-- Web Address -->
+//   <tr>
+//     <td align="left" class="website" style="font-size: 0px;padding: 20px 0 0;word-break: break-word;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+//       <div style="font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;font-size:13px;font-weight:bold;line-height:1;text-align:left;color:#019ff9;"><a href="https://rlmg.com" style="color: #019ff9; text-decoration:underline">rlmg.com</a></div>
+//     </td>
+//   </tr>`
+
+// }
+
+const FooterTemplate = `<div
+      style="
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 1;
+        text-align: left;
+        color: #019ff9;
+        margin-top: 20px;
+      "
+    >
+      <a href="https://rlmg.com" style="color: #019ff9; text-decoration: underline"
+        >rlmg.com</a
+      >
+    </div></div><br /><br />`;
+
+// const FooterTemplate = `
+//                                   <!-- Begin Footer HTML -->
+//                                   </tbody>
+//                                 </table>
+//                               </td>
+//                             </tr>
+//                           </tbody>
+//                         </table>
+//                       </div>
+//                       <!--[if mso | IE]></td></tr></table><![endif]-->
+//                     </td>
+//                   </tr>
+//                 </tbody>
+//               </table>
+//             </div>
+//             <!--[if mso | IE]></td></tr></table><![endif]-->
+//           </td>
+//         </tr>
+//       </tbody>
+//     </table></div><br /><br />`;
 
 
 
