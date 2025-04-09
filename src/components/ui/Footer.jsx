@@ -194,7 +194,7 @@ export const SubscribeModal = forwardRef(({ submissionStatus, setSubmissionStatu
                     )}
                 </form>
 
-                <form onClick={handleSubmit} className={`${submissionStatus === 'getname' ? 'block' : 'hidden'}`}>
+                <form className={`${submissionStatus === 'getname' ? 'block' : 'hidden'}`}>
                     <section className={`flex flex-col gap-3 p-2 my-4 _mt-6`}>
                         <h3 className="text-secondary text-lgr font-black mt-0">Almost there!</h3>
                         <div className="flex flex-col md:flex-row gap-2">
@@ -217,7 +217,7 @@ export const SubscribeModal = forwardRef(({ submissionStatus, setSubmissionStatu
                                 <span className="label-text-alt">Email</span>
                             </div>
                         </label>
-                        <button type="submit" className="btn btn-primary">Subscribe</button>
+                        <button onClick={handleSubmit} type="submit" className="btn btn-primary">Subscribe</button>
                     </section>
                 </form>
             </div>
