@@ -18,7 +18,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
     const footerTemplate = FooterTemplate;
 
     if (emailSignature) {
-      emailSignature.innerHTML = `${headerTemplate} ${NameBlock({ name })} ${TitleBlock({ title, pronouns })} ${OfficeNum({ officeNum })} ${MobileNum({ mobileNum })} ${SocialIcons({ officeNum, mobileNum })} ${footerTemplate}`;
+      emailSignature.innerHTML = `${headerTemplate} ${NameBlock({ name })} ${TitleBlock({ title, pronouns })} ${OfficeNum({ officeNum })} ${MobileNum({ mobileNum })} ${footerTemplate}`; // ${SocialIcons({ officeNum, mobileNum })}
     }
   }, [name, title, pronouns, officeNum, mobileNum]);
 
@@ -55,7 +55,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
 
   return (
     <>
-      <div className="badge badge-accent text-xs mb-4"><span className='text-orange-500 pr-1'>★</span> Updated April 9, 2025 at 8:53 am</div>
+      <div className="badge badge-accent text-xs mb-4"><span className='text-orange-500 pr-1'>☀</span> Updated April 9, 2025 at 11:51 am</div>
       <p className="text-base mt-0">Use the form controls at the bottom of this page to create your email signature for Gmail.</p>
       <p className='text-sm'>
         Enter your full name, your job title, and optionally, your pronouns and phone numbers.
@@ -103,12 +103,12 @@ const NameBlock = ({ name }) => {
   return `<div
       style="
         font-family: 'arial black', Arial, 'Helvetica Neue', Helvetica, sans-serif;
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bold;
         line-height: 1.5;
         text-align: left;
-        color: #015a8d;
-        margin-top: 20px;
+        color: #015a8d !important;
+        margin-top: 17px;
       "
     >
     ${name}
@@ -127,10 +127,10 @@ const TitleBlock = ({ title, pronouns }) => {
   return `<div
       style="
         font-family: Georgia, Times, 'Times New Roman', serif;
-        font-size: 14px;
+        font-size: 12px;
         line-height: 1.5;
         text-align: left;
-        color: #000000;
+        color: #000000 !important;
       "
     >
       ${title} ${pronouns && pronouns.length > 0 ? `&nbsp;|&nbsp; <em>${pronouns}</em>` : ''}
@@ -156,11 +156,11 @@ const OfficeNum = ({ officeNum }) => {
   return `<div
       style="
         font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.5;
         text-align: left;
-        color: #000000;
-        margin-top: 20px;
+        color: #000000 !important;
+        margin-top: 12px;
       "
     >
       Office: ${officeNum}
@@ -180,10 +180,10 @@ const MobileNum = ({ mobileNum }) => {
   return `<div
       style="
         font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.5;
         text-align: left;
-        color: #000000;
+        color: #000000 !important;
       "
     >
       Mobile: ${mobileNum}
@@ -201,9 +201,9 @@ const HeaderTemplate = `<br />
   <a href="https://rlmg.com" target="_blank">
       <img
         alt
-        src="https://manage.rlmg.com/assets/fc96f888-8461-48bb-9508-16b6c93d6955/rlmg-email-logo.png?width=100"
-        width="100"
-        height="auto"
+        src="https://manage.rlmg.com/assets/17cfa5a6-b22d-4628-9f60-e527fae220f0/RLMG_Logo_EmailSig_90x45.jpg"
+        width="90"
+        height="45"
       />
     </a>`;
 
@@ -415,7 +415,7 @@ const FooterTemplate = `<div
         line-height: 1;
         text-align: left;
         color: #019ff9;
-        margin-top: 20px;
+        margin-top: 14px;
       "
     >
       <a href="https://rlmg.com" style="color: #019ff9; text-decoration: underline"
