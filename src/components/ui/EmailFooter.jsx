@@ -55,7 +55,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
 
   return (
     <>
-      <div className="badge badge-accent text-xs mb-4"><span className='text-orange-500 pr-1'>☀</span> Updated April 9, 2025 at 12:51 pm</div>
+      <div className="badge badge-accent text-xs mb-4"><span className='text-orange-500 pr-1'>☀</span> Updated April 9, 2025 at 3:00 pm</div>
       <p className="text-base mt-0">Use the form controls at the bottom of this page to create your email signature for Gmail.</p>
       <p className='text-sm'>
         Enter your full name, your job title, and optionally, your pronouns and phone numbers.
@@ -98,6 +98,18 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
 
 
 // Helper functions to create the HTML blocks for the email signature
+
+const HeaderTemplate = `<br />
+<div>
+  <a href="https://rlmg.com" target="_blank">
+      <img
+        alt
+        src="https://manage.rlmg.com/assets/fc96f888-8461-48bb-9508-16b6c93d6955/rlmg-email-logo.png"
+        width="90"
+        height="45"
+        style="width:90px; height: 45px;"
+      />
+    </a>`;
 
 const NameBlock = ({ name }) => {
   return `<div
@@ -195,17 +207,6 @@ const MobileNum = ({ mobileNum }) => {
   //   </td>
   // </tr>`;
 }
-
-const HeaderTemplate = `<br />
-<div>
-  <a href="https://rlmg.com" target="_blank">
-      <img
-        alt
-        src="https://manage.rlmg.com/assets/17cfa5a6-b22d-4628-9f60-e527fae220f0/RLMG_Logo_EmailSig_90x45.jpg?quality=100"
-        width="90"
-        height="45"
-      />
-    </a>`;
 
 // const HeaderTemplateOld = `<div style="width:100%;max-width:100%"><table align="left" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;background: #ffffff;background-color: #ffffff;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
 //       <tbody>
