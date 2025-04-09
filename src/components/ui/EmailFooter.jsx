@@ -55,7 +55,7 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
 
   return (
     <>
-      <div className="badge badge-accent text-xs mb-4"><span className='text-orange-500 pr-1'>☀</span> Updated April 9, 2025 at 11:51 am</div>
+      <div className="badge badge-accent text-xs mb-4"><span className='text-orange-500 pr-1'>☀</span> Updated April 9, 2025 at 12:51 pm</div>
       <p className="text-base mt-0">Use the form controls at the bottom of this page to create your email signature for Gmail.</p>
       <p className='text-sm'>
         Enter your full name, your job title, and optionally, your pronouns and phone numbers.
@@ -201,7 +201,7 @@ const HeaderTemplate = `<br />
   <a href="https://rlmg.com" target="_blank">
       <img
         alt
-        src="https://manage.rlmg.com/assets/17cfa5a6-b22d-4628-9f60-e527fae220f0/RLMG_Logo_EmailSig_90x45.jpg"
+        src="https://manage.rlmg.com/assets/17cfa5a6-b22d-4628-9f60-e527fae220f0/RLMG_Logo_EmailSig_90x45.jpg?quality=100"
         width="90"
         height="45"
       />
