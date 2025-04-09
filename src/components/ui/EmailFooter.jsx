@@ -74,8 +74,8 @@ export const EmailFooter = ({ name, title, pronouns, officeNum, mobileNum }) => 
       </div>
 
       <div>
-        <hr className=' opacity-0 my-5 w-full border-t-2 mt-6' />
-        <hr className='my-5 w-full border-t-2 mt-6' />
+        {/* <hr className=' opacity-0 my-5 w-full border-t-2 mt-6' /> */}
+        <hr className='mb-5 -mt-4 w-full border-t-2' />
         <span onClick={handleCopySignature}><Button label="Copy Signature" type="button" /> </span>
         <span className='btn btn-link !text-xs !font-normal' onClick={handleCopyHtml}>Copy HTML</span>
       </div>
