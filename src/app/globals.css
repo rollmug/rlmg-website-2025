@@ -216,9 +216,9 @@ ul.menu li a {
   @apply !mb-0;
 }
 
-/* .banner-block + .content-section.rich-text-block .block-inner {
+.banner-block + .content-section.rich-text-block .block-inner {
   @apply !mt-2 lg:!mt-2;
-} */
+}
 
 .banner-block + .content-section.banner-image-columns:first-child {
   @apply !mt-0;
