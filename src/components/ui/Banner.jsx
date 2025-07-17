@@ -66,6 +66,20 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
             <ContactTypeBanner bannerHeader={bannerHeader} socialLinks={socialLinks} globalSettings={globalSettings} />
         );
     }
+    if (!bannerImage && !bannerBGVideo) {
+        return (
+            <div className={`banner-block relative bg-neutral slanted w-full flex flex-col pb-16 sm:pb-20 pt-10 md:pb-28 md:pt-16 lg:pb-32`}>
+                <OverlayText
+                    bannerHeader={bannerHeader}
+                    bannerSubheader={bannerSubheader}
+                    bannerCallToActionLink={bannerCallToActionLink}
+                    bannerCallToActionText={bannerCallToActionText}
+                    bannerTextPlacement={bannerTextPlacement}
+                    blogButtons={blogButtons}
+                    categoryLabel={categoryLabel} />
+            </div>
+        );
+    }
 
     if (bannerImage && bannerBGVideo) {
         return (

@@ -5,9 +5,9 @@ import { ContentSection } from "../layout/ContentSection";
 
 export const RichText = ({ content, placement, padding, className = '' }) => {
     return (
-        <ContentSection>
+        <ContentSection className="rich-text-block">
             <section className={`section-padded ${className}`}>
-                <div className={`max-w-prose ${placement === 'left' ? '' : 'mx-auto'} ${padding === 'large' ? 'my-16 lg:my-24' : 'my-4 lg:my-8'} lg:max-w-screen-md`}>
+                <div className={`block-inner max-w-prose ${placement === 'left' ? '' : 'mx-auto'} ${padding === 'large' ? 'my-16 lg:my-24' : 'my-4 lg:my-8'} lg:max-w-screen-md`}>
                     {content.map((item, index) => {
                         switch (item.type) {
                             case 'header':
