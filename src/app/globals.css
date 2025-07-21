@@ -222,7 +222,7 @@ ul.menu li a {
 }
 
 /* hero-text */
-.content-section.text-only-hero .hero-text a {
+.content-section.text-only-hero .hero-text a:not(.btn-forward-link) {
   text-decoration: underline;
 }
 
