@@ -70,7 +70,8 @@ export const ContentBlocks = async ({ data, blogFilters }) => {
         'bannerCallToActionLink',
         'bannerCallToActionText',
         'bannerImage',
-        'bannerBGVideo'
+        'bannerBGVideo',
+        'customHeaderData'
     ];
 
     if (pageData.pageType === 'page') {
@@ -89,6 +90,7 @@ export const ContentBlocks = async ({ data, blogFilters }) => {
                             bannerImage={pageData?.bannerImage?.id ? formatImageURL(pageData.bannerImage) : null}
                             bannerImgAltTag={pageData?.bannerImage?.title ? encode(pageData.bannerImage.title) : ''}
                             bannerBGVideo={pageData?.bannerBGVideo?.id ? formatImageURL(pageData.bannerBGVideo) : null}
+                            customHeaderData={pageData.customHeaderData}
                             globalSettings={data.globalSettings}
                         />
                     )
@@ -282,6 +284,7 @@ const ContentBlock = async ({ block }) => {
                 textBlocks={textBlocks}
                 buttonText={item.buttonText}
                 buttonURL={item.buttonURL}
+                firstItemFull={item.firstItemFull}
             />;
             break;
 

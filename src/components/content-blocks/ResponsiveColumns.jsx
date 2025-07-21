@@ -6,7 +6,7 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import DOMPurify from "isomorphic-dompurify";
 
-export const ResponsiveColumns = ({ headerText, subheaderText, textBlocks, buttonText, buttonURL, standout = false, className }) => {
+export const ResponsiveColumns = ({ headerText, subheaderText, textBlocks, buttonText, buttonURL, standout = false, className, firstItemFull }) => {
     // const transition = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
     // const variants = {
     //     hidden: { filter: "blur(10px)", transform: "translateY(2rem)", opacity: 0 },
@@ -20,6 +20,42 @@ export const ResponsiveColumns = ({ headerText, subheaderText, textBlocks, butto
             case 2: gridClass = 'lg:grid-cols-2'; break;
             case 3: gridClass = 'sm:grid-cols-2 lg:grid-cols-3'; break;
         }
+    }
+
+    if (firstItemFull && textBlocks.length === 3) {
+        return (
+            <>
+                <ContentSection standout={standout}>
+                    <section className={`section-padded full-mobile ${className}`}>
+                        <div className="flex flex-col justify-start gap-2">
+
+                            <div className="section-padded-mobile-only flex flex-col justify-start gap-1 lg:gap-2">
+                                {headerText && (<h2 className="my-0">{headerText}</h2>)}
+                                {subheaderText && (<h3 className="my-0">{subheaderText}</h3>)}
+                                {(headerText || subheaderText) && <div className="mb-2 lg:mb-1">
+                                    <hr />
+                                </div>}
+                                {textBlocks && textBlocks.length > 0 && (
+                                    <div className="column-text flex flex-wrap flex-row gap-1 lg:gap-4 justify-between ">
+                                        {textBlocks.map((block, index) => {
+                                            const cleanText = DOMPurify.sanitize(block.content);
+                                            return (
+                                                <div key={index} className={`${index === 1 ? 'lg:pr-4' : ''} ${index > 0 ? 'basis-auto lg:flex-1 lg:w-1/2' : 'basis-full'} `} dangerouslySetInnerHTML={{ __html: cleanText }} />
+                                            )
+                                        })}
+                                    </div>
+                                )}
+                                {buttonText && buttonURL && (
+                                    <div className="my-4 lg:mt-2">
+                                        <Button label={buttonText} url={buttonURL} className="" />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+                </ContentSection>
+            </>
+        );
     }
 
     return (

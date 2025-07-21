@@ -269,6 +269,7 @@ const pageByIdQuery = gql`query Pages_by_id($pagesByIdId: ID!) {
     }
     bannerTextPlacement
     bannerDisplayType
+    customHeaderData
     connectedBlog {
       id
       categoryLabel
@@ -345,6 +346,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           textBlocks
           buttonText
           buttonURL
+          firstItemFull
         }
         ... on block_bannerImageWithDetails {
           id

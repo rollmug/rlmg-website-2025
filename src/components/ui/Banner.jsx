@@ -15,7 +15,7 @@ import { SubscribeModal } from "./Footer";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { SocialMediaIcons } from "./SocialMediaIcons";
 
-export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, socialLinks, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerImage, bannerImgAltTag, bannerBGVideo, blogButtons, categoryLabel, isBlog = false, globalSettings }) => {
+export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, socialLinks, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, customHeaderData, bannerImage, bannerImgAltTag, bannerBGVideo, blogButtons, categoryLabel, isBlog = false, globalSettings }) => {
     // console.log('globalSettings', globalSettings);
     let justifyContent, bannerGradient, videoClass, classNames = [];
     switch (bannerTextPlacement) {
@@ -63,9 +63,16 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
 
     if (bannerDisplayType === 'contact') {
         return (
-            <ContactTypeBanner bannerHeader={bannerHeader} socialLinks={socialLinks} globalSettings={globalSettings} />
+            <ContactTypeBanner bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} globalSettings={globalSettings} />
         );
     }
+
+    if (bannerDisplayType === 'simple') {
+        return (
+            <SimpleTypeBanner customHeaderData={customHeaderData} bannerTextPlacement={bannerTextPlacement} bannerSubheader={bannerSubheader} bannerHeader={bannerHeader} socialLinks={socialLinks} globalSettings={globalSettings} bannerCallToActionLink={bannerCallToActionLink} bannerCallToActionText={bannerCallToActionText} />
+        );
+    }
+
     if (!bannerImage && !bannerBGVideo) {
         return (
             <div className={`banner-block relative bg-neutral slanted w-full flex flex-col pb-16 sm:pb-20 pt-10 md:pb-28 md:pt-16 lg:pb-32`}>
@@ -130,6 +137,121 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
                     categoryLabel={categoryLabel} />
             </div>
 
+        </>
+    );
+}
+
+const CustomDataBlock = ({ customData }) => {
+    // console.log(customData);
+    return (
+        <>
+            {customData.map((data, index) => {
+                return (
+                    <div key={index} className="">
+                        <h4 className="text-base-100 font-extrabold text-[13px]/3 md:text-[15px]/3 text-nowrap">{data.dataLabel}</h4>
+                        <ul className="list-none !ml-0">
+                            {data.dataContent.map((content, index) => {
+                                return (
+                                    <li key={index} className="text-base-100 text-[13px]/4 md:text-sm/4 pb-1 md:pb-2 max-w-[16ch] xl:max-w-[22ch]">
+                                        {content}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </div>
+                );
+            })}
+        </>
+    );
+};
+
+const formatCustomData = (customData) => {
+    let formattedData = [];
+    customData.forEach((data) => {
+        const dataItem = {
+            dataLabel: data.dataLabel,
+            dataContent: formatDataContent(data.dataContent),
+            linkable: data?.linkable || false
+        };
+        formattedData.push(dataItem);
+    });
+    return formattedData;
+};
+
+const formatDataContent = (dataContent) => {
+    let formattedData = [];
+    dataContent.forEach((data) => {
+        formattedData.push(data.contentOption);
+    });
+    return formattedData;
+};
+
+const SimpleTypeBanner = ({ customHeaderData, bannerHeader, bannerSubheader, bannerTextPlacement, socialLinks, globalSettings, bannerCallToActionLink, bannerCallToActionText }) => {
+    let customData;
+    // console.log(customHeaderData);
+    const transitionShow = { duration: 1, ease: [.25, .1, .25, 1], delay: .25 };
+    const transitionHide = { duration: .1, ease: [.25, .1, .25, 1], delay: 0 };
+
+    if (customHeaderData && customHeaderData.length > 0) {
+        customData = formatCustomData(customHeaderData);
+        // console.log('customData', customData);
+    }
+
+    const variants = {
+        hidden: { filter: "blur(0)", transform: "translateY(2rem)", opacity: 0, transition: transitionHide },
+        visible: { filter: "blur(0)", transform: "translateY(0)", opacity: 1, transition: transitionShow },
+    };
+
+    const classNames = [
+        `py-14 md:pt1 sm:pb-24`, // mobile portrait
+        // `landscape:_min-h-[calc(60vh)] landscape:pb-20`, // mobile landscape
+        // `landscape:lg:pb-24 landscape:lg:pt-0`, // tablet landscape
+        // `landscape:xl:pb-24` // desktop
+    ];
+
+    const justifyContent = 'justify-center';
+    const className = classNames.join(' ');
+    const classesOutput = twMerge(`${justifyContent} ${className}`);
+
+    const [showMore, setShowMore] = useState(false);
+
+    const handleShowMore = (e) => {
+        e.preventDefault();
+        setShowMore(!showMore);
+    }
+
+    return (
+        <>
+            <div className={`banner-block relative bg-gradient-to-tr from-info via-info to-primary md:bg-gradient-to-tr md:from-info md:via-info md:to-primary slanted-less w-full flex flex-col ${classesOutput}`}>
+                <div className={`section-padded z-[2]`}>
+                    <section className="blog-banner-inner flex flex-col md:grid md:grid-cols-2 lg:grid-cols-[48%_1fr] xl:grid-cols-[42%_1fr] _gap-4 md:gap-6 lg:gap-10 xl:gap-12">
+                        <div className={``}>
+                            {bannerHeader && <h1 className={`${bannerSubheader ? '' : '!mb-6 lg:!mb-8'} smaller-simple md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
+                            {bannerSubheader && <p className="text-base-100 mb-6 leading-normal text-base lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
+                            {(bannerCallToActionLink && bannerCallToActionText) && (
+                                <>
+                                    <Link href={bannerCallToActionLink}>
+                                        <Button label={bannerCallToActionText} />
+                                    </Link>
+                                </>
+                            )}
+                        </div>
+
+                        <div className="hidden md:flex flex-col flex-wrap gap-y-1 gap-x-2 md:gap-x-5 max-h-[250px] md:max-h-[200px] lg:max-h-[150px] max-w-full overflow-hidden">
+                            {customHeaderData && <CustomDataBlock customData={customData} />}
+                        </div>
+
+                        {/* Mobile */}
+                        <AnimatePresence>
+                            <motion.div variants={variants} animate={showMore ? 'visible' : 'hidden'} className={`flex md:hidden my-2 flex-col flex-wrap gap-y-1 gap-x-2 ${showMore ? 'max-h-[280px] mt-6 mb-4' : 'h-0'}  max-w-full overflow-hidden`}>
+                                {customHeaderData && <CustomDataBlock customData={customData} />}
+                            </motion.div>
+                        </AnimatePresence>
+                    </section>
+
+                    <Link href="#" className="btn btn-link inline-block md:hidden !px-0 !h-auto !min-h-fit !text-xs !text-white !font-normal" onClick={handleShowMore}>{showMore ? 'Hide Job Details' : 'See Job Details'}</Link>
+                </div>
+            </div>
         </>
     );
 }
@@ -241,7 +363,7 @@ const ContactTypeBanner = ({ bannerHeader, socialLinks, globalSettings }) => {
     );
 };
 
-const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerTextPlacement, blogButtons, categoryLabel }) => {
+const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, bannerCallToActionText, bannerTextPlacement, blogButtons, categoryLabel, simpleBanner = false }) => {
     let cleanSubheader;
     if (bannerSubheader) {
         cleanSubheader = DOMPurify.sanitize(bannerSubheader);
@@ -257,11 +379,35 @@ const OverlayText = ({ bannerHeader, bannerSubheader, bannerCallToActionLink, ba
         );
     }
 
-    return (<div className={`section-padded z-[2] ${bannerTextPlacement === 'bottom' ? 'lg:mb-4 xl:mb-6' : ''}`}>
-        {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
-        {bannerSubheader && <p className="text-base-100 leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
-        {(bannerCallToActionLink && bannerCallToActionText) && <Button label={bannerCallToActionText} />}
-    </div>)
+    if (simpleBanner) {
+        return (
+            <div className={`section-padded z-[2]`}>
+                {bannerHeader && <h1 className={`${bannerSubheader ? '' : 'mb-6 lg:!mb-8'} smaller-simple md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
+                {bannerSubheader && <p className="text-base-100 mb-6 leading-normal text-base lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
+                {(bannerCallToActionLink && bannerCallToActionText) && (
+                    <>
+                        <Link href={bannerCallToActionLink}>
+                            <Button label={bannerCallToActionText} />
+                        </Link>
+                    </>
+                )}
+            </div>
+        )
+    }
+
+    return (
+        <div className={`section-padded z-[2] ${bannerTextPlacement === 'bottom' ? 'lg:mb-4 xl:mb-6' : ''}`}>
+            {bannerHeader && <h1 className={`${bannerSubheader ? 'smaller' : ''} md:max-w-screen-sm lg:max-w-screen-md lg:-translate-x-1`}>{bannerHeader}</h1>}
+            {bannerSubheader && <p className="text-base-100 leading-normal font-bold lg:text-lg md:max-w-screen-sm lg:max-w-screen-md" >{bannerSubheader}</p>}
+            {(bannerCallToActionLink && bannerCallToActionText) && (
+                <>
+                    <Link href={bannerCallToActionLink}>
+                        <Button label={bannerCallToActionText} />
+                    </Link>
+                </>
+            )}
+        </div>
+    )
 };
 
 const rootDir = (path) => {

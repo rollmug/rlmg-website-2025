@@ -12,11 +12,11 @@ export const TextOnlyHero = ({ headerText, mainText, buttonText, buttonURL, alig
     // console.log('containerHashValue', containerHashValue);
     return (
         <ContentSection className={`text-only-hero`} id={containerHashValue}>
-            <section className={`w-full bg-neutral pt-12 md:pt-16 lg:pt-24 ${alignment === 'center' ? 'pb-20 md:pb-24 lg:pb-40' : 'pb-12 md:pb-16 lg:pb-32'}  slanted-bottom ${className || ''}`}>
+            <section className={`w-full bg-neutral pt-12 md:pt-16 lg:pt-24 ${alignment === 'center' ? 'pb-20 md:pb-24 lg:pb-40' : 'pb-12 md:pb-16 lg:pb-32'} slanted-bottom ${className || ''}`}>
                 <div className={`section-padded`}>
                     <div className={`flex flex-col justify-start ${alignment === 'center' ? 'items-start lg:items-center' : 'items-start'} lg:justify-center gap-4 `}>
                         <h2 className="my-0 text-neutral-content">{headerText}</h2>
-                        <div className={`mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-full md:max-w-lg ${alignment === 'center' ? 'lg:text-center':'self-stretch lg:max-w-xl'} `} dangerouslySetInnerHTML={{ __html: cleanText }} />
+                        <div className={`hero-text mt-0 mb-2 leading-normal font-bold apply-neutral text-neutral-content max-w-full md:max-w-lg ${alignment === 'center' ? 'lg:text-center':'self-stretch lg:max-w-xl'} `} dangerouslySetInnerHTML={{ __html: cleanText }} />
                         {buttonURL && buttonText && (
                             <p className="my-0">
                                 <Link href={buttonURL}>

@@ -55,6 +55,11 @@ h1.smaller {
   @apply text-primary-content text-xl md:text-2xl lg:text-3xl my-2;
 }
 
+h1.smaller-simple {
+  font-weight: 900;
+  @apply text-accent text-xl md:text-xl lg:text-2xl mb-2;
+}
+
 h2 {
   font-weight: 900;
   @apply text-secondary text-xl lg:text-2xl my-2;
@@ -214,6 +219,28 @@ ul.menu li a {
 
 .content-section.text-only-hero:last-child {
   @apply !mb-0;
+}
+
+/* hero-text */
+.content-section.text-only-hero .hero-text a {
+  text-decoration: underline;
+}
+
+.content-section.text-only-hero:has(+ .content-section.banner-image-columns) .slanted-bottom {
+  clip-path: none;
+}
+
+.content-section.text-only-hero:has(+ .content-section.banner-image-columns) {
+  margin-bottom: 0 !important;
+}
+
+.content-section.text-only-hero + .content-section.banner-image-columns:last-child {
+  margin-top: 0 !important;
+}
+
+.content-section.banner-image-columns:last-child {
+  @apply bg-base-200 pt-16 lg:pt-24 pb-16 md:pb-28 lg:pb-32 xl:pb-44;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8vw), 0 100%);
 }
 
 .banner-block + .content-section.rich-text-block .block-inner {

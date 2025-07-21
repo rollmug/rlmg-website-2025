@@ -386,6 +386,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           textBlocks
           buttonText
           buttonURL
+          firstItemFull
         }
         ... on block_bannerImageWithDetails {
           id
