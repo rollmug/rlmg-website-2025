@@ -210,7 +210,8 @@ export const getContentBlocksForPost = async (id) => {
               _eq: true
             }
           }
-        }
+        },
+        sort: "staff_id.displayOrder"
       }
     });
 
@@ -331,7 +332,7 @@ const blogPostByIDQuery = gql`query BlogPosts_by_id($blogPostsByIdId: ID!) {
   }
 }`;
 
-const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsByIdId: ID!, $filter: block_featuredPosts_blogPosts_filter) {
+const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsByIdId: ID!, $filter: block_featuredPosts_blogPosts_filter, $sort: [String]) {
   blogPosts_by_id(id: $blogPostsByIdId) {
     id
     contentBlocks {
@@ -463,7 +464,7 @@ const contentBlocksForPostQuery = gql`query BlogPostContentBlocks($blogPostsById
           id
           headerText
           internalName
-          teamMembers {
+          teamMembers(sort: $sort) {
             staff_id {
               id
               firstName

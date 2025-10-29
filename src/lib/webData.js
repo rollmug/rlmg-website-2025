@@ -133,7 +133,7 @@ export const getContentBlocksForPage = async (id) => {
   try {
     const client = getClient();
     const { data } = await client.query({
-      query: conentBlocksForPageQuery,
+      query: contentBlocksForPageQuery,
       variables: {
         pagesByIdId: id,
         filter: {
@@ -142,7 +142,8 @@ export const getContentBlocksForPage = async (id) => {
               _eq: true
             }
           }
-        }
+        },
+        sort: "staff_id.displayOrder"
       },
       context: {
         fetchOptions: {
@@ -291,7 +292,7 @@ const pageByIdQuery = gql`query Pages_by_id($pagesByIdId: ID!) {
   }
 }`;
 
-const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, $filter: block_featuredPosts_blogPosts_filter) {
+const contentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, $filter: block_featuredPosts_blogPosts_filter, $sort: [String]) {
   pages_by_id(id: $pagesByIdId) {
     id
     contentBlocks {
@@ -423,7 +424,7 @@ const conentBlocksForPageQuery = gql`query PageContentBlocks($pagesByIdId: ID!, 
           id
           headerText
           internalName
-          teamMembers {
+          teamMembers(sort: $sort) {
             staff_id {
               id
               firstName
