@@ -61,6 +61,12 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
     const classesOutput = twMerge(`${justifyContent} ${className}`);
     const imgClasses = 'object-cover object-center lg:object-center transition-all ease-in-out duration-1000 opacity-0';
 
+    const [videoPlayable, setVideoPlayable] = useState(false);
+    const handleOnCanPlay = (event) => {
+        setVideoPlayable(true);
+        // event.target.play();
+    }
+
     if (bannerDisplayType === 'contact') {
         return (
             <ContactTypeBanner bannerHeader={bannerHeader} bannerSubheader={bannerSubheader} globalSettings={globalSettings} />
@@ -95,8 +101,13 @@ export const Banner = ({ bannerTextPlacement, bannerDisplayType, bannerHeader, s
                     <div className="absolute inset-0 z-0 slanted">
                         <Image src={bannerImage} fill quality={100} sizes="100vw" alt={bannerImgAltTag} className={`${imgClasses} md:hidden`} onLoad={(event) => event.target.classList.remove("opacity-0")} />
                         <AnimatePresence>
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 slanted">
-                                <BackgroundPlayer src={bannerBGVideo} poster={bannerImage} className={`bg-video-banner !hidden md:!grid`} />
+                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: videoPlayable ? 1 : 0 }} transition={{ ease: "easeIn", duration: 1 }} className="absolute inset-0 z-0 slanted">
+                                <BackgroundPlayer
+                                    src={bannerBGVideo}
+                                    poster={bannerImage}
+                                    className={`bg-video-banner !hidden md:!grid`}
+                                    onCanPlay={handleOnCanPlay}
+                                />
                             </motion.div>
                         </AnimatePresence>
                         {(bannerHeader || bannerSubheader) && (
